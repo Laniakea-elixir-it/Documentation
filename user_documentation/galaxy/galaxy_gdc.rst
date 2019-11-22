@@ -144,6 +144,18 @@ GDC Somatic Variant reference data
 GDC somatic variant Galaxy workflow
 ===================================
 
+------------------
+GDC wf preparation 
+------------------
+
+Before running the GDC_WF some preparation steps are required:
+
+#. Change the GATK_PATH dependency (env.sh) of `GATK <https://toolshed.g2.bx.psu.edu/view/avowinkel/gatk/b80ff7f43ad1>`_ to
+   `GATK_PATH=/export/tool_deps/_conda; export GATK_PATH`
+#. Move the GenomeAnalysisTK.jar present in GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 downloadable from `GATK website <https://software.broadinstitute.org/gatk/download/archive>`_ package in `/export/tool_deps/_conda`
+#. Download the required vep-cache using vep-download-cache module of `Wrapper Variant Annotation <https://testtoolshed.g2.bx.psu.edu/view/elixir-it/vep86_vcf2maf/ca1e48c52db9>`_
+
+
 .. figure:: img/galaxy_gdc_workflow.png
    :scale: 50%
    :align: center
