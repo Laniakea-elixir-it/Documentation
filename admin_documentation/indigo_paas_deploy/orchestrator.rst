@@ -140,9 +140,9 @@ Create the file ``indigopaas-deploy/ansible/inventory/group_vars/orchestrator.ya
   orchestrator_mysql_root_password: *****
   orchestrator_mysql_password: *****
   orchestrator_im_url: https://<proxy_dns_name>/im
-  orchestrator_cmdb_url: http://<proxy_dns_name>/cmdb
+  orchestrator_cmdb_url: https://<proxy_dns_name>/cmdb
   orchestrator_slam_url: https://<slam_dns_name>:8443/rest/slam
-  orchestrator_cpr_url: http://<proxy_dns_name>:80
+  orchestrator_cpr_url: https://<proxy_dns_name>/cpr
   orchestrator_iam_issuer: https://<iam_dns_name>/
   orchestrator_iam_client_id: <orchestrator_client_id>
   orchestrator_iam_client_secret: <orchestrator_client_secret>

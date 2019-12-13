@@ -1,4 +1,4 @@
-Laniakea deployment
+Laniakea installation
 ===================
 
 Laniakea relies on the INDIGO-DataCloud `software catalogue <https://www.indigo-datacloud.eu/electricindigo-software-catalogue>`_. The Fig. 1 shows the deployment strategy to be followed to install Laniakea.
