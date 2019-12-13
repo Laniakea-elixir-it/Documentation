@@ -64,6 +64,13 @@ IAM protected resource configuration for the Orchestrator
    - Access Token Timeout: 7200
    - ID Token Timeout: 7200
 
+   and flag:
+
+   -  Refresh tokens are issued for this client
+   - Refresh tokens for this client are re-used
+   - Active access tokens are automatically revoked when the refresh token is used
+   - Refresh tokens do not time out 
+
    .. figure:: _static/orchestrator/orchestrator_admin_client_tokens.png
       :scale: 40%
       :align: center 
@@ -107,6 +114,13 @@ IAM  protected resource configuration for CLUES
 
    - Access Token Timeout: 7200
    - ID Token Timeout: 7200
+
+   and flag:
+   
+   -  Refresh tokens are issued for this client
+   - Refresh tokens for this client are re-used
+   - Active access tokens are automatically revoked when the refresh token is used
+   - Refresh tokens do not time out
 
    .. figure:: _static/orchestrator/clues_admin_client_tokens.png
       :scale: 40%
