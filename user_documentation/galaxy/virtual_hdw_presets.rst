@@ -9,7 +9,7 @@ Each cloud provider enable a set of Image Flavor, defined in terms of Virctual C
 Currently, the following pre-sets are available at ReCaS-Bari facility:
 
 =========  =======  =======  =============  =============
-Name       VCPUs    RAM      Disk     Enabled
+Name       VCPUs    RAM      Disk           Enabled
 =========  =======  =======  =============  =============
 small      1        2 GB     20 GB          No
 medium 	   2        4 GB     20 GB          No
