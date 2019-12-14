@@ -66,7 +66,7 @@ IAM protected resource configuration for the Orchestrator
 
    and flag:
 
-   -  Refresh tokens are issued for this client
+   - Refresh tokens are issued for this client
    - Refresh tokens for this client are re-used
    - Active access tokens are automatically revoked when the refresh token is used
    - Refresh tokens do not time out 
@@ -117,7 +117,7 @@ IAM  protected resource configuration for CLUES
 
    and flag:
    
-   -  Refresh tokens are issued for this client
+   - Refresh tokens are issued for this client
    - Refresh tokens for this client are re-used
    - Active access tokens are automatically revoked when the refresh token is used
    - Refresh tokens do not time out
