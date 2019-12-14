@@ -95,7 +95,7 @@ Video tutorial
 IM configuration
 ----------------
 
-In order to allow IM to distinguish private from public networks, IM needs to be properly configured. Edit the IM configuration file ``/etc/im.cfg``, modifying the field ``PRIVATE_NET_MASKS`` with your favourite text editor, adding the network IP address. The IM will considers IPs not in these subnets as Public IPs.
+In order to allow IM to distinguish private from public networks, IM needs to be properly configured. Edit the IM configuration file ``/etc/im.cfg``, modifying the field `PRIVATE_NET_MASKS <https://imdocs.readthedocs.io/en/latest/manual.html#confval-PRIVATE_NET_MASKS>`_ with your favourite text editor, adding the network IP address. The IM will considers IPs not in these subnets as Public IPs.
 
 ::
 
@@ -300,5 +300,7 @@ FAQ
 
 References
 ----------
+
+`IM configuration <https://imdocs.readthedocs.io/en/latest/manual.html#configuration>`_
 
 `IM APIs documentation <https://imdocs.readthedocs.io/en/latest/REST.html>`_
