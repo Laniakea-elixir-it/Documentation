@@ -16,7 +16,7 @@ Create VM for Dashboard. The VM should meet the following minimum requirements:
 OS      Ubuntu 16.04
 vCPUs   2
 RAM     4 GB
-Network Private IP address.
+Network Public IP address.
 ======= ==============================
 
 .. warnings::

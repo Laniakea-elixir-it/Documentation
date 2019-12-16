@@ -4,7 +4,7 @@ Overview
 Home view
 ---------
 
-The home page tiles show the available applications. The goal of each tile is to quickly display each application, with its description and configuration button.
+The home page tiles show the available applications. The goal of each tile is to quickly display each application, with its description and configuration button. Currently, the interface allows to pin three applications.
 
 .. figure:: img/overview/home.png 
    :scale: 30 %

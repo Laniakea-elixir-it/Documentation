@@ -3,7 +3,6 @@ Galaxy cluster template
 
 The :doc:`ansible_galaxycloud` role provides the possibility to possible to instantiate Galaxy with SLURM as Resource Manager, just setting the ``galaxy_lrms`` variable to ``slurm``.
 
-
 This allows to instantiate Galaxy with SLURM cluster exploiting INDIGO custom types and ansible roles using INDIGO components:
 
 - CLUES (INDIGO solution for automatic elasticity)
