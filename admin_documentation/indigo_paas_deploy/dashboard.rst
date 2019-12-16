@@ -5,7 +5,7 @@ The Laniakea Dashbaord is built on top of the INDIGO Orchestrator Dashboard.
 
 .. note::
 
-   Current Dahsboard version: v0.5
+   Current Dahsboard version: stable version
 
 VM configuration
 ----------------
