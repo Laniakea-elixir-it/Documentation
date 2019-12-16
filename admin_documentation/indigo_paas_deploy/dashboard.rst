@@ -19,7 +19,7 @@ RAM     4 GB
 Network Public IP address.
 ======= ==============================
 
-.. warnings::
+.. warning::
 
    In this tutorial we will use the same VM for vault and the dashbord, being the two services strictly connected.
 
