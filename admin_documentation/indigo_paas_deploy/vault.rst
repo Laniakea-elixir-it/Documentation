@@ -34,6 +34,16 @@ Create the file ``indigopaas-deploy/ansible/inventory/group_vars/vault.yaml`` wi
   vault_image_name: vault:1.1.2
   vault_letsencrypt_email: "<valid_email_address>"
 
+.. warning::
+
+   Depending on your Cloud Provider network configuration, the ``vault_host`` variable needs to be added and configured with the private ip address associated to the VM, for example when a floating IP is used.
+
+   In this case it is possible to set the IP address adding:
+
+   ::
+
+     vault_host: '<vm_private_ip_address>'
+
 Run the role using the ``ansible-playbook`` command:
 
 ::

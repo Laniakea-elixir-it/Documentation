@@ -89,6 +89,15 @@ Create the file ``indigopaas-deploy/ansible/inventory/group_vars/orchestrator-da
   dashboard_vault_iam_client_id: "vault_iam_client_id>"
   dashboard_vault_iam_client_secret: "<vault_iam_client_secret"
 
+.. warning::
+
+   Depending on your Cloud Provider network configuration, the database IP address needs to be further configured, for example using the private ip address associated to the VM, when a floating IP is used.
+
+   In this case it is possible to set the database IP address adding:
+
+   ::
+
+     dashboard_db_host: '<vm_private_ip_address>'
 
 .. warning::
 

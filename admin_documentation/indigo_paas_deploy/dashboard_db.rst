@@ -32,6 +32,16 @@ Create the file ``indigopaas-deploy/ansible/inventory/group_vars/orchestrator-da
 
 .. warning::
 
+   Depending on your Cloud Provider network configuration, the database IP address needs to be further configured, for example using the private ip address associated to the VM, when a floating IP is used.
+
+   In this case it is possible to set the database IP address adding:
+
+   ::
+
+     dashboard_db_host: '<vm_private_ip_address>'
+
+.. warning::
+
    Set also your custom mysql password with: ``dashboard_mysql_root_password`` and ``dashboard_mysql_password``.
 
 Run the role using the ``ansible-playbook`` command:
