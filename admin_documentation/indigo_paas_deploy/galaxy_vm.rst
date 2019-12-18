@@ -153,7 +153,7 @@ Workflow for genotyping and variant annotation of whole genome/exome and target-
 ``Image``
 *********
 
-http://cloud.recas.ba.infn.it/horizon/api/swift/containers/Laniakea-generic-cloud-images/object/CentOS-7-x86_64-GenericCloud_galaxy-CoVaCS_release_19.05-1.qcow2
+`Image URL <http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/Laniakea-generic-cloud-images/CentOS-7-x86_64-GenericCloud_galaxy-CoVaCS_release_19.05-1.qcow2>`_
 
 ******************************
 ``Tools dependencies tarball``
@@ -211,13 +211,13 @@ Port of the Genomic Data Commons (GDC) pipeline for the identification of somati
 ``Image``
 *********
 
-http://cloud.recas.ba.infn.it/horizon/api/swift/containers/Laniakea-generic-cloud-images/object/CentOS-7-x86_64-GenericCloud_galaxy-GDC_Somatic_Variant_release_19.05-1.qcow2
+`Image URL <http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/Laniakea-generic-cloud-images/CentOS-7-x86_64-GenericCloud_galaxy-GDC_Somatic_Variant_release_19.05-1.qcow2>`_
 
 ******************************
 ``Tools dependencies tarball``
 ******************************
 
-http://cloud.recas.ba.infn.it/horizon/api/swift/containers/Laniakea-generic-cloud-images/object/galaxy-GDC_Somatic_Variant-release_19.05-1.tar.gz
+`Image URL <http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/Laniakea-generic-cloud-images/galaxy-GDC_Somatic_Variant-release_19.05-1.tar.gz>`_
 
 *************
 ``CMDB json``
