@@ -101,7 +101,7 @@ Galaxy production-grade server (Galaxy, PostgreSQL, NGINX, proFTPd, uWSGI).
 ``Image``
 *********
 
-`Image URL <http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/Laniakea-generic-cloud-images/object/CentOS-7-x86_64-GenericCloud_galaxy-minimal_release_19.05-1.qcow2>`_
+`Image URL <http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/Laniakea-generic-cloud-images/CentOS-7-x86_64-GenericCloud_galaxy-minimal_release_19.05-1.qcow2>`_
 
 *************
 ``CMDB json``
