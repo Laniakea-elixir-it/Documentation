@@ -159,7 +159,7 @@ Workflow for genotyping and variant annotation of whole genome/exome and target-
 ``Tools dependencies tarball``
 ******************************
 
-http://cloud.recas.ba.infn.it/horizon/api/swift/containers/Laniakea-generic-cloud-images/object/galaxy-CoVaCS-release_19.05-1.tar.gz
+`Tools tarball URL <http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/Laniakea-generic-cloud-images/galaxy-CoVaCS-release_19.05-1.tar.gz>`_
 
 *************
 ``CMDB json``
@@ -217,7 +217,7 @@ Port of the Genomic Data Commons (GDC) pipeline for the identification of somati
 ``Tools dependencies tarball``
 ******************************
 
-`Image URL <http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/Laniakea-generic-cloud-images/galaxy-GDC_Somatic_Variant-release_19.05-1.tar.gz>`_
+`Tools tarball URL <http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/Laniakea-generic-cloud-images/galaxy-GDC_Somatic_Variant-release_19.05-1.tar.gz>`_
 
 *************
 ``CMDB json``
@@ -270,13 +270,13 @@ Based on Epigen project (http://www.epigen.it/).
 ``Image``
 *********
 
-http://cloud.recas.ba.infn.it/horizon/api/swift/containers/Laniakea-generic-cloud-images/object/CentOS-7-x86_64-GenericCloud_galaxy-epigen_release_19.05-1.qcow2
+`Image URL <http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/Laniakea-generic-cloud-images/CentOS-7-x86_64-GenericCloud_galaxy-epigen_release_19.05-1.qcow2>`_
 
 ******************************
 ``Tools dependencies tarball``
 ******************************
 
-http://cloud.recas.ba.infn.it/horizon/api/swift/containers/Laniakea-generic-cloud-images/object/galaxy-epigen-release_19.05-1.tar.gz
+`Tools tarball URL <http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/Laniakea-generic-cloud-images/galaxy-epigen-release_19.05-1.tar.gz>`_
 
 *************
 ``CMDB json``
@@ -329,13 +329,13 @@ More than 50 tools for RNA centric analysis (https://www.ncbi.nlm.nih.gov/pubmed
 ``Image``
 *********
 
-http://cloud.recas.ba.infn.it/horizon/api/swift/containers/Laniakea-generic-cloud-images/object/CentOS-7-x86_64-GenericCloud_galaxy-rna-workbench_19.05-1.qcow2
+`Image URL <http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/Laniakea-generic-cloud-images/CentOS-7-x86_64-GenericCloud_galaxy-rna-workbench_19.05-1.qcow2>`_
 
 ******************************
 ``Tools dependencies tarball``
 ******************************
 
-http://cloud.recas.ba.infn.it/horizon/api/swift/containers/Laniakea-generic-cloud-images/object/galaxy-rna-workbench-release_19.05-1.tar.gz
+`Tools tarball URL <http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/Laniakea-generic-cloud-images/galaxy-rna-workbench-release_19.05-1.tar.gz>`_
 
 *************
 ``CMDB json``
@@ -384,7 +384,7 @@ The |galaxy_cluster_vm| explits the previous flavour images to instantiate Galax
 ``Worker nodes image``
 **********************
 
-http://cloud.recas.ba.infn.it/horizon/api/swift/containers/Laniakea-generic-cloud-images/object/CentOS-7-x86_64-GenericCloud_galaxy-wn-1.qcow2
+`Image URL <http://cloud.recas.ba.infn.it:8080/v1/AUTH_3b4918e0a982493e8c3ebcc43586a2a8/Laniakea-generic-cloud-images/CentOS-7-x86_64-GenericCloud_galaxy-wn-1.qcow2>`_
 
 *************
 ``CMDB json``
