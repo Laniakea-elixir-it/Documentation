@@ -148,7 +148,7 @@ GDC somatic variant Galaxy workflow
 GDC wf preparation 
 ------------------
 
-Before running the GDC_WF some preparation steps are required:
+Before running the GDC workflow some preparation steps are required:
 
 #. Change the GATK_PATH dependency (env.sh) of `GATK <https://toolshed.g2.bx.psu.edu/view/avowinkel/gatk/b80ff7f43ad1>`_ to
    `GATK_PATH=/export/tool_deps/_conda; export GATK_PATH`
