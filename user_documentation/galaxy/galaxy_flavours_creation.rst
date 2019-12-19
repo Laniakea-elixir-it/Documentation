@@ -1,5 +1,9 @@
-Create and test Galaxy flavours
-===============================
+Submit yout flavour
+===================
+
+.. note::
+
+   To follow this procedure basic knowledge of Git is needed. If you feel unsure you can contact us using our support mail address (laniakea.helpdesk@gmail.com) and we will be happy to assist you in creating your flavour.
 
 New flavours can be easily added to Laniakea through a Pull Request on our `GitHub page <https://github.com/Laniakea-elixir-it/Galaxy-flavours>`_.
 
@@ -13,7 +17,7 @@ In this step will be described how to make a Pull Request to the Laniakea GitHub
 
      git clone https://github.com/<user-name>/Galaxy-flavours.git
 
-#. Create a new directory with the name of your flavor. For example, ``galaxy-testing`` in this case.
+#. Create a new directory with the name of your flavour. For example, ``galaxy-testing`` in this case.
 
    ::
 
@@ -27,7 +31,7 @@ In this step will be described how to make a Pull Request to the Laniakea GitHub
 
      cd galaxy-testing
 
-   Edit your tool list file with your favourite text editor adding  the following default configuration lines:
+   Edit your tool list file with your favourite text editor adding the following default configuration lines:
 
    ::
 
@@ -63,8 +67,7 @@ In this step will be described how to make a Pull Request to the Laniakea GitHub
          owner: devteam
          tool_panel_section_label: "tools"
 
-   In this case the 
-
+   In this case the resulting Galaxy tools section will be:
 
    .. figure:: img/galaxy-testing-flavour.png
       :scale: 70%
@@ -79,7 +82,7 @@ In this step will be described how to make a Pull Request to the Laniakea GitHub
      mkdir workflow
 
 
-   For example, in our galaxy-testing flavour we, currently, have:
+   For example, in our galaxy-testing flavour we have:
 
    ::
 
