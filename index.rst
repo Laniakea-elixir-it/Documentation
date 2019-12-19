@@ -42,6 +42,7 @@ For more information on the Galaxy Project, please visit the https://galaxyproje
    user_documentation/ssh_keys/ssh_keys.rst
    user_documentation/galaxy/virtual_hdw_presets
    user_documentation/galaxy/galaxy_flavours
+   user_documentation/galaxy/galaxy_flavours_creation
    user_documentation/galaxy/galaxy_refdata
    user_documentation/galaxy_production_environment/galaxy_production_environment_configuration
    user_documentation/galaxy_production_environment/galaxy_docker
