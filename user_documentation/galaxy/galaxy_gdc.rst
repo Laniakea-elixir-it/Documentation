@@ -150,11 +150,25 @@ GDC wf preparation
 
 Before running the GDC workflow some preparation steps are required:
 
-#. Change the GATK_PATH dependency (env.sh) of `GATK <https://toolshed.g2.bx.psu.edu/view/avowinkel/gatk/b80ff7f43ad1>`_ to
-   `GATK_PATH=/export/tool_deps/_conda; export GATK_PATH`
-#. Move the GenomeAnalysisTK.jar present in GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 downloadable from `GATK website <https://software.broadinstitute.org/gatk/download/archive>`_ package in `/export/tool_deps/_conda`
-#. Download the required vep-cache using vep-download-cache module of `Wrapper Variant Annotation <https://testtoolshed.g2.bx.psu.edu/view/elixir-it/vep86_vcf2maf/ca1e48c52db9>`_
+#. On Galaxy homepage go to **Admin** then **manage tool** and select **gatk**.
 
+#. In this page select the tool dependecy ``GATK_PATH``
+
+   .. figure:: img/GATK_dependencies.png 
+      :scale: 50%
+      :align: center
+
+#. Copy the **Tool dependency installation directory**
+
+   .. figure:: img/GATK_PATH.png
+      :scale: 50%
+      :align: center
+
+#. Open the env.sh located in the **Tool dependency installation directory** and change its content to: `GATK_PATH=/export/tool_deps/_conda; export GATK_PATH`
+
+#. Move the GenomeAnalysisTK.jar avaiable in GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 downloadable from `GATK website <https://software.broadinstitute.org/gatk/download/archive>`_ package in ``/export/tool_deps/_conda``
+
+#. Download the required vep-cache using vep-download-cache module of `Wrapper Variant Annotation <https://testtoolshed.g2.bx.psu.edu/view/elixir-it/vep86_vcf2maf/ca1e48c52db9>`_
 
 .. figure:: img/galaxy_gdc_workflow.png
    :scale: 50%
