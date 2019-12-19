@@ -122,7 +122,7 @@ In this step will be described how to make a Pull Request to the Laniakea GitHub
 
 We will review and test your flavour and enable it on Laniakea. 
 
-These changes must be merged to the main branch of the `Galaxy flavours repository <https://github.com/Laniakea-elixir-it/Galaxy-flavours.git>`_. The merge will b
+These changes must be merged to the main branch of the `Galaxy flavours repository <https://github.com/Laniakea-elixir-it/Galaxy-flavours.git>`_. The merge will be done once the flavour has been enabled on Laniakea.
 
 .. warning::
 
