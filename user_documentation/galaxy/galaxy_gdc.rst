@@ -164,9 +164,9 @@ Before running the GDC workflow some preparation steps are required:
       :scale: 50%
       :align: center
 
-#. Open the env.sh located in the **Tool dependency installation directory** and change its content to: `GATK_PATH=/export/tool_deps/_conda; export GATK_PATH`
+#. Open the file ``env.sh`` located in the **Tool dependency installation directory** and change its content to: ``GATK_PATH=/export/tool_deps/_conda; export GATK_PATH``
 
-#. Move the GenomeAnalysisTK.jar avaiable in GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2 downloadable from `GATK website <https://software.broadinstitute.org/gatk/download/archive>`_ package in ``/export/tool_deps/_conda``
+#. Move the ``GenomeAnalysisTK.jar`` avaiable in ``GenomeAnalysisTK-3.8-0-ge9d806836.tar.bz2`` downloadable from `GATK website <https://software.broadinstitute.org/gatk/download/archive>`_ package to ``/export/tool_deps/_conda``
 
 #. Download the required vep-cache using vep-download-cache module of `Wrapper Variant Annotation <https://testtoolshed.g2.bx.psu.edu/view/elixir-it/vep86_vcf2maf/ca1e48c52db9>`_
 
