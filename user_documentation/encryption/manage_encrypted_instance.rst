@@ -83,7 +83,7 @@ Here the list of the currently available commands:
 Action    Command                 Description
 ========  ======================  =========================
 Open      sudo luksctl open       Open the encrypted device, requiring your passphrase.
-Close     sudo luksctl close      Closei and umount the encrypted device
+Close     sudo luksctl close      Close and umount the encrypted device
 Status    sudo luksctl status     Check device status
 ========  ======================  =========================
 
