@@ -1,7 +1,7 @@
 Launch |galaxy_cluster|
 =======================
 
-Galaxy serves tools which may require a wide range of compute resources to properly work. To account this, the Laniakea dashboard tiles allow user to deploy a standard `Galaxy production environment <https://docs.galaxyproject.org/en/latest/admin/production.html>`_ connected to a `compute cluster <https://galaxyproject.github.io/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html>`_.
+Galaxy serves tools which may require a wide range of computing resources to properly work. To account this, the Laniakea dashboard tiles allow user to deploy a standard `Galaxy production environment <https://docs.galaxyproject.org/en/latest/admin/production.html>`_ connected to a `compute cluster <https://galaxyproject.github.io/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html>`_.
 
 .. seealso::
 
@@ -69,7 +69,7 @@ Virtual hardware configuration
 
 #. Select the number of Virtual Worker Nodes of your Cluster and the instance flavor, (virtual CPUs and RAM) for each worker node. More information on available virtual hardware presets can be found here: :doc:`virtual_hdw_presets`.
 
-#. Copy & Paste your SSH key, to login in the Galaxy instance or configure it in the :doc:`/user_documentation//ssh_keys/ssh_keys` page:
+#. Copy & Paste your SSH key, to login in the Galaxy instance or configure it in the :doc:`/user_documentation//ssh_keys/ssh_keys` page.
 
 #. Laniakea provides the possibility to encrypt the storage volume associated with the virtual machine on-demand, to protect user data.
 
@@ -110,7 +110,7 @@ Galaxy configuration
 Galaxy access
 -------------
 
-Once your Galaxy instance a confirmation e-mail is sent, to the Laniakea user and to the galaxy administrator email, if different, with the URL of Galaxy and user credentials.
+Once your Galaxy instance is ready, a confirmation e-mail is sent to the Laniakea user and to the galaxy administrator email, if different, with the Galaxy URL and user credentials.
 
 .. Warning::
 
@@ -145,3 +145,4 @@ The galaxy administrator password and the API key are automatically set during t
 .. Warning::
 
    The anonymous login is disabled by default.
+
