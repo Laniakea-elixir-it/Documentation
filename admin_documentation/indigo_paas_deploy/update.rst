@@ -39,7 +39,7 @@ Currently, the following verions of the INDIGO services are recommended:
 ======================= =================== ======================================================
 Service                 Version             Docker image
 ======================= =================== ======================================================
-indigopaas-deploy       master              v1.0
+indigopaas-deploy       v1.0                ---
 IAM                     1.5 rc2             indigoiam/iam-login-service:v1.5.0.rc2-SNAPSHOT-latest
 IM                      1.8.8.1             indigodatacloud/im:1.8.6.1
 CMDB                    indigo_2            indigodatacloud/cmdb:indigo_2
