@@ -164,9 +164,9 @@ uWSGI
 uWSGI (https://uwsgi-docs.readthedocs.io/en/latest) is used as interface between the web server (i.e. NGINX) and the web application (i.e. Galaxy). Using uWSGI for production servers is recommended by the Galaxy team: https://galaxyproject.org/admin/config/performance/scaling/
 
 uWSGI configuration is embedded in the galaxy.yml file (``$HOME/galaxy/config/galaxy.yml``), and by default foresee 4 handler configuration.
-The number of processes (i.e. uWSGI workers is set to ``number_of_virtual_cpus - 1``. This configuration should be fine for most uses. Nevertheless, there's no golden rule to define the workers number. It is up to the end-user to configure it dependig on your needs. The same goes for the number of job handlers (4 by default).
+The number of processes (i.e. uWSGI workers) is set to ``number_of_virtual_cpus - 1``. This configuration should be fine for most uses. Nevertheless, there's no golden rule to define the workers number. It is up to the end-user to configure it dependig on your needs. The same goes for the number of job handlers (4 by default).
 
-UWSGI socket and stats server are, by default, listening on ``127.0.0.1:4001`` and ``127.0.0.1:9191``, respectively. More on the uWSGI stats server here: http://uwsgi-docs.readthedocs.io/en/latest/StatsServer.html?highlight=stats%20server.
+uWSGI socket and stats server are, by default, listening on ``127.0.0.1:4001`` and ``127.0.0.1:9191``, respectively. More on the uWSGI stats server here: http://uwsgi-docs.readthedocs.io/en/latest/StatsServer.html?highlight=stats%20server.
 
 ::
 
