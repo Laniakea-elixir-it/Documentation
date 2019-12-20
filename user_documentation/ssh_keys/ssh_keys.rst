@@ -85,7 +85,7 @@ It is possible to delete the SSH key (pair) from Laniakea with ``Delete`` button
 
 .. warning::
 
-   The key will not be removed from the virtual instances where it has been inserted. Once removed, if not saved elsewhere, and and if no different keys were added, you will not be able to access the instances.
+   The key will not be removed from the virtual instances where it has been inserted. Once removed, if not saved elsewhere, and if no different keys were added, you will not be able to access the instances.
 
 
 How to create SSH keys on Linux or macOS
