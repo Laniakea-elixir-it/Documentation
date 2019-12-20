@@ -35,7 +35,7 @@ Virtual hardware configuration
 
 #. Select your instance flavour (virtual CPUs and the memory size). More information on available virtual hardware presets can be found here: :doc:`virtual_hdw_presets`.
 
-#. Copy & Paste your SSH key, to login in the Galaxy instance or configure it in the :doc:`/user_documentation//ssh_keys/ssh_keys` page:
+#. Copy & Paste your SSH key, to login in the Galaxy instance or configure it in the :doc:`/user_documentation//ssh_keys/ssh_keys` page.
 
 #. Laniakea provides the possibility to encrypt the storage volume associated with the virtual machine on-demand, to protect user data.
 
@@ -76,7 +76,7 @@ Galaxy configuration
 Galaxy access
 -------------
 
-Once your Galaxy instance a confirmation e-mail is sent, to the Laniakea user and to the galaxy administrator email, if different, with the URL of Galaxy and user credentials.
+Once your Galaxy instance is ready, a confirmation e-mail is sent to the Laniakea user and to the galaxy administrator email, if different, with the Galaxy URL and user credentials.
 
 .. Warning::
 
