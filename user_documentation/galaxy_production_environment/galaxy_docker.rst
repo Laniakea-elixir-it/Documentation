@@ -40,7 +40,7 @@ The Docker configuration is slighty customized to make the Galaxy experience as 
 
   ``GALAXY_CONFIG_CONDA_AUTO_INIT``: true - conda auto-start
 
-  ``GALAXY_CONFIG_CONDA_AUTO_INSTALL``: true, - conda auto-install
+  ``GALAXY_CONFIG_CONDA_AUTO_INSTALL``: true - conda auto-install
 
 
 - ``/etc/galaxy/tool_data_tables``: directory with the tool_data_table_conf.xml files. A detailed description of Laniakea Galaxy flavours configuration for the reference data is here: :doc:`/user_documentation/galaxy/galaxy_flavours`.
