@@ -76,7 +76,7 @@ The options ``--force``, ``--timeout`` and ``--retry`` are available for restart
 
 Galaxy first start
 ~~~~~~~~~~~~~~~~~~
-Galaxy takes longer to start the first time. Since the uWSGI stats server is the last software component started, the script waits it ensure that Galaxy has correctly started. Then uWSGI workers are checked to ensure Galaxy is acceptin requests. If not, uWSGI is restarted.
+Galaxy takes longer to start the first time. Since the uWSGI stats server is the last software component started, the script waits to ensure that Galaxy has correctly started. Then uWSGI workers are checked to ensure Galaxy is accepting requests. If not, uWSGI is restarted.
 Currently, before rise an error, the script try to restart galaxy 5 times, while the waiting time is set to 600 seconds.
 The command used in ``/usr/local/bin/galaxy-startup`` script, is
 
@@ -96,7 +96,7 @@ supervisord    Supervisord is current default, it is mandatory for docker contai
 init           CentOS 7 and Ubuntu 16.04 use systemd, while  Ubuntu 14.04 is using upstart.
 =============  ===========================================
 
-Through ``galaxyctl_libs.DetectGalaxyCommands`` method the script automatically retrieve the right command to be used and it  is compatible with both CentOS 7 and Ubuntu 16.04.
+Through ``galaxyctl_libs.DetectGalaxyCommands`` method the script automatically retrieves the right command to be used and it  is compatible with both CentOS 7 and Ubuntu 16.04.
 
 If Supervisord is used to manage Galaxy (which is our default choice), configuration files have to be specified using the variable ``supervisord_config_file``
 On CentOS:
