@@ -6,7 +6,7 @@ While the adoption of a distributed environment for data analysis makes data dif
 The user data privacy is granted through LUKS storage encryption as a service: data are isolated from any other instance on the same platform and from the cloud service administrators.
 In the past version, users were required to insert a password to encrypt/decrypt data directly on the virtual instance during its deployment, through SSH connection.
 
-In the second Laniakea release The encryption procedure has been completely re-worked and automated in order to simplify the user experience: now the user can encrypt storage on-demand, using a strong random alphanumerical passphrase, without having to interact with the Galaxy instance through SSH.
+In the second Laniakea release the encryption procedure has been completely re-worked and automated in order to simplify the user experience: now the user can encrypt storage on-demand, using a strong random alphanumerical passphrase, without having to interact with the Galaxy instance through SSH.
 This has been achieved integrating the key management system Hashicorp Vault (vaultproject.io) to store encryption keys, which are shown in the Laniakea Dashboard only if explicitly requested by the user.
 
 Disk encryption ensures that files are stored on disk in an encrypted form: the files only become available to the operating system and applications in readable when the volume is unlocked by a trusted user. The adopted block device encryption method, operates below the filesystem layer and ensures that everything is written to the block device (i.e. the external volume) is encrypted. 
