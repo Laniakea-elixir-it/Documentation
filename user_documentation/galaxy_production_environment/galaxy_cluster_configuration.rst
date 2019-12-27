@@ -1,7 +1,7 @@
 Cluster configuration
 ======================
 
-|project_name| provides the possibility to instantiate Galaxy with `SLURM <slurm.schedmd.com>`_ as Resource Manager and to customize the number of virtual workern nodes and the workenr nodes and front-end server virtual hardware, e.g. vCPUs and memory.
+|project_name| provides the possibility to instantiate Galaxy with `SLURM <slurm.schedmd.com>`_ as Resource Manager and to customize the number of virtual worker nodes and the workenr nodes and front-end server virtual hardware, e.g. vCPUs and memory.
 
 Furthermore, automatic elasticity, provided using `CLUES <https://ec3.readthedocs.io/en/latest/arch.html#clues>`_, enables dynamic cluster resources scaling, deploying and powering on new working nodes depending on the workload of the cluster and powering-off them when no longer needed. This provides an efficient use of the resources, making them available only when really needed.
 
@@ -60,11 +60,12 @@ Moreover, to allow SLURM restart on elastic cluster, the number of connection re
 
 Shared file system
 ------------------
-Current cluster configuration foresee two path shared between front and worker nodes: 
+
+Current cluster configuration foresee two paths shared between front and worker nodes: 
 
 #. ``/home`` where Galaxy is installed.
 
-#. ``/export`` where Galaxy input and output datasets are stored. Here is also mounted the external (encrypted) storage volume, allowing to share it among worner nodes.
+#. ``/export`` where Galaxy input and output datasets are stored. Here is also mounted the external (encrypted) storage volume, allowing to share it among worker nodes.
 
 .. Note::
 
