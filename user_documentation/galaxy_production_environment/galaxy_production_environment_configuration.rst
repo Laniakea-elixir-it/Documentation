@@ -209,7 +209,7 @@ How to use FTP through command line
 ***********************************
 To install FTP command line client, type ``sudo yum install ftp`` on CentOS or ``sudo apt-get install ftp`` on Ubuntu.
 
-To establish a connection with Glaxy Proftpd server, you can use your Galaxy username and password, in addition to the server IP address you’re connecting to (e.g. ``90.147.102.82``). To open a connection in Terminal type the following command, replacing the IP address with with your server IP address:
+To establish a connection with Glaxy Proftpd server, you can use your Galaxy username and password, in addition to the server IP address you’re connecting to (e.g. ``90.147.102.82``). To open a connection in Terminal type the following command, replacing the IP address with your server IP address:
 
 ::
 
@@ -253,18 +253,18 @@ Here’s a list of the basic commands that you can use with the FTP client.
 ============  ======================
 Command       Description
 ============  ======================
-ls	      to find out the pathname of the current directory on the remote machine.
+ls	      ls the current directory on the remote machine.
 cd            to change directory on the remote machine.
 pwd           to find out the pathname of the current directory on the remote machine.
 delete        to delete (remove) a file in the current remote directory (same as rm in UNIX).
 mkdir         to make a new directory within the current remote directory.
-rmdir         to to remove (delete) a directory in the current remote directory.
+rmdir         to remove (delete) a directory in the current remote directory.
 get           to copy one file from the remote machine to the local machine
 |             ``get ABC DEF``  copies file ABC in the current remote directory to (or on top of) a file named DEF in your current local directory.
 |             ``get ABC``      copies file ABC in the current remote directory to (or on top of) a file with the same name, ABC, in your current local directory. 
 mget          to copy multiple files from the remote machine to the local machine; you are prompted for a y/n answer before transferring each file.
 put           to copy one file from the local machine to the remote machine.
-mput          o copy multiple files from the local machine to the remote machine; you are prompted for a y/n answer before transferring each file.
+mput          to copy multiple files from the local machine to the remote machine; you are prompted for a y/n answer before transferring each file.
 quit          to exit the FTP environment (same as bye).
 ============  ======================
 
