@@ -1,7 +1,7 @@
 Galaxy cluster template
 =======================
 
-The :doc:`ansible_galaxycloud` role provides the possibility to possible to instantiate Galaxy with SLURM as Resource Manager, just setting the ``galaxy_lrms`` variable to ``slurm``.
+The :doc:`ansible_galaxycloud` role provides the possibility to instantiate Galaxy with SLURM as Resource Manager, just setting the ``galaxy_lrms`` variable to ``slurm``.
 
 This allows to instantiate Galaxy with SLURM cluster exploiting INDIGO custom types and ansible roles using INDIGO components:
 
@@ -13,7 +13,7 @@ This allows to instantiate Galaxy with SLURM cluster exploiting INDIGO custom ty
 
 The related tosca template is located `here <https://github.com/indigo-dc/tosca-types/blob/master/examples/galaxy_elastic_cluster.yaml>`_.
 
-The inpout parameters allow to customize the number of virtual nodes, nodes and master virtual hardware:
+The input parameters allow to customize the number of virtual nodes, nodes and master virtual hardware:
 
 ::
 
@@ -45,7 +45,7 @@ The inpout parameters allow to customize the number of virtual nodes, nodes and 
 
 .. Note::
 
-   You can refere to :doc:`tosca_galaxy` section for galaxy input paramters.
+   You can refere to :doc:`tosca_galaxy` section for galaxy input parameters.
 
 The master node hosts Galaxy and Slurm controller:
 
@@ -136,4 +136,4 @@ Then the worker nodes configuration (OS and virtual hardware):
 
 .. Note::
 
-   Note that to orchestrate Galaxy with SLURM we do not need new TOSCA custom types or anible roles. Everythings is already built in INDIGO.
+   Note that to orchestrate Galaxy with SLURM we do not need new TOSCA custom types or ansible roles. Everythings is already built in INDIGO.
