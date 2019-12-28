@@ -51,7 +51,7 @@ Laniakea exploits a set of four different policies for secrets management:
          capabilities = [ "create"]
      }
 
-   The ecryption script write the random generated passphrase on vault on Vault, in a path where only the user can access, since it depends on its identity.
+   The ecryption script write the random generated passphrase on vault, in a path where only the user can access, since it depends on its identity.
  
 #. The Laniakea Dashboard can Read, if required by the user, after the authentication, the passphrase from Vault using the **read_only.hcl** policy.
    
@@ -94,7 +94,7 @@ On the Dashboard:
 
    - limited in time duration (currently configured to expire after 12 hours).
 
-  The wrapping token is sent to the VM, via tosca template, with the vault path where the seecret has to be stored. These information are sent to the VM, all needed to store a secret on vault using kv-v2:
+  The wrapping token is sent to the VM, via TOSCA template, with the vault path where the secret has to be stored. These information are sent to the VM, all needed to store a secret on vault using kv-v2:
 
    - The path of the secret: secrets/<user_subject>/<deployment_uuid>. This allows to have **user identity** and **deployment uuid** dependent path for every secret
 
