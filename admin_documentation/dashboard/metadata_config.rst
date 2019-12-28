@@ -20,7 +20,7 @@ The dashboard reads the content of this directory and automatically associate to
 Metadata file structure
 -----------------------
 
-The YAML metadata file has ony one section: metadata. For example:
+The YAML metadata file has only one section: metadata. For example:
 
 ::
 
@@ -99,6 +99,7 @@ Supported options
 
 :Documentation:
 	Define the name to be shown within the colored ribbon on the bottom right corner of the tile. Currently, we adopted three values:
+
 	``Express``: for those applications already installed in the image used to create the Virtual Instance, to speed-up the deployment.
 
 	``Docker``: for those applications run using a Docker container.
@@ -140,7 +141,7 @@ Supported options
 ----------
 
 :Description:
-	Define the three applications which can be diplayed in the ``Most used`` top row.
+	Define the three applications which can be displayed in the ``Most used`` top row.
 
 :Example:
         ::

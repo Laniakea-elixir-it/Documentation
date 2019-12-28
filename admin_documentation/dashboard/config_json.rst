@@ -1,7 +1,7 @@
 Basic configuration
 ===================
 
-The dashboard configuration file can be is located at ``/etc/orchestrator-dashboard/config.json``, to make configuration changes.
+The dashboard configuration file is located at ``/etc/orchestrator-dashboard/config.json``, to make configuration changes.
 
 ::
 
