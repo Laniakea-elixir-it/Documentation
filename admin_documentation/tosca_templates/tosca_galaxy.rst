@@ -3,7 +3,7 @@ Galaxy template
 
 The orchetrator interprets the TOSCA template and orchestrate the Galaxy deployment on the virtual machine.
 
-Galaxy template is located `here <https://github.com/indigo-dc/tosca-types/blob/mtangaro-galaxy-tools/examples/galaxy_tosca.yaml>`_.
+Galaxy template is located `here <https://raw.githubusercontent.com/Laniakea-elixir-it/laniakea-dashboard-config/master/tosca-templates/galaxy.yaml>`_.
 
 Input parameters are needed for each custom type used in the template:
 
