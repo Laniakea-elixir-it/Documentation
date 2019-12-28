@@ -1,7 +1,7 @@
 Infrastructure Manager (IM)
 ===========================
 
-The `Infrastructure Manager (IM) <https://www.grycap.upv.es>`_ is used to deploy virtual infrastructures, to deploy virtual infrastructures, e.g. Galaxy and the underlying virtual hardware.
+The `Infrastructure Manager (IM) <https://www.grycap.upv.es>`_ is used to deploy virtual infrastructures, e.g. Galaxy and the underlying virtual hardware.
 
 .. note::
    Current IM version: 1.8.6.1
@@ -131,7 +131,7 @@ IM testing
 POST
 ****
 
-The POST request, istantiate a new deployment
+The POST request istantiate a new deployment
 
 ::
 

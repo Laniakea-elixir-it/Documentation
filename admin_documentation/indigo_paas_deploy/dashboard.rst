@@ -83,7 +83,7 @@ The one with MySQL and Hashicorp Vault is the one used in Laniakea.
 Post installation steps to enable the callback
 ----------------------------------------------
 
-If the callback is enabled, the Paas Orchestrator (:doc:`/admin_documentation/indigo_paas_deploy/orchestrator`) needs to be configured accordingly.
+If the callback is enabled, the PaaS Orchestrator (:doc:`/admin_documentation/indigo_paas_deploy/orchestrator`) needs to be configured accordingly.
 
 In particular, the dashboard CA certificate has to be copied on the PaaS Orchestrator Virtual Machine in ``/etc/orchestrator/trusted_certs``.
 

@@ -227,7 +227,7 @@ The full registration procedure is described in the :doc:`/user_documentation/au
 Create IAM Client
 -----------------
 
-Registered clients allow to request and receive information about authenticated end-users. Each INDIGO service must authenticate to a dedicated IAM client using a **client id** a **client secret**.
+Registered clients allow to request and receive information about authenticated end-users. Each INDIGO service must authenticate to a dedicated IAM client using a **client id** and a **client secret**.
 
 To create a IAM **client** or a **protetect resource**, please follow these instructions:
 

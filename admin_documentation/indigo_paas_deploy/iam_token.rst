@@ -72,7 +72,7 @@ Get IAM access token
       :scale: 50%
       :align: center
 
-#. Open in a brower the URL obtained from the script and paste code:
+#. Open in a browser the URL obtained from the script and paste code:
 
    .. figure:: _static/get_iam_token/get_iam_token_enter_code.png
       :scale: 50%

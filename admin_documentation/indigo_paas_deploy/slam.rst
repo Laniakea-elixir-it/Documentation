@@ -1,7 +1,7 @@
 SLA Manager (SLAM)
 ==================
 
-The Service Level Agreement Manager (SLAM) role is to establish an agreement between customer and provider about capacity and quality targets. SLAM is using INDIGO IAM for authentication and INDIGO CMDB for configuration and authorization for providers.
+The Service Level Agreement Manager (SLAM) is used to establish an agreement between customer and provider about capacity and quality targets. SLAM is using INDIGO IAM for authentication and INDIGO CMDB for configuration and authorization for providers.
 
 .. note::
    Current SLAM version v2.0.0
@@ -31,7 +31,7 @@ Register a new IAM client for SLAM:
 
 #. Click on **MitreID Dashboard** and then **Self-service client registration**.
 
-#. Click on **New client** and fill the form with the following paramethers:
+#. Click on **New client** and fill the form with the following parameters:
 
    ::
 
@@ -43,7 +43,7 @@ Register a new IAM client for SLAM:
       :scale: 30%
       :align: center
 
-#. In the Access tab select the follwing **Scopes** 
+#. In the Access tab select the following **Scopes** 
 
    ::
 
@@ -128,8 +128,8 @@ Authorize SLAM
    
    .. centered:: Fig.1: SLAM home page
 
-Resources negitation
-^^^^^^^^^^^^^^^^^^^^
+Resources negotiation
+^^^^^^^^^^^^^^^^^^^^^
 
 To create new SLAs with SLAM follow this steps:
 

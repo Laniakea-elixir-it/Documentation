@@ -5,7 +5,7 @@ Vault is exploited as secrets management store, to store and manage encryption p
 
 .. note::
 
-   Current version version: 1.1.2
+   Current version: 1.1.2
 
 VM configuration
 ----------------
@@ -73,7 +73,7 @@ The Vault initialization can not be automated. To initialize it and get your roo
      ssh root@<vault_vm_ip_address>
 
 
-#. Initialize vault
+#. Initialize Vault:
 
    ::
 

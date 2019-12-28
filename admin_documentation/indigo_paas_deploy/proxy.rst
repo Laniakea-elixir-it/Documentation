@@ -5,7 +5,7 @@ A proxy server is used to expose IM, CMDB, CPR and the PaaS Orchestrator.
 VM configuration
 ----------------
 
-The control machine can used to run the proxy server. The VM should meet the following minimum requirements:
+The control machine can be used to run the proxy server. The VM should meet the following minimum requirements:
 
 ======= ==============================
 OS      Ubuntu 16.04

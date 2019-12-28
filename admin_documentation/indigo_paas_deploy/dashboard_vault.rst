@@ -24,7 +24,7 @@ Create another IAM client for Vault, to enable oidc integration to authenticate 
 
 #. Login on IAM then **MitreID Dashboard** and select **Self-service client registration** as Administrator user.
 
-#. Click on **New client** with the following paramethers
+#. Click on **New client** with the following parameters:
 
    ::
 

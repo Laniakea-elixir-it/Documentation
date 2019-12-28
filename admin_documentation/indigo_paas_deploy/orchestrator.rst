@@ -23,7 +23,7 @@ IAM protected resource configuration for the Orchestrator
 
 #. Login on IAM then **MitreID Dashboard** and select **Self-service protected resource registration** as Administrator user.
 
-#. Select **New Resource** with the follwoing parameters
+#. Select **New Resource** with the following parameters
 
    ::
 
@@ -82,7 +82,7 @@ IAM  protected resource configuration for CLUES
 
 #. Login on IAM then **MitreID Dashboard** and select **Self-service protected resource registration** as Administrator user.
 
-#. Select **New Resource** and set the follwoing parameters
+#. Select **New Resource** and set the following parameters
 
    ::
 
