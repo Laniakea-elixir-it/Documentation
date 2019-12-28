@@ -12,7 +12,7 @@ The CernVM-FS (cvmfs) relies on OverlayFS or AUFS as default storage driver. Ubu
 
 #. Ensure enough disk space in ``/var/spool/cvmfs`` (>50GiB). 
 
-#. For local storage: Ensure enough disk space in /srv/cvmfs.
+#. For local storage: ensure enough disk space in /srv/cvmfs.
 
 #. Create a repository with ``cvmfs_server mkfs``.
 
@@ -21,7 +21,7 @@ The CernVM-FS (cvmfs) relies on OverlayFS or AUFS as default storage driver. Ubu
 
   - ``/cvmfs`` is the repository mount point, containing read-only union file system mountpoints that become writable during repository updates.
 
-  - ``/var/spool/cvmfs`` Hosts the scratch area described here, thus might consume notable disk space during repository updates. When you copy your files to ``/cvmfs/<your_repository_name>/``, they are stored in ``/var/spool/cvmfs``, therefore you have ensure enough space to this directory.
+  - ``/var/spool/cvmfs`` hosts the scratch area described here, thus might consume notable disk space during repository updates. When you copy your files to ``/cvmfs/<your_repository_name>/``, they are stored in ``/var/spool/cvmfs``, therefore you have ensure enough space to this directory.
 
   - ``/srv/cvmfs`` is the central repository storage location. During the ``cvmfs_server publish`` procedure, your files will be moved and stored here. Therefore you have to ensure enough space here, too. This directory needs to have enough space to store all your cvmfs server contents.
 
@@ -98,7 +98,7 @@ Reference data are available on Openstack Swift for public download. The list of
 
 Furthermore, to automatically download our reference data set it is possible to use python script `refdata_download.py <https://raw.githubusercontent.com/indigo-dc/Reference-data-galaxycloud-repository/master/scripts/refdata_download.py>`_. 
 
-THe package python-pycurl is needed to satisfy refdata_download.py requirements: on Ubuntu ``sudo apt-get install python-pycurl``
+The package python-pycurl is needed to satisfy refdata_download.py requirements: on Ubuntu ``sudo apt-get install python-pycurl``
 
 Script usage
 ************
