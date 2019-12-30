@@ -87,7 +87,10 @@ https://www.biorxiv.org/content/10.1101/472464v2
 
 Licence
 -------
-GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+
+As an open source project Laniakea is made up of many pieces of software created by a range of individuals, teams, and companies. Laniakea is a collective work, and each piece of software within this work has its own license.
+
+Your use of each piece of software is governed by the terms of its accompanying license. Redistribution of parts or the whole of Laniakea may require you to comply with additional license requirements. 
 
 Galaxy tutorials
 ----------------
