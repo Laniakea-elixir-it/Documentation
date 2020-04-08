@@ -83,6 +83,8 @@ Cite
 
 **Marco Antonio Tangaro, Giacinto Donvito, Marica Antonacci, Matteo Chiara, Pietro Mandreoli, Graziano Pesole, Federico Zambelli, Laniakea: an open solution to provide Galaxy “on-demand” instances over heterogeneous cloud infrastructures, GigaScience, Volume 9, Issue 4, April 2020, giaa033, https://doi.org/10.1093/gigascience/giaa033**
 
+Tha paper is available `here <https://academic.oup.com/gigascience/article/9/4/giaa033/58166689>`_.
+
 Licence
 -------
 
