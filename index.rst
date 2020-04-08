@@ -81,9 +81,7 @@ Software glitches and bugs can occasionally be encoutered. The best way to repor
 Cite
 ----
 
-**Laniakea: an open solution to provide Galaxy “on-demand” instances over heterogeneous cloud infrastructures**, Marco Antonio Tangaro, Giacinto Donvito, Marica Antonacci, Matteo Chiara, Pietro Mandreoli, Graziano Pesole, Federico Zambelli,, ioRxiv 472464; doi: https://doi.org/10.1101/472464
-
-https://www.biorxiv.org/content/10.1101/472464v2
+**Marco Antonio Tangaro, Giacinto Donvito, Marica Antonacci, Matteo Chiara, Pietro Mandreoli, Graziano Pesole, Federico Zambelli, Laniakea: an open solution to provide Galaxy “on-demand” instances over heterogeneous cloud infrastructures, GigaScience, Volume 9, Issue 4, April 2020, giaa033, https://doi.org/10.1093/gigascience/giaa033**
 
 Licence
 -------
