@@ -192,7 +192,7 @@ How to use FTP through FileZilla
 
 Open FileZilla and configure it with:
 
-#. Host: Galaxy ip address (e.g. 90.147.170.108), without the ``/gaaxy``.
+#. Host: Galaxy ip address (e.g. 90.147.170.108), without the ``/galaxy``.
 
 #. User name: your e-mail address on Galaxy.
 
