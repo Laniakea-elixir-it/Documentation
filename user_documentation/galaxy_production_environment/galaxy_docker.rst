@@ -97,7 +97,7 @@ Of course, the Galaxy Docker container allows user to upload data through FTP.
 
 The procedure is similar to that described in the ``Proftpd`` section here: :doc:`/user_documentation/galaxy_production_environment/galaxy_production_environment_configuration.rst`.
 
-Moreover, you need to enable FTP Passive mode. Go to ``Settings...```, then to ``FTP`` and flag ``Passive (recommended)``, as shown in the following picture.
+Moreover, you need to enable FTP Passive mode. Go to ``Settings...``, then to ``FTP`` and flag ``Passive (recommended)``, as shown in the following picture.
 
 .. figure:: img/docker_ftp_passive.png
    :scale: 30 %
