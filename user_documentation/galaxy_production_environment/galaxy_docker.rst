@@ -100,7 +100,7 @@ The procedure is similar to that described in the ``Proftpd`` section here: :doc
 Moreover, you need to enable FTP Passive mode. Go to ``Settings...``, then to ``FTP`` and flag ``Passive (recommended)``, as shown in the following picture.
 
 .. figure:: img/docker_ftp_passive.png
-   :scale: 30 %
+   :scale: 20 %
    :align: center
 
 For those using the command line tool, you can enable/disable the passive mode by typing ``passive``. First connect to the server then type:
