@@ -90,6 +90,27 @@ In order to see the Galaxy Docker configuration, SSH login in the virtual machin
 
   $ sudo docker exec -it galaxydocker echo $GALAXY_CONFIG
 
+Data upload: FTP
+****************
+
+Of course, the Galaxy Docker container allows user to upload data through FTP.
+
+The procedure is similar to that described in the ``Proftpd`` section here: :doc:`/user_documentation/galaxy_production_environment/galaxy_production_environment_configuration.rst`.
+
+Moreover, you need to enable FTP Passive mode. Go to ``Settings...```, then to ``FTP`` and flag ``Passive (recommended)``, as shown in the following picture.
+
+.. figure:: img/docker_ftp_passive.png
+   :scale: 90 %
+   :align: center
+
+For those using the command line tool, you can enable/disable the passive mode by typing ``passive``. First connect to the server then type:
+
+::
+
+  passive
+
+
+and you will be in passive mode
 
 Galaxy Docker usage tutorial
 ----------------------------
