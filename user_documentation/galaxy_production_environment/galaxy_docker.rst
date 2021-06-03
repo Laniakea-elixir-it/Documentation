@@ -110,7 +110,7 @@ For those using the command line tool, you can enable/disable the passive mode b
   passive
 
 
-and you will be in passive mode
+and you will be in passive mode.
 
 Galaxy Docker usage tutorial
 ----------------------------
