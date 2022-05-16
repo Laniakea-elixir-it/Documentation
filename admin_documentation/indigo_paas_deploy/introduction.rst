@@ -67,7 +67,7 @@ Service installation
    proxy
    im
    cmdb
-   slam
+   slat
    orchestrator
    vault
    dashboard
