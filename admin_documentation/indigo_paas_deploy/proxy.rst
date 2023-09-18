@@ -25,8 +25,9 @@ Create the file ``indigopaas-deploy/ansible/inventory/group_vars/proxy.yaml`` wi
 
 ::
 
- letsencrypt_email: "<valid_email_address>"
- domain_name: "<proxy_vm_dns_name>"
+  letsencrypt_email: "<valid_email_address>"
+  domain_name: "<proxy_vm_dns_name>"
+  proxy_use_letsencrypt: true
 
 .. warning::
 
