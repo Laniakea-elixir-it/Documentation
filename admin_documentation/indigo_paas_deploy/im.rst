@@ -268,7 +268,7 @@ It is possible to use an OIDC Token with IM for POST, GET and DELETE calls:
 
   export IAM_ACCESS_TOKEN="..."
 
-  curl -k -H 'Content-type: text/yaml' -H "Authorization: id = ost; type = OpenStack; host = https://cloud.recas.ba.infn.it:5000/; username = laniakea; password = $IAM_ACCESS_TOKEN; tenant = oidc; auth_version = 3.x_oidc_access_token; service_region = recas-cloud;\nid = im; type = InfrastructureManager; token = $IAM_ACCESS_TOKEN" -i -X POST https://cloud-90-147-75-119.cloud.ba.infn.it/im/infrastructures --data-binary "@node_with_image.yaml"
+  curl -k -H 'Content-type: text/yaml' -H "Authorization: id = ost; type = OpenStack; host = https://cloud.recas.ba.infn.it:5000/; username = laniakea; password = $IAM_ACCESS_TOKEN; tenant = openid; auth_version = 3.x_oidc_access_token; service_region = RegionOne;\nid = im; type = InfrastructureManager; token = $IAM_ACCESS_TOKEN" -i -X POST https://cloud-90-147-75-119.cloud.ba.infn.it/im/infrastructures --data-binary "@node_with_image.yaml"
 
 -------
 ``GET``
@@ -278,7 +278,7 @@ It is possible to use an OIDC Token with IM for POST, GET and DELETE calls:
 
   export IAM_ACCESS_TOKEN="..."
 
-  curl -k -H 'Content-type: text/yaml' -H "Authorization: id = ost; type = OpenStack; host = https://cloud.recas.ba.infn.it:5000/; username = laniakea; password = $IAM_ACCESS_TOKEN; tenant = oidc; auth_version = 3.x_oidc_access_token; service_region = recas-cloud;\nid = im; type = InfrastructureManager; token = $IAM_ACCESS_TOKEN" -i -X GET https://cloud-90-147-75-119.cloud.ba.infn.it/im/infrastructures
+  curl -k -H 'Content-type: text/yaml' -H "Authorization: id = ost; type = OpenStack; host = https://cloud.recas.ba.infn.it:5000/; username = laniakea; password = $IAM_ACCESS_TOKEN; tenant = openid; auth_version = 3.x_oidc_access_token; service_region = RegionOne;\nid = im; type = InfrastructureManager; token = $IAM_ACCESS_TOKEN" -i -X GET https://cloud-90-147-75-119.cloud.ba.infn.it/im/infrastructures
 
 ---------
 ``DELETE``
@@ -288,7 +288,7 @@ It is possible to use an OIDC Token with IM for POST, GET and DELETE calls:
 
   export IAM_ACCESS_TOKEN="..."
 
-  curl -k -H 'Content-type: text/yaml' -H "Authorization: id = ost; type = OpenStack; host = https://cloud.recas.ba.infn.it:5000/; username = laniakea; password = $IAM_ACCESS_TOKEN; tenant = oidc; auth_version = 3.x_oidc_access_token; service_region = recas-cloud;\nid = im; type = InfrastructureManager; token = $IAM_ACCESS_TOKEN" -i -X DELETE https://cloud-90-147-75-119.cloud.ba.infn.it/im/infrastructures/<infrastructure_uuid>
+  curl -k -H 'Content-type: text/yaml' -H "Authorization: id = ost; type = OpenStack; host = https://cloud.recas.ba.infn.it:5000/; username = laniakea; password = $IAM_ACCESS_TOKEN; tenant = openid; auth_version = 3.x_oidc_access_token; service_region = RegionOne;\nid = im; type = InfrastructureManager; token = $IAM_ACCESS_TOKEN" -i -X DELETE https://cloud-90-147-75-119.cloud.ba.infn.it/im/infrastructures/<infrastructure_uuid>
 
 FAQ
 ---
