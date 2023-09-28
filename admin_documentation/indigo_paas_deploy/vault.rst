@@ -13,7 +13,7 @@ VM configuration
 Create a VM for Vault. The VM should meet the following minimum requirements:
 
 ======= ==============================
-OS      Ubuntu 16.04
+OS      Ubuntu 22.04
 vCPUs   2
 RAM     4 GB
 Network Public IP address.
@@ -30,8 +30,10 @@ Create the file ``indigopaas-deploy/ansible/inventory/group_vars/vault.yaml`` wi
 
 ::
 
-  vault_fqdn: <dashboard_vm_dns_name>
+  vault_fqdn: <vault_vm_dns_name>
+  vault_listener_address: <vault_vm_dns_name>
   vault_image_name: vault:1.1.2
+  vault_letsencrypt: true
   vault_letsencrypt_email: "<valid_email_address>"
 
 .. warning::
@@ -51,6 +53,15 @@ Run the role using the ``ansible-playbook`` command:
   # cd indigopaas-deploy/ansible 
 
   # ansible-playbook -i inventory/inventory playbooks/deploy-vault.yml
+
+
+.. warning::
+
+   If you are using letsencryt certificates, there is a permissions issue on the private key, set to 600. 644 is needed. You can fix this with:
+
+   ::
+
+     # chmod 644 /etc/letsencrypt/archive/<vault_vm_dns_name>/privkey1.pem
 
 Installation video tutorial
 ***************************
