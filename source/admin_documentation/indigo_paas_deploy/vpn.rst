@@ -188,18 +188,97 @@ Finally, restart the server:
 Jump host connection tweaks
 ===========================
 
-https://askubuntu.com/questions/1181115/openvpn-client-cannot-access-any-network-except-for-the-server-itself-after-conn
+Once the OpenVPN is configured you need to fix the networking configuration.
 
-aggiungo il masquarade
+It may be necessary to configure Linux IP forwarding (see `here <https://linuxconfig.org/how-to-turn-on-off-ip-forwarding-in-linux>`_).
 
-iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -d 172.18.7.0/24 -o ens4 -j MASQUERADE
+Indeed iptables is not well configured:
+
+::
+
+  # sudo iptables -t nat -L --line-numbers
+  Chain PREROUTING (policy ACCEPT)
+  num  target     prot opt source               destination         
+  
+  Chain INPUT (policy ACCEPT)
+  num  target     prot opt source               destination         
+  
+  Chain OUTPUT (policy ACCEPT)
+  num  target     prot opt source               destination         
+  
+  Chain POSTROUTING (policy ACCEPT)
+  num  target     prot opt source               destination         
+  1    SNAT       all  --  10.8.0.0/24         !10.8.0.0/24          to:212.189.202.200
 
 
-rimuovo SNAT
+We need to tell to iptables that the network source is the openvpn network (here 10.8.0.0/24), the destination the private network (here 172.18.7.0/24) doing NAT, so we add the masquarade:
 
-iptables -t nat -D POSTROUTING 1
+::
 
-mettere ip_forwarding 1
+  iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -d 172.18.7.0/24 -o ens4 -j MASQUERADE
+
+Then we have to remove the SNAT line
+
+::
+
+  iptables -t nat -D POSTROUTING 1
+
+To make this permanent disable and turn off  the openvpn iptables systemd file ``/etc/systemd/system/openvpn-iptables.service``
+
+::
+
+  systemctl stop openvpn-iptables.service
+
+  systemctl disable openvpn-iptables.service
 
 PaaS Configuration
 ------------------
+
+Once the OpenVPN part is configured, we need to teach IM and the PaaS how to exploit it.
+
+When IM is installed and configured a SSH key pair is created and mounted in the IM Docker container, whose path is:
+
+::
+
+  # ll /etc/im/.ssh/
+
+  ...
+  -rw------- 1 root root 3357 Sep 20  2023 id_rsa
+  -rw-r--r-- 1 root root  726 Sep 20  2023 id_rsa.pub
+
+The public key has to be configured on the jump host. So login on the jump host VM. Then create a ``im`` user:
+
+::
+
+  useradd -m im
+
+Log in as the new user
+
+::
+
+  su - im
+
+Add the public key to the authorized_keys file:
+
+::
+
+  mkdir .ssh
+  
+  vim authorized_keys
+
+Finally, you should be able to connect from the IM machine to the jump host with the command
+
+::
+
+  ssh -i /etc/im/.ssh/id_rsa im@212.189.202.200
+
+References
+----------
+
+Install OpenVPN: https://community.openvpn.net/openvpn/wiki/OpenvpnSoftwareRepos
+
+Enable IP forwarding: https://linuxconfig.org/how-to-turn-on-off-ip-forwarding-in-linux
+
+Enable IP forwarding with OpenVPN: https://openvpn.net/faq/what-is-and-how-do-i-enable-ip-forwarding-on-linux/
+
+Iptables configuration: https://askubuntu.com/questions/1181115/openvpn-client-cannot-access-any-network-except-for-the-server-itself-after-conn
