@@ -272,6 +272,73 @@ Finally, you should be able to connect from the IM machine to the jump host with
 
   ssh -i /etc/im/.ssh/id_rsa im@212.189.202.200
 
+Now that we teached IM how to login in the Jump Host to access the tenant private network, we need to teach the PaaS that, if the deployment is only on the private network, IM has to use the jump host to access it.
+
+This is done at tenant level via CMDB, adding two entries to the tenant:
+
+::
+
+  ...
+  "private_network_proxy_user": "im",
+  "private_network_proxy_host": "<JUMP HOST PUBLIC IP>"
+  ...
+
+with the command:
+
+::
+
+ curl -X PUT http://cmdb:********@localhost:5984/indigo-cmdb-v2/<TENANT CMDB ID> -H "Content-Type: application/json" -d@tenant_update.json
+
+where tenat_update.json is:
+
+::
+
+  {
+  "_id": "ce7fa82f858c3a182288eff7650040ca",
+  "_rev": "1-6b1ac50c5532a5ee8cad48d482ff5316",
+  "data": {
+    "tenant_id": "3b38073bf9e04049bf0cab08b2c1c9a0",
+    "service": "service-RECAS-BARI-openstack",
+    "tenant_name": "ELIXIR-PAAS",
+    "private_network_name": "private_net",
+    "public_network_name": "public_net",
+    "private_network_proxy_user": "im",
+    "private_network_proxy_host": "212.189.202.200",
+    "iam_organisation": "ELIXIR-PAAS"
+  },
+  "type": "tenant"
+
+The resulting output is, for example:
+
+::
+
+  {
+    "id": "ce7fa82f858c3a182288eff7650040ca",
+    "key": [
+      "tenant"
+    ],
+    "value": {
+      "tenant_id": "3b38073bf9e04049bf0cab08b2c1c9a0",
+      "tenant_name": "ELIXIR-PAAS",
+      "iam_organisation": "ELIXIR-PAAS"
+    },
+    "doc": {
+      "_id": "ce7fa82f858c3a182288eff7650040ca",
+      "_rev": "2-d423458cf3f8a0747370dce0498b806c",
+      "data": {
+        "tenant_id": "3b38073bf9e04049bf0cab08b2c1c9a0",
+        "service": "service-RECAS-BARI-openstack",
+        "tenant_name": "ELIXIR-PAAS",
+        "private_network_name": "private_net",
+        "public_network_name": "public_net",
+        "private_network_proxy_user": "im",
+        "private_network_proxy_host": "212.189.202.200",
+        "iam_organisation": "ELIXIR-PAAS"
+      },
+      "type": "tenant"
+    }
+  }
+
 References
 ----------
 
