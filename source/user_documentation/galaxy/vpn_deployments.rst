@@ -35,7 +35,7 @@ The deployment will follow as usual. Once the Deployment is complete click on ``
 
 Here if you click the Galaxy url, it is not possible to access it since it is not available.
 
-   .. figure:: img/vpn_deployment_galaxy_fail.png
+.. figure:: img/vpn_deployment_galaxy_fail.png
    :scale: 20 %
    :align: center
 
