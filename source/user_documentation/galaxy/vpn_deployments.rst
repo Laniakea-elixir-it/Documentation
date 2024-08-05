@@ -16,39 +16,39 @@ In the following we describe how to deploy and exploit these deployments.
 Once the Deployment is complete, navigate to Output values
 
 .. figure:: img/vpn_deployment_select.png
-   :scale: 10 %
+   :scale: 20 %
    :align: center
 
 .. figure:: img/vpn_deployment_output_values.png
-   :scale: 10 %
+   :scale: 20 %
    :align: center
 
 .. figure:: img/vpn_deployment_galaxy_fail.png
-   :scale: 10 %
+   :scale: 20 %
    :align: center
 
 .. figure:: img/vpn_deployment_complete.png
-   :scale: 10 %
+   :scale: 20 %
    :align: center
 
 .. figure:: img/vpn_deployment_save_ovpn_file.png
-   :scale: 10 %
+   :scale: 20 %
    :align: center
 
 .. figure:: img/vpn_deployment_ovpn_file_import.png
-   :scale: 10 %
+   :scale: 20 %
    :align: center
 
 .. figure:: img/vpn_deployment_tunnelblick_creds.png
-   :scale: 10 %
+   :scale: 20 %
    :align: center
 
 .. figure:: img/vpn_deployment_mail.png
-   :scale: 10 %
+   :scale: 20 %
    :align: center
 
 .. figure:: img/vpn_deployment_client_authorization.png
-   :scale: 10 %
+   :scale: 20 %
    :align: center
 
 .. figure:: img/vpn_deployment_tunnelblick_ok.png
@@ -56,7 +56,7 @@ Once the Deployment is complete, navigate to Output values
    :align: center
 
 .. figure:: img/vpn_deployment_galaxy_ok.png
-   :scale: 10 %
+   :scale: 20 %
    :align: center
 
 In this case we are using tunnelblick, which is available for McOS and Linux systems
