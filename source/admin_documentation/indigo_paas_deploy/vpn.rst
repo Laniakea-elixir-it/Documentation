@@ -289,7 +289,7 @@ with the command:
 
  curl -X PUT http://cmdb:********@localhost:5984/indigo-cmdb-v2/<TENANT CMDB ID> -H "Content-Type: application/json" -d@tenant_update.json
 
-where tenat_update.json is:
+where tenat_update.json looks like:
 
 ::
 
@@ -303,7 +303,7 @@ where tenat_update.json is:
     "private_network_name": "private_net",
     "public_network_name": "public_net",
     "private_network_proxy_user": "im",
-    "private_network_proxy_host": "212.189.202.200",
+    "private_network_proxy_host": "<JUMP HOST PUBLIC IP>",
     "iam_organisation": "ELIXIR-PAAS"
   },
   "type": "tenant"
