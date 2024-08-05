@@ -3,7 +3,7 @@ Cloud Info Provider
 
 clone cip:
 
-git clone https://recas-paas:YvCNDdic__zEnFuCjeEa@baltig.infn.it/recas-bari/paas/cip.git /opt/cip
+git clone https://recas-paas:XXXXXXXXXX@baltig.infn.it/recas-bari/paas/cip.git /opt/cip
 
 
 #. Add Cloud site details
