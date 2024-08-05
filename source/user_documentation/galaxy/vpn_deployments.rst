@@ -16,35 +16,35 @@ In the following we describe how to deploy and exploit these deployments.
 Once the Deployment is complete, navigate to Output values
 
 .. figure:: img/vpn_deployment_select.png
-   :scale: 20 %
-   :align: center
-
-.. figure:: img/vpn_deployment_output_values.png
-   :scale: 20 %
-   :align: center
-
-.. figure:: img/vpn_deployment_galaxy_fail.png
-   :scale: 20 %
+   :scale: 40 %
    :align: center
 
 .. figure:: img/vpn_deployment_complete.png
    :scale: 20 %
    :align: center
 
-.. figure:: img/vpn_deployment_save_ovpn_file.png
+.. figure:: img/vpn_deployment_output_values.png
+   :scale: 30 %
+   :align: center
+
+.. figure:: img/vpn_deployment_galaxy_fail.png
    :scale: 20 %
+   :align: center
+
+.. figure:: img/vpn_deployment_save_ovpn_file.png
+   :scale: 30 %
    :align: center
 
 .. figure:: img/vpn_deployment_ovpn_file_import.png
-   :scale: 20 %
+   :scale: 30 %
    :align: center
 
 .. figure:: img/vpn_deployment_tunnelblick_creds.png
-   :scale: 20 %
+   :scale: 30 %
    :align: center
 
 .. figure:: img/vpn_deployment_mail.png
-   :scale: 20 %
+   :scale: 30 %
    :align: center
 
 .. figure:: img/vpn_deployment_client_authorization.png
