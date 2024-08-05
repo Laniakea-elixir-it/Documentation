@@ -50,9 +50,15 @@ Network Public and private IP address.
 PAM module installation and configuration
 -----------------------------------------
 
-Original instructions provided here: https://github.com/maricaantonacci/pam_oauth2_device#readme
+Original instructions to install the PAM module are provided here: https://github.com/maricaantonacci/pam_oauth2_device#readme
 
-Device code timeout is default is 0. It should be a different value: we set 300.
+Please note:
+
+#. Use Ubuntu 22.04 instead.
+
+#. use the release ``0.0.3`` of the PAM module: https://github.com/maricaantonacci/pam_oauth2_device/releases
+
+#. When you create the IAM client, please **set the device code timeout is default is 0. It should be a different value: we set 300.**
 
 OpenVPN installation
 --------------------
