@@ -36,8 +36,9 @@ For more information on the Galaxy Project, please visit the https://galaxyproje
    :caption: User documentation
 
    user_documentation/galaxy/galaxy
-   user_documentation/galaxy/galaxy_docker
    user_documentation/galaxy/galaxy_cluster
+   user_documentation/galaxy/other_applications
+   user_documentation/galaxy/vpn_deployments
    user_documentation/encryption/manage_encrypted_instance
    user_documentation/ssh_keys/ssh_keys.rst
    user_documentation/galaxy/virtual_hdw_presets
