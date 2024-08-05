@@ -58,7 +58,7 @@ Please note:
 
 #. use the release ``0.0.3`` of the PAM module: https://github.com/maricaantonacci/pam_oauth2_device/releases
 
-#. When you create the IAM client, please **set the device code timeout is default is 0. It should be a different value: we set 300.**
+#. When you create the IAM client, please **the device code timeout default is 0 secs. It should be a different value: set it 300 secs.**
 
 OpenVPN installation
 --------------------
