@@ -5,7 +5,11 @@ Continuous Integration (CI) and Continuous Delivery (CD) are practices designed 
 
 Jenkins is an open-source automation server widely used for CI/CD in software development. It facilitates the automation of various stages of the software development lifecycle, such as building, testing, and deploying code. Jenkins supports a wide range of plugins, making it highly customizable and adaptable to different project requirements. It allows developers to integrate their code into a shared repository frequently, ensuring that any integration issues are identified and resolved quickly. Jenkins can also automate the deployment process, making it easier to deliver updates to production environments reliably. Its user-friendly web interface and extensive community support make it a popular choice among developers. Overall, Jenkins plays a crucial role in enhancing development workflows, improving productivity, and ensuring high-quality software releases.
 
-Laniakea exploits Jenksin for two tasks, i.e.  cloud images creation and regular deployment testing, which are tedious operations, but they play a crucial role in the long-term sustainability of the service and must be automated.
+Jenkins installation is not the topic of this section, but we followed the `the GTN tutorial here <https://training.galaxyproject.org/training-material/topics/admin/tutorials/jenkins/tutorial.html>`_, which covers the main tasks of Jenkins installation and configuration.
+
+Laniakea exploits Jenksin for two tasks, i.e. cloud images creation and regular deployment testing, which are tedious operations, but they play a crucial role in the long-term sustainability of the service and must be automated.
+
+Both tasks require the authentication on OpenStack, therefore `OIDC Agent <https://github.com/indigo-dc/oidc-agent>`_ needs to be properly configured on jenkins nodes.
 
 All recipes and JenkinsFiles are hosted on `GitHub <https://github.com/Laniakea-elixir-it/laniakea-ci-infrastructure/>`_.
 
