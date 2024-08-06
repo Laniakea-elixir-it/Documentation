@@ -5,7 +5,7 @@ Laniakea exploits Cloud images for Express builds, i.e. the deployment of applic
 
 These images needs to be rebuilt every time a new software release or update is delivered, and, of course, in case of critical security issues. Therefore, in the long run, their manual creation was not a sustainable strategy.
 
-We use `Hashicorp Packer <https://developer.hashicorp.com/packer>`_ to create images, whith OpenStack plugin, to instantiate the VM on openstack cloud and save it automatically on it, and Ansible for software installation and configuration.
+We use `Hashicorp Packer <https://developer.hashicorp.com/packer>`_ to create images, whith OpenStack plugin, to instantiate the VM on openstack cloud and save it automatically on it, and Ansible for software installation and configuration. Packer will create a VM on OpenStack, will use ansible to configure the software on it (same role used by Laniakea Live builds), and, once finished, will save the image on Glance, ready to be used. Finally, the image can be shared with all Laniakea tenants.
 
 The `Cloud image module <https://github.com/Laniakea-elixir-it/laniakea-ci-infrastructure/tree/master/cloud-images>`_ encompasses:
 
@@ -26,9 +26,13 @@ The list of the cloud images that need to be created is hosted on `GitHub <https
 ``images_db_url``
 -----------------
 
+Every time a new image is created, it is stored on CMDB. To prevent the re-build of images alrady created we check, before image building if the image is already on CMDB. If yes it is skipped.
+
 ----------
 ``images``
 ----------
+
+In the section ``images`` we describe the image to create. In the following we example of a galaxy cloud image is used.
 
 ::
 
@@ -45,20 +49,25 @@ The list of the cloud images that need to be created is hosted on `GitHub <https
             playbook_file: "galaxy.yml" <--------
             ansible_galaxy_file: "galaxy.yml" <--------
 
-**name**:
+**name**: The name of the cloud image
 
-**version**:
+**version**: The version of the cloud image in the form vX.Y.Z, e.g. v1.0.0
 
-**build**:
+**build**: a boolean to enable image building. If yes the image is built, if no, it is not.
 
-**ssh_username**: (default: rocky)
-**source_image**:
-**flavor**: (default:large)
-**volume_size:** "10"
-**network_id**:
-**playbook_file**:
-**ansible_galaxy_file**:
+**ssh_username**: the user Ansible will use to access the created VM (default: rocky).
 
+**source_image**: the soruce image ID on OpenStack to use.
+
+**flavor**: the flavor of the VM to use on OpenStack (default:large).
+
+**volume_size:** the size of the volume used for the VM (default: "10" GB).
+
+**network_id**: the network ID to be attached to the VM
+
+**playbook_file**: Ansible playbook which will be run by Ansible, e.g. galaxy.yml. Available playbooks are stored in the `playbook directory <https://github.com/Laniakea-elixir-it/laniakea-ci-infrastructure/tree/master/cloud-images/playbooks>`_.
+
+**ansible_galaxy_file**: the requiremets file which will be used by **Ansible Galaxy** to install roles. All requirements file are in the `requiremets directory <https://github.com/Laniakea-elixir-it/laniakea-ci-infrastructure/tree/master/cloud-images/requirements>`_.
 
 Image creation with Packer
 --------------------------
