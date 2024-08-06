@@ -186,7 +186,7 @@ Finally, restart the server:
 
 
 Jump host connection tweaks
-===========================
+---------------------------
 
 Once the OpenVPN is configured you need to fix the networking configuration.
 
