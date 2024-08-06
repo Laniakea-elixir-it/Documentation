@@ -5,7 +5,7 @@ The PaaS provides the possibility to instantiate and configure VMs with private 
 
 Isolation is reached using OpenStack tenant and security groups properties, granting the access only through VPN authentication, while the user authentication to the VPN using the same Laniakea credentials.
 
-.. figure:: _static/vpn/vpn_architecture.png
+.. figure:: _static/vpn_architecture.png
    :scale: 40%
    :align: center
 
@@ -29,7 +29,7 @@ We exploit a PAM plugin to enable authentication through OpenID Connect, exploit
 
 #. if the user owns the right tenant permissions, he is granted access to the private network and can finally interact with the deployed application.
 
-.. figure:: _static/vpn/vpn_auth_flow.png
+.. figure:: _static/vpn_auth_flow.png
    :scale: 40%
    :align: center
 
