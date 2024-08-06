@@ -5,4 +5,11 @@ Continuous Integration (CI) and Continuous Delivery (CD) are practices designed 
 
 Jenkins is an open-source automation server widely used for CI/CD in software development. It facilitates the automation of various stages of the software development lifecycle, such as building, testing, and deploying code. Jenkins supports a wide range of plugins, making it highly customizable and adaptable to different project requirements. It allows developers to integrate their code into a shared repository frequently, ensuring that any integration issues are identified and resolved quickly. Jenkins can also automate the deployment process, making it easier to deliver updates to production environments reliably. Its user-friendly web interface and extensive community support make it a popular choice among developers. Overall, Jenkins plays a crucial role in enhancing development workflows, improving productivity, and ensuring high-quality software releases.
 
+Modules
+-------------
 
+.. toctree::
+   :maxdepth: 2
+
+   cloud_images
+   automated_tests
