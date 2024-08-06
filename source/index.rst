@@ -57,6 +57,7 @@ For more information on the Galaxy Project, please visit the https://galaxyproje
 
    admin_documentation/encryption/encryption
    admin_documentation/indigo_paas_deploy/vpn
+   admin_documentation/ci_cd/jenkins.rst
    admin_documentation/ansible/ansible_roles
    admin_documentation/tosca_templates/tosca_templates
    admin_documentation/cvmfs/build_cvmfs_server
