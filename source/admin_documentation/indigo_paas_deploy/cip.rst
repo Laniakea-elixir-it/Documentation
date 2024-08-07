@@ -86,6 +86,18 @@ CIP installation
                  gpu_cuda_driver: 'NA'
                  gpu_cudnn_driver: 'NA'
 
+   The relevant part is the one in the **shares** section. For example we have a tenant on OpenStack named ``laniakea-test-tenant`` with tentant id ``a_random_uuid``. The share section looks like:
+
+   ::
+
+         shares:
+             laniakea-test-tenant:
+                 auth:
+                     project_id: a_random_uuid
+                 iam_organisation: laniakea-test-tenant
+                 private_network_proxy_host: bastion_ip_address
+                 private_network_proxy_user: im
+
 
 #. Copy the docker file from utils on cip directory
 
