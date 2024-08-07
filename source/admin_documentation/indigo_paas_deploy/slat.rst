@@ -1,4 +1,4 @@
-SLA Manager (SLAM)
+SLA Tool (SLAT)
 ==================
 
 .. warning::
@@ -121,14 +121,16 @@ Run the role using the ``ansible-playbook`` command:
 
 .. warning::
 
-   SLAT will require few minutes to start and will be available at **https://<slat_dns_name>:5001
+   SLAT will require few minutes to start and will be available at **https://<slat_dns_name>:5001**
 
-Video tutorial
---------------
+..
 
-.. raw:: html
-
-   <a href="https://asciinema.org/a/NmMSgc2QEB6I9Y32GASbXTBi7" target="_blank"><img src="https://asciinema.org/a/NmMSgc2QEB6I9Y32GASbXTBi7.svg" /></a>
+  Video tutorial
+  --------------
+  
+  .. raw:: html
+  
+     <a href="https://asciinema.org/a/NmMSgc2QEB6I9Y32GASbXTBi7" target="_blank"><img src="https://asciinema.org/a/NmMSgc2QEB6I9Y32GASbXTBi7.svg" /></a>
 
 SLAT configuration
 ------------------
