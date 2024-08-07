@@ -69,6 +69,8 @@ CIP installation
                  auth:
                      project_id: <OPENSTACK TENANT NAME> <------
                  iam_organisation: <CORRESPONDING IAM ORGANISATION> <------
+                 private_network_proxy_host: <PRIVATE IP BASTION> <------ (optional)
+                 private_network_proxy_user: im <------ (optional)
              ... add more here ...  <------
          templates:
              defaults:
