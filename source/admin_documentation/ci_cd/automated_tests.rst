@@ -17,7 +17,7 @@ The `Automated tests module <https://github.com/Laniakea-elixir-it/laniakea-ci-i
 
 #. a `JenkinsFile <https://raw.githubusercontent.com/Laniakea-elixir-it/laniakea-ci-infrastructure/master/automated-tests/JenkinsFile>`_ for jenkins integration;
 
-This module retrieve a valid token using `OIDC agent <https://github.com/indigo-dc/oidc-agent>`_, and, tests all tosca templates <https://github.com/Laniakea-elixir-it/tosca-templates>`_  used in Laniaka.
+This module retrieve a valid token using `OIDC agent <https://github.com/indigo-dc/oidc-agent>`_, and, tests all `tosca templates <https://github.com/Laniakea-elixir-it/tosca-templates>`_  used in Laniakea.
 
 .. note::
 
@@ -144,7 +144,7 @@ It parses the test list, and performa the deployment using orchent, for each tes
 
   python $PWD/automated-tests/control-script.py -c "$PWD/automated-tests/health-check.sh" -l ./automated-tests/laniakea_recas_prod.yaml
 
-To use this script you need a valid IAM token.
+To use this script you need a valid IAM token. Finally a `bash script <https://raw.githubusercontent.com/Laniakea-elixir-it/laniakea-ci-infrastructure/master/automated-tests/control-script.sh>`_ is used to proxy the python one, and create the right environment variables.
 
 .. note::
 
