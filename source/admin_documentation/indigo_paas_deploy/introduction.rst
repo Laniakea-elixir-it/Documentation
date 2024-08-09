@@ -20,7 +20,7 @@ Please create the needed VMs with the following configuration:
 +----------------------------------------------+------+------+-----------------------+---------------+
 | INDIGO Component                             | RAM  | vCPU | Ports                 | Network       |
 +==============================================+======+======+=======================+===============+
-| Proxy server                                 | 2 GB | 1    | 22, 443, 8080         | | public IP   |
+| Proxy server                                 | 2 GB | 1    | 22, 443, 8080, 8443   | | public IP   |
 |                                              |      |      |                       | | private IP  |
 +----------------------------------------------+------+------+-----------------------+---------------+
 | Identity and Access Manager (IAM)            | 4 GB | 2    | 22, 443               | public IP     |
@@ -29,8 +29,9 @@ Please create the needed VMs with the following configuration:
 +----------------------------------------------+------+------+-----------------------+---------------+
 | | Change Management Database (CMDB),         | 4 GB | 2    | 22, 443, 5984, 8080,  | private IP    |
 | | Cloud Provider Ranker (CPR)                |      |      | 8081                  |               |
+| | Cloud Info Provider (CIP)                  |      |      |                       |               |
 +----------------------------------------------+------+------+-----------------------+---------------+
-| Service Level Agreement Manager (SLAM)       | 2 GB | 1    | 22, 8443, 443         | public IP     |
+| Service Level Agreement Tool (SLAT)          | 2 GB | 1    | 22, 5001              | private IP    |
 +----------------------------------------------+------+------+-----------------------+---------------+
 | PaaS Orchestrator                            | 4 GB | 2    | 22, 443               | private IP    |
 +----------------------------------------------+------+------+-----------------------+---------------+
@@ -67,6 +68,7 @@ Service installation
    proxy
    im
    cmdb
+   cip
    slat
    orchestrator
    vault
