@@ -155,8 +155,6 @@ Resources negotiation
 
 SLAT will retrieve the available services from CMDB automatically.
 
-slat_add_sla.png    slat_crate_sla.png  slat_home.png       slat_provider.png   slat_sla_list.png 
-
 #. When you login to SLAT the list of available service providers is shown:
 
    .. figure:: _static/slat/slat_provider.png
