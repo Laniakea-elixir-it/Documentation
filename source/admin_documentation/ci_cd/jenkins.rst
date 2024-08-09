@@ -9,7 +9,9 @@ Jenkins installation is not the topic of this section, but we followed the `the 
 
 Laniakea exploits Jenksin for two tasks, i.e. cloud images creation and regular deployment testing, which are tedious operations, but they play a crucial role in the long-term sustainability of the service and must be automated.
 
-Both tasks require the authentication on OpenStack, therefore `OIDC Agent <https://github.com/indigo-dc/oidc-agent>`_ needs to be properly configured on jenkins nodes.
+.. note::
+
+   Both tasks require the authentication on OpenStack, therefore `OIDC Agent <https://github.com/indigo-dc/oidc-agent>`_ needs to be properly configured on jenkins nodes.
 
 All recipes and JenkinsFiles are hosted on `GitHub <https://github.com/Laniakea-elixir-it/laniakea-ci-infrastructure/>`_.
 

@@ -21,6 +21,10 @@ The `Cloud image module <https://github.com/Laniakea-elixir-it/laniakea-ci-infra
 
 #. a `JenkinsFile <https://raw.githubusercontent.com/Laniakea-elixir-it/laniakea-ci-infrastructure/master/cloud-images/JenkinsFile>`_ for jenkins integration;
 
+.. note::
+
+   This module requires the authentication on OpenStack, therefore `OIDC Agent <https://github.com/indigo-dc/oidc-agent>`_ needs to be properly configured on jenkins nodes.
+
 The image list
 --------------
 
