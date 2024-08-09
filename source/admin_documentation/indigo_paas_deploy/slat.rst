@@ -10,7 +10,7 @@ The Service Level Agreement Tool (SLAT) is used to establish an agreement betwee
 .. note::
    Current SLAT version v0.1
 
-.. figure:: _static/slam/slat_home.png
+.. figure:: _static/slat/slat_home.png
    :scale: 30%
    :align: center
 
