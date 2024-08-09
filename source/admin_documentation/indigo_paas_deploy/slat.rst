@@ -10,6 +10,10 @@ The Service Level Agreement Tool (SLAT) is used to establish an agreement betwee
 .. note::
    Current SLAT version v0.1
 
+.. figure:: _static/slam/slat_home.png
+   :scale: 30%
+   :align: center
+
 VM configuration
 ----------------
 
@@ -123,14 +127,12 @@ Run the role using the ``ansible-playbook`` command:
 
    SLAT will require few minutes to start and will be available at **https://<slat_dns_name>:5001**
 
-..
+Video tutorial
+--------------
 
-  Video tutorial
-  --------------
-  
-  .. raw:: html
-  
-     <a href="https://asciinema.org/a/NmMSgc2QEB6I9Y32GASbXTBi7" target="_blank"><img src="https://asciinema.org/a/NmMSgc2QEB6I9Y32GASbXTBi7.svg" /></a>
+.. raw:: html
+
+   <a href="https://asciinema.org/a/NmMSgc2QEB6I9Y32GASbXTBi7" target="_blank"><img src="https://asciinema.org/a/NmMSgc2QEB6I9Y32GASbXTBi7.svg" /></a>
 
 SLAT configuration
 ------------------
