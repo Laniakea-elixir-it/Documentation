@@ -47,7 +47,7 @@ Register a new IAM client for SLAT:
 
      Client name: slat.client.name
 
-     redirect URI = https://<slat_vm_dns_name>/login/iam/authorized
+     redirect URI = https://<proxy_dns_name>:8443/login/iam/authorized
 
    .. figure:: _static/slam/slam_client_main.png
       :scale: 30%
@@ -83,8 +83,8 @@ Create the file ``indigopaas-deploy/ansible/inventory/group_vars/slat.yaml`` wit
   slat_image_name: "marica/slat:latest"
   
   slat_iam_issuer: 'https://<iam_dns_name'
-  slat_iam_client_id: '<slam-client-ID>'
-  slat_iam_client_secret: '<slam-client-secret>'
+  slat_iam_client_id: '<slat-client-ID>'
+  slat_iam_client_secret: '<slat-client-secret>'
   
   slat_trusted_oidc_idp_list: [{ 'iss': 'https://<iam_dns_name>', 'type': 'indigoiam' }]
   
@@ -129,12 +129,7 @@ Run the role using the ``ansible-playbook`` command:
 
    SLAT will require few minutes to start and will be available at **https://<slat_dns_name>:5001**
 
-Video tutorial
---------------
-
-.. raw:: html
-
-   <a href="https://asciinema.org/a/NmMSgc2QEB6I9Y32GASbXTBi7" target="_blank"><img src="https://asciinema.org/a/NmMSgc2QEB6I9Y32GASbXTBi7.svg" /></a>
+.. Add video tutorial
 
 SLAT configuration
 ------------------
@@ -142,9 +137,9 @@ SLAT configuration
 Authorize SLAT
 ^^^^^^^^^^^^^^
 
-#. SLAT is available at **https://<slam_dns_name>:5001. It will redirect you to IAM
+#. SLAT is available at **https://<proxy_dns_name>:8443**. It will redirect you to IAM
 
-#. Login as admin
+#. Login with a valid user, that has access to tenants.
 
 #. Authorize SLAT
 
@@ -160,7 +155,28 @@ Resources negotiation
 
 SLAT will retrieve the available services from CMDB automatically.
 
-.. toctree::
-   :maxdepth: 2
+slat_add_sla.png    slat_crate_sla.png  slat_home.png       slat_provider.png   slat_sla_list.png 
 
-   slam_negotiation
+#. When you login to SLAT the list of available service providers is shown:
+
+   .. figure:: _static/slat/slat_provider.png
+      :scale: 30%
+      :align: center
+
+#. Select the provider and then ``Create SLA``:   
+
+   .. figure:: _static/slat/slat_add_sla.png
+      :scale: 30%
+      :align: center
+
+#. You need a SLA for each tenant you need to include on Laniakea. So Select the tenant in the ``Customer Gropup`` menu, add the start and end data, and the allocated resources.
+
+   .. figure:: _static/slat/slat_create_sla.png
+      :scale: 30%
+      :align: center
+
+#. The SLA is now available in the SLA list.
+
+   .. figure:: _static/slat/slam_sla_list.png
+      :scale: 30%
+      :align: center
