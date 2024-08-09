@@ -158,13 +158,13 @@ SLAT will retrieve the available services from CMDB automatically.
 #. When you login to SLAT the list of available service providers is shown:
 
    .. figure:: _static/slat/slat_provider.png
-      :scale: 30%
+      :scale: 20%
       :align: center
 
 #. Select the provider and then ``Create SLA``:   
 
    .. figure:: _static/slat/slat_add_sla.png
-      :scale: 30%
+      :scale: 20%
       :align: center
 
 #. You need a SLA for each tenant you need to include on Laniakea. So Select the tenant in the ``Customer Gropup`` menu, add the start and end data, and the allocated resources.
@@ -175,6 +175,6 @@ SLAT will retrieve the available services from CMDB automatically.
 
 #. The SLA is now available in the SLA list.
 
-   .. figure:: _static/slat/slam_sla_list.png
-      :scale: 30%
+   .. figure:: _static/slat/slat_sla_list.png
+      :scale: 20%
       :align: center
