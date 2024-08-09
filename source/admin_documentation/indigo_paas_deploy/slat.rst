@@ -11,8 +11,10 @@ The Service Level Agreement Tool (SLAT) is used to establish an agreement betwee
    Current SLAT version v0.1
 
 .. figure:: _static/slat/slat_home.png
-   :scale: 30%
+   :scale: 20%
    :align: center
+
+.. centered:: Fig.1: SLAT home page
 
 VM configuration
 ----------------
@@ -150,13 +152,8 @@ Authorize SLAT
       :scale: 30%
       :align: center
    
-   .. centered:: Fig.1: SLAM authorization
+   .. centered:: Fig.2: SLAT authorization
 
-   .. figure:: _static/slat/slat_home.png
-      :scale: 30%
-      :align: center
-   
-   .. centered:: Fig.1: SLAT home page
 
 Resources negotiation
 ^^^^^^^^^^^^^^^^^^^^^
