@@ -22,4 +22,5 @@ Modules
    :maxdepth: 2
 
    cloud_images
+   flavors
    automated_tests
