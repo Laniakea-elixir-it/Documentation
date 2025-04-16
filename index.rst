@@ -74,7 +74,7 @@ https://hub.docker.com/r/laniakeacloud
 Support
 -------
 
-If you need support please contact us to: ``laniakea.helpdesk@gmail.com``
+If you need support please contact us via: ``laniakea.helpdesk@gmail.com``
 
 Software glitches and bugs can occasionally be encoutered. The best way to report a bug is to open an issue on our GitHub `repository <https://github.com/Laniakea-elixir-it/elixir-italy-science-gateway/issues>`_.
 
@@ -88,7 +88,7 @@ Tha paper is available `here <https://academic.oup.com/gigascience/article/9/4/g
 Licence
 -------
 
-As an open source project Laniakea is made up of many pieces of software created by a range of individuals, teams, and companies. Laniakea is a collective work, and each piece of software within this work has its own license.
+As an open source project Laniakea is made up of many pieces of software created by a range of individuals, teams, and companies. Laniakea is a collective work, and each piece of software within this work has it's own license.
 
 Your use of each piece of software is governed by the terms of its accompanying license. Redistribution of parts or the whole of Laniakea may require you to comply with additional license requirements. 
 
