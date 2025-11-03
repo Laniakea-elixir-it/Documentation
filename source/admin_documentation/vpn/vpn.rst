@@ -71,7 +71,7 @@ The first step is install OpenVPN
 
 ::
 
-  wet -O - https://swupdate.openvpn.net/repos/repo-public.gpg | sudo apt-key add -
+  wget -O - https://swupdate.openvpn.net/repos/repo-public.gpg | sudo apt-key add -
 
   echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/openvpn-repo-public.gpg] https://build.openvpn.net/debian/openvpn/release/2.5 jammy main" > /etc/apt/sources.list.d/openvpn-aptrepo.list
 
