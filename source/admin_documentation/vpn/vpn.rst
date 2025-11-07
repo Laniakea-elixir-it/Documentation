@@ -71,7 +71,7 @@ Please note:
 3. When you create the IAM client, **do not leave the default “device code timeout” at 0 seconds**.  
    Set it explicitly to **300 seconds (5 minutes)**, otherwise it will expire immediately.
 
-You can follow these steps or the original one applying the suggested modification:
+You can follow these steps or refer to the original one(remember to apply the suggested modification):
 
 1. Download the repository
 
@@ -95,8 +95,8 @@ You can follow these steps or the original one applying the suggested modificati
       make
       sudo make install
 
-4. When creating the OIDC client on your identity provider,  
-   **do not** leave the default ``device code timeout`` at 0 seconds but set it to **300 seconds** (or any number > 0) to prevent immediate expiration.
+Remembrer that when creating the OIDC client on your identity provider,  **do not** leave the default ``device code timeout`` at 0 seconds but set it to **300 seconds** 
+(or any number > 0) to prevent immediate expiration.
 
 OpenVPN installation
 --------------------
@@ -106,21 +106,20 @@ OpenVPN installation
    OpenVPN **version >= 2.5** is required to enable the *deferred authentication* mechanism,
    which is needed by the PAM OAuth2 module.
 
-1. Add the OpenVPN repository
+1. The first step is add the OpenVPN repository:
 
-   Run the following commands on your Ubuntu 22.04 machine::
+   .. code-block:: bash
 
       wget -O - https://swupdate.openvpn.net/repos/repo-public.gpg | sudo apt-key add -
-      echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/openvpn-repo-public.gpg] \
-      https://build.openvpn.net/debian/openvpn/release/2.5 jammy main" | \
-      sudo tee /etc/apt/sources.list.d/openvpn-aptrepo.list
+      echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/openvpn-repo-public.gpg] https://build.openvpn.net/debian/openvpn/release/2.5 jammy main" > /etc/apt/sources.list.d/openvpn-aptrepo.list
+      sudo apt update
 
-2. Install OpenVPN
+2. Then you need to install OpenVPN
 
    You can install and configure OpenVPN automatically using the following script:  
    https://raw.githubusercontent.com/Nyr/openvpn-install/master/openvpn-install.sh
 
-   Run the following commands::
+   .. code-block:: bash
 
       wget https://raw.githubusercontent.com/Nyr/openvpn-install/master/openvpn-install.sh
       chmod +x openvpn-install.sh
