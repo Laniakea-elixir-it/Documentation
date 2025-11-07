@@ -78,7 +78,9 @@ You can follow these steps or refer to the original one(remember to apply the su
    .. code-block:: bash
 
       wget https://github.com/maricaantonacci/pam_oauth2_device/archive/refs/tags/v0.0.3.tar.gz
+      
       tar -xzf v0.0.3.tar.gz
+      
       cd pam_oauth2_device-0.0.3
 
 2. Install required tools
@@ -86,6 +88,7 @@ You can follow these steps or refer to the original one(remember to apply the su
    .. code-block:: bash
 
       sudo apt update
+      
       sudo apt install -y build-essential libcurl4-openssl-dev libpam0g-dev
 
 3. Build and install the module
@@ -93,6 +96,7 @@ You can follow these steps or refer to the original one(remember to apply the su
    .. code-block:: bash
 
       make
+      
       sudo make install
 
 Remembrer that when creating the OIDC client on your identity provider,  **do not** leave the default ``device code timeout`` at 0 seconds but set it to **300 seconds** 
@@ -111,10 +115,12 @@ OpenVPN installation
    .. code-block:: bash
 
       wget -O - https://swupdate.openvpn.net/repos/repo-public.gpg | sudo apt-key add -
+      
       echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/openvpn-repo-public.gpg] https://build.openvpn.net/debian/openvpn/release/2.5 jammy main" > /etc/apt/sources.list.d/openvpn-aptrepo.list
+      
       sudo apt update
 
-2. Then you need to install OpenVPN
+2. Then you need to install OpenVPN:
 
    You can install and configure OpenVPN automatically using the following script:  
    https://raw.githubusercontent.com/Nyr/openvpn-install/master/openvpn-install.sh
@@ -122,7 +128,9 @@ OpenVPN installation
    .. code-block:: bash
 
       wget https://raw.githubusercontent.com/Nyr/openvpn-install/master/openvpn-install.sh
+      
       chmod +x openvpn-install.sh
+      
       sudo ./openvpn-install.sh
 
    During the script execution, **select the following options when prompted**:
@@ -131,7 +139,7 @@ OpenVPN installation
    - **Port:** 1194 (default)  
    - **Server name:** choose a name or press Enter to use the default one  
 
-   Once the script completes, your OpenVPN server will be installed and ready for configuration.
+Once the script completes, your OpenVPN server will be installed and ready for configuration.
 
 
 Enable the PAM plugin
