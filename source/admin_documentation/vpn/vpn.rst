@@ -36,7 +36,10 @@ We exploit a PAM plugin to enable authentication through OpenID Connect, exploit
 VM configuration
 ----------------
 
-Create VM for the jump host, in the tenant where you want enable the VPN deployments. You need a jump host for each tenant.
+Create a virtual machine (VM) that will be used as **jump host** in the tenant where you are planning to enable VPN deployment. 
+
+.. note::
+   Each tenant in your cloud requires its own dedicated jump host.
 
 The VM should meet the following minimum requirements:
 
@@ -44,7 +47,7 @@ The VM should meet the following minimum requirements:
 OS      Ubuntu 22.04
 vCPUs   2
 RAM     4 GB
-Network Public and private IP address.
+Network Public and private IP address
 ======= ==============================
 
 PAM module installation and configuration
