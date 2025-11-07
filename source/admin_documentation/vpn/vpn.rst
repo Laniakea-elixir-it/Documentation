@@ -33,6 +33,8 @@ We exploit a PAM plugin to enable authentication through OpenID Connect, exploit
    :scale: 40%
    :align: center
 
+Let's get started with the installation.
+
 VM configuration
 ----------------
 
@@ -63,11 +65,38 @@ We will install version ``0.0.3`` on **Ubuntu 22.04**.
 
 Please note:
 
-1. The steps are adapted and tested on **Ubuntu 22.04**.
+1. The steps below are adapted and tested on **Ubuntu 22.04**.
 2. Use the release `0.0.3` of the PAM module:  
    https://github.com/maricaantonacci/pam_oauth2_device/releases
 3. When you create the IAM client, **do not leave the default “device code timeout” at 0 seconds**.  
    Set it explicitly to **300 seconds (5 minutes)**, otherwise it will expire immediately.
+
+You can follow these steps or the original one applying the suggested modification:
+
+1. Download the repository
+
+   .. code-block:: bash
+
+      wget https://github.com/maricaantonacci/pam_oauth2_device/archive/refs/tags/v0.0.3.tar.gz
+      tar -xzf v0.0.3.tar.gz
+      cd pam_oauth2_device-0.0.3
+
+2. Install required tools
+
+   .. code-block:: bash
+
+      sudo apt update
+      sudo apt install -y build-essential libcurl4-openssl-dev libpam0g-dev
+
+3. Build and install the module
+
+   .. code-block:: bash
+
+      make
+      sudo make install
+
+4. When creating the OIDC client on your identity provider,  
+   **do not** leave the default ``device code timeout`` at 0 seconds but set it to **300 seconds** (or any number > 0) to prevent immediate expiration.
 
 OpenVPN installation
 --------------------
