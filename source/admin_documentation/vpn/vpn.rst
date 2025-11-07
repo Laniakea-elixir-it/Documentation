@@ -13,7 +13,7 @@ We use a jump host VM that has two fundamental functions: (1) allow IM to access
 
 .. note::
 
-   The procedure has been tested only using Ubuntu 22.04 as OS on the jump host VM.
+   The procedure has been tested using Ubuntu 22.04 as OS on the jump host VM.
 
 The VPN is based on OpenVPN, with clients and server are configured to use TPC protocol.
 
@@ -50,140 +50,194 @@ Network Public and private IP address.
 PAM module installation and configuration
 -----------------------------------------
 
-Original instructions to install the PAM module are provided here: https://github.com/maricaantonacci/pam_oauth2_device#readme
+The PAM module enables OAuth2 device authentication for OpenVPN.  
+We will install version ``0.0.3`` on **Ubuntu 22.04**.
+
+.. note::
+
+   Original installation instructions are available here:
+   https://github.com/maricaantonacci/pam_oauth2_device#readme
 
 Please note:
 
-#. Use Ubuntu 22.04 instead.
-
-#. use the release ``0.0.3`` of the PAM module: https://github.com/maricaantonacci/pam_oauth2_device/releases
-
-#. When you create the IAM client, please **the device code timeout default is 0 secs. It should be a different value: set it 300 secs.**
+1. The steps are adapted and tested on **Ubuntu 22.04**.
+2. Use the release `0.0.3` of the PAM module:  
+   https://github.com/maricaantonacci/pam_oauth2_device/releases
+3. When you create the IAM client, **do not leave the default “device code timeout” at 0 seconds**.  
+   Set it explicitly to **300 seconds (5 minutes)**, otherwise it will expire immediately.
 
 OpenVPN installation
 --------------------
 
 .. note::
 
-   OpenVPN version >= 2.5 is needed for the server in order to enable the deferred authentication mechanism.
+   OpenVPN **version >= 2.5** is required to enable the *deferred authentication* mechanism,
+   which is needed by the PAM OAuth2 module.
 
-The first step is install OpenVPN
+1. Add the OpenVPN repository
 
-::
+   Run the following commands on your Ubuntu 22.04 machine::
 
-  wget -O - https://swupdate.openvpn.net/repos/repo-public.gpg | sudo apt-key add -
+      wget -O - https://swupdate.openvpn.net/repos/repo-public.gpg | sudo apt-key add -
+      echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/openvpn-repo-public.gpg] \
+      https://build.openvpn.net/debian/openvpn/release/2.5 jammy main" | \
+      sudo tee /etc/apt/sources.list.d/openvpn-aptrepo.list
 
-  echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/openvpn-repo-public.gpg] https://build.openvpn.net/debian/openvpn/release/2.5 jammy main" > /etc/apt/sources.list.d/openvpn-aptrepo.list
+2. Install OpenVPN
 
-  sudo apt update
+   You can install and configure OpenVPN automatically using the following script:  
+   https://raw.githubusercontent.com/Nyr/openvpn-install/master/openvpn-install.sh
 
-You can install OpenVPN with the `script <https://raw.githubusercontent.com/Nyr/openvpn-install/master/openvpn-install.sh>`_
+   Run the following commands::
 
-.. note::
+      wget https://raw.githubusercontent.com/Nyr/openvpn-install/master/openvpn-install.sh
+      chmod +x openvpn-install.sh
+      sudo ./openvpn-install.sh
 
-   Please select the following options: TCP for protocol
+   During the script execution, **select the following options when prompted**:
 
-::
+   - **Protocol:** TCP  
+   - **Port:** 1194 (default)  
+   - **Server name:** choose a name or press Enter to use the default one  
 
-  wget https://raw.githubusercontent.com/Nyr/openvpn-install/master/openvpn-install.sh
+   Once the script completes, your OpenVPN server will be installed and ready for configuration.
 
-  chmod +x openvpn-install.sh
-
-  ./openvpn-install.sh
 
 Enable the PAM plugin
 ---------------------
 
-Create the file ``/etc/pam.d/openvpn`` with your favourit editor:
+Create the file ``/etc/pam.d/openvpn`` with your preferred editor:
 
-::
+.. code-block:: bash
 
-  auth required pam_oauth2_device.so
-  account sufficient pam_oauth2_device.so
+   auth     required    pam_oauth2_device.so
+   account  sufficient  pam_oauth2_device.so
 
-Then edit /etc/openvpn/server/server.conf adding the Public ip of the jump host and the private network IP.
+Then edit ``/etc/openvpn/server/server.conf`` to include the public IP of the jump host and the private network IP.
 
 .. note::
 
-   Moreover, lines 26-31 are needed to be properly configured for the pam oauth2 module.
+   Lines marked below are critical for correct PAM + OAuth2 integration,  
+   especially when using username/password authentication only (no client certificates).
 
-::
+.. code-block:: bash
 
-  local <PUBLIC IP OF THE JUMP HOST>
-  port 1194
-  proto tcp
-  dev tun
-  ca ca.crt
-  cert server.crt
-  key server.key
-  dh dh.pem
-  auth SHA512
-  tls-crypt tc.key
-  topology subnet
-  server 10.8.0.0 255.255.255.0
-  #push "redirect-gateway def1 bypass-dhcp"
-  push "route <PRIVATE NETWORK> 255.255.255.0"
-  ifconfig-pool-persist ipp.txt
-  push "dhcp-option DNS 8.8.8.8"
-  push "dhcp-option DNS 8.8.4.4"
-  keepalive 10 120
-  cipher AES-256-CBC
-  user nobody
-  group nogroup
-  persist-key
-  persist-tun
-  verb 7
-  crl-verify crl.pem
-  plugin /usr/lib/x86_64-linux-gnu/openvpn/plugins/openvpn-plugin-auth-pam.so openvpn
-  duplicate-cn
-  setenv deferred_auth_pam 1
-  reneg-sec 0
-  hand-window 300
-  username-as-common-name
+   local <PUBLIC IP OF THE JUMP HOST>
+   port 1194
+   proto tcp
+   dev tun
 
-In particular:
+   # Base PKI configuration
+   ca ca.crt
+   cert server.crt
+   key server.key
+   dh dh.pem
 
-#. ``duplicate-cn``: Allow multiple clients with the same common name to concurrently connect. In the absence of this option, OpenVPN will disconnect a client instance upon connection of a new client having the same common name.
+   # TLS and encryption settings
+   auth SHA512
+   cipher AES-256-CBC
+   tls-crypt tc.key
+   topology subnet
+   server 10.8.0.0 255.255.255.0
 
-#. ``setenv deferred_auth_pam 1``: enable deferred auth method.
+   # Network and routing
+   #push "redirect-gateway def1 bypass-dhcp"
+   push "route <PRIVATE NETWORK> 255.255.255.0"
+   push "dhcp-option DNS 8.8.8.8"
+   push "dhcp-option DNS 8.8.4.4"
 
-#. ``reneg-sec 0``: avoid the end user to be challenged to reauthorize once per hour (default value).
+   # Reliability and permissions
+   keepalive 10 120
+   user nobody
+   group nogroup
+   persist-key
+   persist-tun
+   verb 7
+   crl-verify crl.pem
 
-#. ``hand-window 300``: set the handshake window to a larger value (default is 60s) to copy with email delays.
+   # PAM integration
+   plugin /usr/lib/x86_64-linux-gnu/openvpn/plugins/openvpn-plugin-auth-pam.so openvpn
+   duplicate-cn
+   setenv deferred_auth_pam 1
+   reneg-sec 0
+   hand-window 300
+   username-as-common-name
 
-#. ``username-as-common-name``: use the authenticated username as the common name, rather than the common name from the client cert (neededas we are using the auth-user-pass on the client side).
+Particular attention over key parameters:
 
-Edit the client.ovpn file, with public IP of the jump ost and adding the needed options (lines 15-17):
+1. ``duplicate-cn``: Allow multiple clients with the same common name to concurrently connect. In the absence of this option, OpenVPN will disconnect a client instance upon connection of a new client having the same common name.**Remove it if you want to enforce single-session per user.**
 
-::
+...
 
-  client
-  dev tun
-  proto tcp
-  remote <PUBLIC IP OF THE JUMP HOST> 1194
-  resolv-retry infinite
-  nobind
-  persist-key
-  persist-tun
-  remote-cert-tls server
-  auth SHA512
-  cipher AES-256-CBC
-  ignore-unknown-option block-outside-dns
-  block-outside-dns
-  verb 3
-  auth-user-pass
-  reneg-sec 0
-  hand-window 300
-  <ca>
-  ...
-  </ca>
+2. Client configuration
 
-Finally, restart the server:
 
-::
+Update the ``client.ovpn`` file to use the public IP of the jump host and include the required authentication parameters.
 
-  systemctl restart openvpn-server@server.service
+.. code-block:: bash
 
+   client
+   dev tun
+   proto tcp
+   remote <PUBLIC IP OF THE JUMP HOST> 1194
+   resolv-retry infinite
+   nobind
+   persist-key
+   persist-tun
+   remote-cert-tls server
+   auth SHA512
+   cipher AES-256-CBC
+   ignore-unknown-option block-outside-dns
+   block-outside-dns
+   verb 3
+   auth-user-pass
+   auth-nocache
+   reneg-sec 0
+   hand-window 300
+   <ca>
+   ...
+   </ca>
+
+3. Applying the configuration
+
+.. code-block:: bash
+
+   # Open port 1194 (if using UFW)
+   sudo ufw allow 1194/tcp
+
+   # Restart OpenVPN service
+   sudo systemctl restart openvpn-server@server.service
+
+   # Follow logs for debugging
+   sudo journalctl -u openvpn-server@server.service -f
+
+   # Check plugin path and OpenVPN version
+   openvpn --version | head -n 5
+   ls -l /usr/lib/x86_64-linux-gnu/openvpn/plugins/openvpn-plugin-auth-pam.so
+
+4. Troubleshooting
+
+- **Handshake fails or client certificate requested:**  
+  Add ``verify-client-cert none`` (or ``client-cert-not-required`` for OpenVPN 2.4).
+
+- **Authentication succeeds but connection drops during rekey:**  
+  Ensure ``reneg-sec 0`` is set.
+
+- **PAM module not triggered:**  
+  The PAM service name in ``plugin ... openvpn`` must match the file in ``/etc/pam.d/``.
+
+- **“plugin not found” error:**  
+  Confirm plugin path with ``find /usr -name openvpn-plugin-auth-pam.so``.
+
+- **Timeouts during authentication:**  
+  Increase ``hand-window`` to 300 and ensure the IAM *device code timeout* is set to **300 seconds**.
+
+5. Security recommendations
+
+- Always set ``auth-nocache`` in the client to avoid storing credentials in memory.  
+- Remove ``duplicate-cn`` if you want to restrict users to a single active session.  
+- Keep OpenVPN and PAM modules up to date.  
+- Limit SSH and management access to the jump host.
 
 Jump host connection tweaks
 ---------------------------
