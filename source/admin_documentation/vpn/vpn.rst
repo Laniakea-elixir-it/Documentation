@@ -15,7 +15,7 @@ We use a jump host VM that has two fundamental functions: (1) allow IM to access
 
    The procedure has been tested using Ubuntu 22.04 as OS on the jump host VM.
 
-The VPN is based on OpenVPN, with clients and server are configured to use TPC protocol.
+The VPN is based on OpenVPN, with clients and server are configured to use TCP protocol.
 
 We exploit a PAM plugin to enable authentication through OpenID Connect, exploiting Oauth2 device flow:
 
@@ -71,7 +71,7 @@ Please note:
 3. When you create the IAM client, **do not leave the default “device code timeout” at 0 seconds**.  
    Set it explicitly to **300 seconds (5 minutes)**, otherwise it will expire immediately.
 
-You can follow these steps or refer to the original one (remember to apply the suggested modification):
+You can follow these steps or refer to the original istructions (remember to apply the suggested modification):
 
 1. Download the repository:
 
@@ -99,7 +99,7 @@ You can follow these steps or refer to the original one (remember to apply the s
       
       sudo make install
 
-Remembrer that when creating the OIDC client on your identity provider,  **do not** leave the default ``device code timeout`` at 0 seconds but set it to **300 seconds** 
+Remember that when creating the OIDC client on your identity provider,  **do not** leave the default ``device code timeout`` at 0 seconds but set it to **300 seconds** 
 (or any number > 0) to prevent immediate expiration.
 
 OpenVPN installation
@@ -110,7 +110,7 @@ OpenVPN installation
    OpenVPN **version >= 2.5** is required to enable the *deferred authentication* mechanism,
    which is needed by the PAM OAuth2 module.
 
-1. The first step is add the OpenVPN repository:
+1. The first step is to add the OpenVPN repository:
 
    .. code-block:: bash
 
@@ -140,10 +140,10 @@ OpenVPN installation
 
 Once the script completes, your OpenVPN server will be installed and ready for configuration.
 
-OIDC and certificate configuration
-----------------------------------
+Server Certificates and OIDC configuration
+------------------------------------------
 
-Before continuing with the tutorial, it is necessary to configure OIDC, if you haven't done so already.
+The following steps focus on generating the required server and client certificates, if you haven't done so already.
 To procede you have to have installed OpenVPN ed Easy-RSA:
 
 .. code-block:: bash 
@@ -309,7 +309,7 @@ Recommendations:
 Jump host connection tweaks
 ---------------------------
 
-Once the OpenVPN is configured is important to fix the networking configuration.
+Once OpenVPN is configured is important to fix the networking configuration.
 
 It may be necessary to configure Linux IP forwarding (have a look to `the following link <https://linuxconfig.org/how-to-turn-on-off-ip-forwarding-in-linux>`_).
 
