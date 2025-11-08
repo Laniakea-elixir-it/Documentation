@@ -71,9 +71,9 @@ Please note:
 3. When you create the IAM client, **do not leave the default “device code timeout” at 0 seconds**.  
    Set it explicitly to **300 seconds (5 minutes)**, otherwise it will expire immediately.
 
-You can follow these steps or refer to the original one(remember to apply the suggested modification):
+You can follow these steps or refer to the original one (remember to apply the suggested modification):
 
-1. Download the repository
+1. Download the repository:
 
    .. code-block:: bash
 
@@ -83,7 +83,7 @@ You can follow these steps or refer to the original one(remember to apply the su
       
       cd pam_oauth2_device-0.0.3
 
-2. Install required tools
+2. Install required tools:
 
    .. code-block:: bash
 
@@ -91,7 +91,7 @@ You can follow these steps or refer to the original one(remember to apply the su
       
       sudo apt install -y build-essential libcurl4-openssl-dev libpam0g-dev
 
-3. Build and install the module
+3. Build and install the module:
 
    .. code-block:: bash
 
@@ -122,9 +122,8 @@ OpenVPN installation
 
 2. Then you need to install OpenVPN:
 
-   You can install and configure OpenVPN automatically using the following script:  
-   https://raw.githubusercontent.com/Nyr/openvpn-install/master/openvpn-install.sh
-
+   You can install and configure OpenVPN automatically using the following `script <https://raw.githubusercontent.com/Nyr/openvpn-install/master/openvpn-install.sh>`_.:  
+  
    .. code-block:: bash
 
       wget https://raw.githubusercontent.com/Nyr/openvpn-install/master/openvpn-install.sh
@@ -264,8 +263,6 @@ Particular attention over key parameters:
 - ``hand-window 300``: Increases the handshake window from 60 seconds to 300 seconds to accommodate possible email or token delays.
 - ``username-as-common-name``: Use the authenticated username as the common name, rather than the one from the client certificate. This is required when using ``auth-user-pass`` on the client side.
 
-...
-
 Then we switch to the client configuration.
 
 Update the ``client.ovpn`` file to use the jump host's **public IP** and include the required authentication parameters.
@@ -356,6 +353,11 @@ To make the change permanent, disable and stop the default OpenVPN iptables serv
   systemctl stop openvpn-iptables.service
 
   systemctl disable openvpn-iptables.service
+
+OpenVPN Connect
+---------------
+
+...
 
 PaaS Configuration
 ------------------
