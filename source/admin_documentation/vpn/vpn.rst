@@ -197,6 +197,7 @@ Generate the TLS key and certificate revocation list (CRL):
 
    sudo chown nobody:nogroup /etc/openvpn/server/crl.pem
 
+.. _enable-pam-plugin:
 Enable the PAM plugin
 ---------------------
 
@@ -372,7 +373,7 @@ Once you have installed and opened the client you should see the following windo
    :scale: 40%
    :align: center
 
-Here select
+Here, at the bottom of the window, you need to upload a **.ovpn** file, e.g the one that you create `in the previous script <#enable-pam-plugin>`_.
 
 
 
