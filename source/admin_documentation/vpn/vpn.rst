@@ -140,8 +140,9 @@ OpenVPN installation
 
 Once the script completes, your OpenVPN server will be installed and ready for configuration.
 
-OIDC configuration
-------------------
+OIDC and certificate configuration
+----------------------------------
+
 Before continuing with the tutorial, it is necessary to configure OIDC, if you haven't done so already.
 To procede you have to have installed OpenVPN ed Easy-RSA:
 
@@ -356,6 +357,15 @@ To make the change permanent, disable and stop the default OpenVPN iptables serv
 
 OpenVPN Connect
 ---------------
+
+Now you need to install the official client application that enables you to securely access network resources. Here we strongly suggest **OpenVPN Connect**, available on Windows, MacOS and Linux. The tutorial will show openVPN Connect steps.
+
+.. note::
+   **OpenVPN Connect** is not the only valid client option, **Tunnelblick** can also be used on **macOS** (but not on Windows).  
+   However, it is essential to use a client that does **not** prompt for a password before authentication (Later in this guide, we will cover this topic in more detail),  
+   so that the login verification code can be received by e-mail.
+
+Please visit the `official OpenVPN CLient page <https://openvpn.net/client/>`_ to download the client.
 
 ...
 
