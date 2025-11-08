@@ -393,7 +393,26 @@ Now is sufficent to click connect and compile the following fields:
    :align: center
 
 .. tip::
-   If the certificate is blocking you from the access, you can 
+   When you first configure the connection in **OpenVPN Connect**, you may see the following prompt:
+
+   .. figure:: _static/openvpn_missing_certificate.png
+      :scale: 60%
+      :align: center
+
+      This message appears when the client expects an external certificate for authentication.  
+      In our **example**, this step is not required, so simply disable the *“Require External Certificate”* option in the connection profile.
+
+   Once disabled, you can proceed with the configuration as shown below:
+
+   .. figure:: _static/openvpn_disable_certificate.png
+      :scale: 50%
+      :align: center
+
+      Make sure to:
+      - Set the **Server Hostname** to the public IP of the ``<PUBLIC_JUMP_HOST_IP>``  
+      - Enter your **true email address** in the *Username* field  
+      - Type any placeholder string (e.g. ``password``) in the *password* field  
+      - Click **Save Changes** to receive the email
 
 
 PaaS Configuration
