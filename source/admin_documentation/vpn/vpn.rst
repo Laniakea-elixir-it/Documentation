@@ -408,10 +408,8 @@ Now is sufficent to click connect and compile the following fields:
       :scale: 50%
       :align: center
 
-      Make sure to:
-      - Set the **Server Hostname** to the public IP of the ``<PUBLIC_JUMP_HOST_IP>``  
-      - Enter your **true email address** in the *Username* field  
-      - Type any placeholder string (e.g. ``password``) in the *password* field  
+      Make sure to:  
+      - Disable the field: Require External Certificate
       - Click **Save Changes** to receive the email
 
 
