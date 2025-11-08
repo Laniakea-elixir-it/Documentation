@@ -141,6 +141,61 @@ OpenVPN installation
 
 Once the script completes, your OpenVPN server will be installed and ready for configuration.
 
+OIDC configuration
+------------------
+Before continuing with the tutorial, it is necessary to configure OIDC, if you haven't done so already.
+To procede you have to have installed OpenVPN ed Easy-RSA:
+
+.. code-block:: bash 
+   sudo apt update
+
+   sudo apt install -y openvpn easy-rsa
+
+OpenVPN requires a valid Public Key Infrastructure (PKI) for secure communication between the server and the clients.  
+
+.. note::
+
+   The following example uses **Easy-RSA** to generate the necessary certificates and keys.
+
+You can start by  generating the certificates:
+
+.. code-block:: bash
+
+   make-cadir ~/openvpn-ca
+
+   cd ~/openvpn-ca
+
+   ./easyrsa init-pki
+
+   ./easyrsa build-ca
+
+   ./easyrsa gen-req bastion nopass
+
+   ./easyrsa sign-req server bastion
+
+   ./easyrsa gen-req <YOUR_CLIENT_NAME> 
+
+   ./easyrsa sign-req client <YOUR_CLIENT_NAME>
+
+Copy the required certificates and keys to OpenVPN directory:
+
+.. code-block:: bash
+
+   sudo mkdir -p /etc/openvpn/server
+
+   sudo cp pki/ca.crt pki/issued/bastion.crt pki/private/bastion.key /etc/openvpn/server/
+
+Generate the TLS key and certificate revocation list (CRL):
+
+.. code-block:: bash
+
+   sudo openvpn --genkey secret /etc/openvpn/server/tc.key
+
+   ./easyrsa gen-crl
+
+   sudo cp pki/crl.pem /etc/openvpn/server/
+
+   sudo chown nobody:nogroup /etc/openvpn/server/crl.pem
 
 Enable the PAM plugin
 ---------------------
@@ -149,15 +204,23 @@ Create the file ``/etc/pam.d/openvpn`` with your preferred editor:
 
 .. code-block:: bash
 
+   vim /etc/pam.d/openvpn
+
+Fill the file with the following content:
+
+.. code-block:: bash
+
    auth     required    pam_oauth2_device.so
    account  sufficient  pam_oauth2_device.so
 
-Then edit ``/etc/openvpn/server/server.conf`` to include the public IP of the jump host and the private network IP.
+Then edit ``/etc/openvpn/server/server.conf`` to include the jump host's **public IP** and the **private network IP** range that should be accessible.
 
 .. note::
 
    Lines marked below are critical for correct PAM + OAuth2 integration,  
    especially when using username/password authentication only (no client certificates).
+
+A look to the file:
 
 .. code-block:: bash
 
@@ -165,36 +228,27 @@ Then edit ``/etc/openvpn/server/server.conf`` to include the public IP of the ju
    port 1194
    proto tcp
    dev tun
-
-   # Base PKI configuration
    ca ca.crt
    cert server.crt
    key server.key
    dh dh.pem
-
-   # TLS and encryption settings
    auth SHA512
-   cipher AES-256-CBC
    tls-crypt tc.key
    topology subnet
    server 10.8.0.0 255.255.255.0
-
-   # Network and routing
    #push "redirect-gateway def1 bypass-dhcp"
    push "route <PRIVATE NETWORK> 255.255.255.0"
+   ifconfig-pool-persist ipp.txt
    push "dhcp-option DNS 8.8.8.8"
    push "dhcp-option DNS 8.8.4.4"
-
-   # Reliability and permissions
    keepalive 10 120
+   cipher AES-256-CBC
    user nobody
    group nogroup
    persist-key
    persist-tun
    verb 7
    crl-verify crl.pem
-
-   # PAM integration
    plugin /usr/lib/x86_64-linux-gnu/openvpn/plugins/openvpn-plugin-auth-pam.so openvpn
    duplicate-cn
    setenv deferred_auth_pam 1
@@ -204,14 +258,17 @@ Then edit ``/etc/openvpn/server/server.conf`` to include the public IP of the ju
 
 Particular attention over key parameters:
 
-1. ``duplicate-cn``: Allow multiple clients with the same common name to concurrently connect. In the absence of this option, OpenVPN will disconnect a client instance upon connection of a new client having the same common name.**Remove it if you want to enforce single-session per user.**
+- ``duplicate-cn``: Allow multiple clients with the same common name to connect concurrently. Without this option, OpenVPN disconnects any existing client instance when a new one with the same common name connects.
+- ``setenv deferred_auth_pam 1``: Enable the deferred authentication method for PAM.
+- ``reneg-sec 0``: Prevents users from being prompted to reauthorize every hour (default behavior).
+- ``hand-window 300``: Increases the handshake window from 60 seconds to 300 seconds to accommodate possible email or token delays.
+- ``username-as-common-name``: Use the authenticated username as the common name, rather than the one from the client certificate. This is required when using ``auth-user-pass`` on the client side.
 
 ...
 
-2. Client configuration
+Then we switch to the client configuration.
 
-
-Update the ``client.ovpn`` file to use the public IP of the jump host and include the required authentication parameters.
+Update the ``client.ovpn`` file to use the jump host's **public IP** and include the required authentication parameters.
 
 .. code-block:: bash
 
@@ -234,62 +291,38 @@ Update the ``client.ovpn`` file to use the public IP of the jump host and includ
    reneg-sec 0
    hand-window 300
    <ca>
-   ...
+   **...<INSERT_YOUR_CLIENT_CERTIFICATE_HERE>...**
    </ca>
 
-3. Applying the configuration
+Then apply the configuration by restarting the server
 
 .. code-block:: bash
 
-   # Open port 1194 (if using UFW)
-   sudo ufw allow 1194/tcp
-
-   # Restart OpenVPN service
    sudo systemctl restart openvpn-server@server.service
 
-   # Follow logs for debugging
-   sudo journalctl -u openvpn-server@server.service -f
 
-   # Check plugin path and OpenVPN version
-   openvpn --version | head -n 5
-   ls -l /usr/lib/x86_64-linux-gnu/openvpn/plugins/openvpn-plugin-auth-pam.so
-
-4. Troubleshooting
-
-- **Handshake fails or client certificate requested:**  
-  Add ``verify-client-cert none`` (or ``client-cert-not-required`` for OpenVPN 2.4).
-
-- **Authentication succeeds but connection drops during rekey:**  
-  Ensure ``reneg-sec 0`` is set.
-
-- **PAM module not triggered:**  
-  The PAM service name in ``plugin ... openvpn`` must match the file in ``/etc/pam.d/``.
-
-- **“plugin not found” error:**  
-  Confirm plugin path with ``find /usr -name openvpn-plugin-auth-pam.so``.
-
-- **Timeouts during authentication:**  
-  Increase ``hand-window`` to 300 and ensure the IAM *device code timeout* is set to **300 seconds**.
-
-5. Security recommendations
+Recommendations:
 
 - Always set ``auth-nocache`` in the client to avoid storing credentials in memory.  
 - Remove ``duplicate-cn`` if you want to restrict users to a single active session.  
 - Keep OpenVPN and PAM modules up to date.  
-- Limit SSH and management access to the jump host.
 
 Jump host connection tweaks
 ---------------------------
 
-Once the OpenVPN is configured you need to fix the networking configuration.
+Once the OpenVPN is configured is important to fix the networking configuration.
 
-It may be necessary to configure Linux IP forwarding (see `here <https://linuxconfig.org/how-to-turn-on-off-ip-forwarding-in-linux>`_).
+It may be necessary to configure Linux IP forwarding (have a look to `the following link <https://linuxconfig.org/how-to-turn-on-off-ip-forwarding-in-linux>`_).
 
 Indeed iptables is not well configured:
 
 ::
 
-  # sudo iptables -t nat -L --line-numbers
+  # run this command to optain the ip table
+  sudo iptables -t nat -L --line-numbers
+
+  # expected output:
+
   Chain PREROUTING (policy ACCEPT)
   num  target     prot opt source               destination         
   
@@ -301,22 +334,22 @@ Indeed iptables is not well configured:
   
   Chain POSTROUTING (policy ACCEPT)
   num  target     prot opt source               destination         
-  1    SNAT       all  --  10.8.0.0/24         !10.8.0.0/24          to:212.189.202.200
+  1    SNAT       all  --  10.8.0.0/24         !10.8.0.0/24          to:<JUMP_HOST_PUBLIC_IP>
 
 
-We need to tell to iptables that the network source is the openvpn network (here 10.8.0.0/24), the destination the private network (here 172.18.7.0/24) doing NAT, so we add the masquarade:
+You need to tell to iptables that the network source is the openvpn network (here 10.8.0.0/24), the destination need to be the private network (here 172.18.7.0/24) doing NAT, so we add the masquarade:
 
 ::
 
   iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -d 172.18.7.0/24 -o ens4 -j MASQUERADE
 
-Then we have to remove the SNAT line
+Then we have to remove the SNAT line:
 
 ::
 
   iptables -t nat -D POSTROUTING 1
 
-To make this permanent disable and turn off  the openvpn iptables systemd file ``/etc/systemd/system/openvpn-iptables.service``
+To make the change permanent, disable and stop the default OpenVPN iptables service:
 
 ::
 
