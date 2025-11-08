@@ -389,7 +389,7 @@ Now is sufficent to click connect and compile the following fields:
    The password field cannot be left empty, but it can contain any value (e.g. ``aaaaaaa`` or ``password``) and can be changed freely at any login.
 
 .. figure:: _static/openvpn_login.png
-   :scale: 40%
+   :scale: 40% 
    :align: center
 
 hide certificate
