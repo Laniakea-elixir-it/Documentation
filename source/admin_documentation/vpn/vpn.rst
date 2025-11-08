@@ -60,8 +60,7 @@ We will install version ``0.0.3`` on **Ubuntu 22.04**.
 
 .. note::
 
-   Original installation instructions are available here:
-   https://github.com/maricaantonacci/pam_oauth2_device#readme
+   Original installation instructions are available here: `click here <https://github.com/maricaantonacci/pam_oauth2_device#readme>`_
 
 Please note:
 
