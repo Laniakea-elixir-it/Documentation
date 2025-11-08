@@ -451,7 +451,7 @@ Finally, you should be able to connect from the IM machine to the jump host with
 
 ::
 
-  ssh -i /etc/im/.ssh/id_rsa im@212.189.202.200
+  ssh -i /etc/im/.ssh/id_rsa im@<JUMP_HOST_PUBLIC_IP>
 
 Now that we teached IM how to login in the Jump Host to access the tenant private network, we need to teach the PaaS that, if the deployment is only on the private network, IM has to use the jump host to access it.
 
@@ -513,7 +513,7 @@ The resulting output is, for example:
         "private_network_name": "private_net",
         "public_network_name": "public_net",
         "private_network_proxy_user": "im",
-        "private_network_proxy_host": "212.189.202.200",
+        "private_network_proxy_host": "<JUMP_HOST_PUBLIC_IP>",
         "iam_organisation": "ELIXIR-PAAS"
       },
       "type": "tenant"
