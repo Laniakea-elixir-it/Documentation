@@ -392,7 +392,8 @@ Now is sufficent to click connect and compile the following fields:
    :scale: 40% 
    :align: center
 
-hide certificate
+.. tip::
+   If the certificate is blocking you from the access, you can 
 
 
 PaaS Configuration
