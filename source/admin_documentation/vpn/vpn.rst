@@ -380,6 +380,20 @@ Once you have uploaded the file, you will be redirected to the following page:
    :scale: 40%
    :align: center
 
+Now is sufficent to click connect and compile the following fields:
+
+.. warning::
+   **Important:** We use this client (and **Tunnelblick** also supports this feature) because it allows the user to start the authentication process without requiring a real password.  
+   When filling in the login fields, you can enter **any string** as the password , **it is not used for verification**.  
+   The only mandatory field is your **e-mail address**, where the authentication code will be sent.  
+   The password field cannot be left empty, but it can contain any value (e.g. ``aaaaaaa`` or ``password``) and can be changed freely at any login.
+
+.. figure:: _static/openvpn_login.png
+   :scale: 40%
+   :align: center
+
+hide certificate
+
 
 PaaS Configuration
 ------------------
