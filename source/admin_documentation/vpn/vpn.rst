@@ -400,7 +400,7 @@ Now is sufficent to click connect and compile the following fields:
       :align: center
 
       This message appears when the client expects an external certificate for authentication.  
-      In our **example**, this step is not required, so simply disable the *“Require External Certificate”* option in the connection profile.
+      In our **example**, this step is not required, so we had simply disabled the *“Require External Certificate”* option in the connection profile. (you may want to keep it)
 
    Once disabled, you can proceed with the configuration as shown below:
 
