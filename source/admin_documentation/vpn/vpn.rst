@@ -368,9 +368,12 @@ Now you need to install the official client application that enables you to secu
 Please visit the `official OpenVPN CLient page <https://openvpn.net/client/>`_ to download the client.
 Once you have installed and opened the client you should see the following window:
 
-.. figure:: _static/OpenVPN_Connect_cloud_conncetion
+.. figure:: _static/OpenVPN_Connect_cloud_connection
    :scale: 40%
    :align: center
+
+
+
 
 
 PaaS Configuration
