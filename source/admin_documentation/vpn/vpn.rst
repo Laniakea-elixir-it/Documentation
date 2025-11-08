@@ -376,6 +376,9 @@ Once you have installed and opened the client you should see the following windo
 Here, at the bottom of the window, you need to upload a **.ovpn** file, e.g the one that you create in `the previous script <#enable-pam-plugin>`_: ``client.ovpn``.
 Once you have uploaded the file, you will be redirected to the following page:
 
+.. figure:: _static/openvpn_ovpn_uploaded.png
+   :scale: 40%
+   :align: center
 
 
 PaaS Configuration
