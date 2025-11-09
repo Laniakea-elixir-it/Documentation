@@ -121,7 +121,7 @@ OpenVPN installation
 
 2. Then you need to install OpenVPN:
 
-   You can install and configure OpenVPN automatically using the following `script <https://raw.githubusercontent.com/Nyr/openvpn-install/master/openvpn-install.sh>`_.:  
+   You can install and configure OpenVPN using the following `script <https://raw.githubusercontent.com/Nyr/openvpn-install/master/openvpn-install.sh>`_.:  
   
    .. code-block:: bash
 
