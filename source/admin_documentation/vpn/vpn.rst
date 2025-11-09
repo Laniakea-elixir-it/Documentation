@@ -131,7 +131,7 @@ OpenVPN installation
       
       sudo ./openvpn-install.sh
 
-   During the script execution, **select the following options when prompted**:
+   During the script execution, **be sure that the following options were selected**:
 
    - **Protocol:** TCP  
    - **Port:** 1194 (default)  
