@@ -1,6 +1,22 @@
+Authentication & Entitlements
+=============================
+
+Identity Providers (IdPs) manage user permissions and authorization in different ways. Some systems, such as ReCaS IAM or AWS Cognito, embed the user's group memberships directly inside the access token in a JSON structure, for example:
+
+.. code-block:: code
+   
+   {
+   "sub": "1234567890",
+   "name": "Mario Rossi",
+   "group": tester
+   }
+
+Other federated AAI providers such as the Life Science Authentication and Authorization Infrastructure (LS AAI) and the European Grid Infrastructure (EGI), expose user authorization information using a more structured and complex mechanism, the ``eduPersonEntitlement``, an attribute defined in the eduPerson schema.
+
 EDUPERSON-ENTITLEMENT
-=====================
-In Research and Education organizations have standardised attribute to exchange informations using know schema, eduPerson is one of them. The eduPerson schema does provide an attribute called eduPersonEntitlement in which the value of the entitlement indicates a set of rights to specific resources.
+---------------------
+
+In Research and Education, organizations have a standardised attribute to exchange informations using known schema, eduPerson is one of them. The eduPerson schema does provide an attribute called eduPersonEntitlement in which the value of the entitlement indicates a set of rights to specific resources.
 
 The generic structure can be represented as the following:
 
@@ -10,38 +26,40 @@ The generic structure can be represented as the following:
 
 In this string you can observe:
 
-- URN, that stands for uniform resource name
-- the authority that 'release' the entitlement 
-- the domain of the authority
-- the group to which a user belong
-- the role in that group
-- the qualifier / idp
+- ``URN`:` stands for uniform resource name
+- ``authority:`` the authority that 'release' the entitlement 
+- ``domain:`` the domain of the authority
+- ``group:`` group to which a user belong
+- ``role:`` the role played in that group
+- ``qualifier:`` the name of the idp | qualifier
 
 In other terms, this is a sub-category of URI that does not point to a location but rather identifies a conceptual identity or entitlement.
 
-EGI
+The two main federation that use EdupersonEntitlements that we will cover are: EGI and LS AAI.
+
+EGI 
 ---
-gli entitlement egi seguono questo schema:
+
+Egi entitlements follow the below schema:
 
 .. code-block:: text
 
    urn:mace:egi.eu:group:<vo_name>:role=<role>#<aai-domain>
 
+Main Elements:
 
-Elementi importanti:
+- ``urn:mace:egi.eu:`` official egi namespace
 
-- urn:mace:egi.eu: namespace ufficiale di egi
+- ``vo.access.egi.eu:`` name of the group or VO
 
-- group: indica il gruppo della VO
+- ``role=vm_operator / role=member:`` role inside the VO
 
-- vo.access.egi.eu: nome della VO o del gruppo
-
-- role=vm_operator / role=member: ruolo all'interno della VO
-
-- #aai.egi.eu: authority
+- ``#aai.egi.eu:`` authority
 
 
-nello script al momento ignoriamo il ruolo, prendiamo solo il nome del gruppo 
+nello script al momento ignoriamo il ruolo, prendiamo solo il nome del gruppo.
+
+- Da riportare il codice del modulo pam -
 
 
 EGI AAI (Check-in) usa lo standard eduPerson, ma segue le linee guida AARC-G002 sulla federazione per e-Infrastructure.
@@ -60,14 +78,16 @@ Questi NON rappresentano gruppi. Sono "autorizzazioni a risorse" generate dal pr
 b) scartati perché NON matchano :group:, poi ci sono i group
 
 
-LSAAI
------
+LS AAI
+------
 
-schema: 
+LS AAI follow a different schema: 
 
 .. code-block:: text
    
    urn:geant:lifescience-ri.eu:group:lifescience:<subgroup/subdomain>:<service>:(<role>)#aai.lifescience-ri.eu
+
+In the field group you find like a path where the group is the last (search if there is a subgroup) field
 
 elementi:
 
@@ -87,10 +107,11 @@ elementi:
 
 - #aai.lifescience-ri.eu: authorit
 
-TODO
-----
-per far saltare fuori i gruppi usando egi basta scartare i ruoli, e con la regex ``.*:group:([^#]+)`` si ottiene facilmente solo il gruppo (vo.access.egi.eu
- ad esempio). Per lsaai invece si otterebbe la stringa/path, (lifescience:relying_services:ls_aai_ovpn_bastion) di cui ci interessa solo ultimo valore/o penultimo. (DA CONTROLLARE se è possbile avere anche il role, perchè se si è un problema, dato che non si può più selezionare semplicemente l'ultimo campo dopo gli ultimi :) -> (flag, 1 + 3*TRUE/FALSE ??)
+
+IAM Recas
+---------
+
+group taken from the token directly by the config...
 
 AWS
 ---
