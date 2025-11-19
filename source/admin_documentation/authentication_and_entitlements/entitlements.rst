@@ -62,51 +62,48 @@ nello script al momento ignoriamo il ruolo, prendiamo solo il nome del gruppo.
 - Da riportare il codice del modulo pam -
 
 
-EGI AAI (Check-in) usa lo standard eduPerson, ma segue le linee guida AARC-G002 sulla federazione per e-Infrastructure.
-Questo comporta due tipi di entitlements:
+EGI AAI (Check-in) use eduPerson standard, but follow AARC-G002 instructions on federation for e-Infrastructure, this lead to two different types of entitlement:
 
-a) i “res:”, (Resource Entitlements), contengono info su servizi di backend:
+a) **res (Resource Entitlements):** which contain infomation on backend serices, for example:
 
-- urn:mace:egi.eu:res:ggus.eu
+.. code-block: code
 
-- urn:mace:egi.eu:res:gocdb#aai.egi.eu
+   - urn:mace:egi.eu:res:ggus.eu
 
-- urn:mace:egi.eu:res:rcauth#aai.egi.eu
+   - urn:mace:egi.eu:res:gocdb#aai.egi.eu
 
-Questi NON rappresentano gruppi. Sono "autorizzazioni a risorse" generate dal proxy EGI per servizi partner.
+   - urn:mace:egi.eu:res:rcauth#aai.egi.eu
 
-b) scartati perché NON matchano :group:, poi ci sono i group
+These do **NOT** represent groups but are "authorization" to resources generated from EGI proxy. 
 
+In our script and for our finality these are not interesting and are discarded.
+
+b) **group entitlement:** contain informations about the role and group of the user
 
 LS AAI
 ------
 
-LS AAI follow a different schema: 
+LS AAI expresses group-based authorization using a specific eduPersonEntitlement structure, reported here:
 
 .. code-block:: text
-   
-   urn:geant:lifescience-ri.eu:group:lifescience:<subgroup/subdomain>:<service>:(<role>)#aai.lifescience-ri.eu
 
-In the field group you find like a path where the group is the last (search if there is a subgroup) field
+   urn:geant:lifescience-ri.eu:group:lifescience:<subgroup/subdomain>:<service>#aai.lifescience-ri.eu
 
-elementi:
+The part after ``group:`` represents a path. The *actual group name* is the last element of the path, while the previous elements represent community, sub-groups, or organizational subdivisions.
 
-- urn:geant: namespace generico per federazioni europee (GEANT)
+Main elements:
 
-- lifescience-ri.eu: authority LSAAI
+- ``urn:geant:`` the GEANT namespace used for standardized federated entitlements
 
-- group: uguale a sopra
+- ``lifescience-ri.eu:`` The authority responsible for issuing LS AAI entitlements
 
-- lifescience: community
+- ``lifescience:`` the LS AAI community (top-level VO)
 
-- relying_services: è il nome che LS AAI utilizza per indicare un servizio che si appoggia all’LS AAI per autenticazione - autorizzazione.
+- ``relying_services:`` the namespace LS AAI uses to categorize groups assigned to a particular relying Party (i.e., a service that relies on LS AAI for authenticatio and authorization)
 
-- ls_aai_ovpn_bastion: nome del gruppo vero e proprio
+- ``ls_aai_ovpn_bastion:`` the actual group name, this is the value that determines whether the user has access to the requested service
 
-- role: opzionale in teoria, non ancora trovato esempi che lo includano ma dovrebbe essere possibile trovarlo
-
-- #aai.lifescience-ri.eu: authorit
-
+- ``#aai.lifescience-ri.eu:`` the entitlement qualifier (authority).  
 
 IAM Recas
 ---------
@@ -123,7 +120,9 @@ vedi
 
 References
 ----------
+
 example edupersonEntitlement: https://help.switch.ch/aai/support/documents/attributes/edupersonentitlement/
+
 main things: https://servicedesk.surf.nl/wiki/spaces/IAM/pages/128910063/Standardized+values+for+eduPersonEntitlement
 
 
