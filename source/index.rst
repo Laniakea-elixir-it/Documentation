@@ -57,6 +57,7 @@ For more information on the Galaxy Project, please visit the https://galaxyproje
 
    admin_documentation/encryption/encryption
    admin_documentation/secrets/secrets
+   admin_documentation/authentication_and_entitlements/entitlements
    admin_documentation/vpn/vpn
    admin_documentation/ci_cd/jenkins
    admin_documentation/laniakea_utils/laniakea_utils_api
