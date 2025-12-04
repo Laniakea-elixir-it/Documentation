@@ -391,6 +391,7 @@ Now is sufficent to click connect and compile the following fields:
    :scale: 40% 
    :align: center
 
+
 .. tip::
    When you first configure the connection in **OpenVPN Connect**, you may see the following prompt:
 
@@ -411,8 +412,11 @@ Now is sufficent to click connect and compile the following fields:
       - Disable the field: Require External Certificate
       - Click **Save Changes** to receive the email
 
+Automatic deployment of a bastion
+---------------------------------
+
 Authentication & Entitlements
-=============================
+-----------------------------
 
 Identity Providers (IdPs) manage user permissions and authorization in different ways. Some systems, such as ReCaS IAM or AWS Cognito, embed the user's group memberships directly inside the access token in a JSON structure, for example:
 
@@ -502,34 +506,17 @@ LS AAI expresses group-based authorization using a specific eduPersonEntitlement
 
    urn:geant:lifescience-ri.eu:group:lifescience:<subgroup/subdomain>:<service>#aai.lifescience-ri.eu
 
-The part after ``group:`` represents a path. The *actual group name* is the last element of the path, while the previous elements represent community, sub-groups, or organizational subdivisions.
-
-Main elements:
-
-- ``urn:geant:`` the GEANT namespace used for standardized federated entitlements
-
-- ``lifescience-ri.eu:`` The authority responsible for issuing LS AAI entitlements
-
-- ``lifescience:`` the LS AAI community (top-level VO)
-
-- ``relying_services:`` the namespace LS AAI uses to categorize groups assigned to a particular relying Party (i.e., a service that relies on LS AAI for authenticatio and authorization)
-
-- ``ls_aai_ovpn_bastion:`` the actual group name, this is the value that determines whether the user has access to the requested service
-
-- ``#aai.lifescience-ri.eu:`` the entitlement qualifier (authority).  
+Document once you have screenshots of ls aai platform tutorial
 
 IAM Recas
 ---------
 
-group taken from the token directly by the config...
+... skippable
 
 AWS
 ---
-non ci sono eduperson nativi, si posso "fabbricare":
-vedi
 
-- lamda trigger  (per imitare)
-- Amazon Cognito (molto meglio, sistema molto semplice di gruppi di appartenenza ex. cognito_groups:['1','2'])
+...
 
 PaaS Configuration
 ------------------
