@@ -538,7 +538,10 @@ Start by cloning the repository on any VM you want:
    git clone https://github.com/Laniakea-elixir-it/ansible-role-vpn-bastion
 
 .. note::
-   TODO vuoi tutto fai solo terraform e skippa questo s eno runna questo
+   If you plan to use the full automated workflow (Terraform + Ansible), you can skip this
+   Ansible-only section and jump directly to the **Terraform** part.  
+   If instead you want to configure an existing VM manually or test the PAM/OIDC setup,
+   run this Ansible role as described below.
 
 Ansible configuration
 ~~~~~~~~~~~~~~~~~~~~~
