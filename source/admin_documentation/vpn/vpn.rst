@@ -520,247 +520,255 @@ The resulting output is, for example:
     }
   }
 
-
 Automatic deployment of a bastion on OpenStack
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In this section is shown how to automatically deploy a bastion host in the Openstack enviroment with terraform and directrly configuring it throught an Ansible role. The repoistory where all the steps are documented is reported at this `link <https://github.com/Laniakea-elixir-it/ansible-role-vpn-bastion>`_. In the repository you can find an Ansible role for provisioning and configuring a secure bastion host (Ubuntu 22.04) with PAM authentication using the OAuth2 Device Flow. The role creates the required local users, builds and installs the pam_oauth2_device module, applies the necessary PAM configuration, and updates sshd to enable OIDC-based interactive authentication and automatic home directory management.
+In this section, we show how to automatically deploy a bastion host in an OpenStack environment using Terraform, followed by direct configuration through an Ansible role. The repository documenting all steps is available at this `link <https://github.com/Laniakea-elixir-it/ansible-role-vpn-bastion>`_.  
+It contains an Ansible role for provisioning and configuring a secure bastion host (Ubuntu 22.04) with PAM authentication using the OAuth2 Device Flow. The role creates the required local users, builds and installs the ``pam_oauth2_device`` module, applies the necessary PAM configuration, and updates ``sshd`` to enable OIDC-based interactive authentication and automatic home directory management.
 
-The Ansible role is designed to be used standalone or as part of an automated deployment pipeline together with the accompanying Terraform module published in the terraform directory, which handles the infrastructure provisioning layer for OpenStack.
+The Ansible role can be used standalone or as part of an automated deployment pipeline together with the Terraform module in the ``terraform`` directory, which handles the infrastructure provisioning on OpenStack.
 
 .. tip::
-   It is recomended that you choose this modality of installation if you already have some knoledge or affinity to terraform and ansible. Otherwise is advisable to follow the full guide.
+   Choose this installation method only if you already have some knowledge of Terraform and Ansible.
+   Otherwise, follow the full guide.
 
-Start by coping the repository in any VM that you want:
+Start by cloning the repository on any VM you want to use:
 
 .. code-block:: bash
  
-   git clone https://github.com/Laniakea-elixir-it/ansible-role-vpn-bastion/main
+   git clone https://github.com/Laniakea-elixir-it/ansible-role-vpn-bastion
 
 Ansible configuration
 ---------------------
 
-This playbook turns an **Ubuntu 22.04** VM into a **bastion** that accepts SSH logins via **OpenID Connect (device code flow)** using the [`pam_oauth2_device`](https://github.com/LuigiMansi1/pam_oauth2_device) module.
+This playbook turns an **Ubuntu 22.04** VM into a **bastion** that accepts SSH logins via **OpenID Connect (device code flow)** using the ``pam_oauth2_device`` module.
 
-.. note:: 
-   A modified version of the module had been used, check `pam_oauth2_device <https://github.com/riccardocaccia/pam_oauth2_device>`_
+.. note::
+   A modified version of the module is used. See:
+   `pam_oauth2_device <https://github.com/riccardocaccia/pam_oauth2_device>`_.
 
-This playbook serves to:
+The playbook performs the following tasks:
 
-#. Builds and installs the `pam_oauth2_device` PAM module.
-#. Writes `/etc/pam_oauth2_device/config.json` for your chosen IdP.
-#. Sends the device code URL via SMTP (disabled by default).
-#. Creates `~/.ssh/authorized_keys` for the `im` user if you provide a public key.
+#. Builds and installs the ``pam_oauth2_device`` PAM module.
+#. Writes ``/etc/pam_oauth2_device/config.json`` for your chosen IdP.
+#. Sends the device-code URL via SMTP (disabled by default).
+#. Creates ``~/.ssh/authorized_keys`` for the ``im`` user if a public key is provided.
 
-By cloning the repository, the ansible part contains:
+By cloning the repository, the Ansible section contains:
 
-.. code.block ::bash
+.. code-block:: bash
+
    inventory
    site.yml
    group_vars/
-     ├─ bastion.yml           # public settings (non-secret)
-     └─ bastion.vault.yml     # secrets (put in Ansible Vault)
+     ├─ bastion.yml          # public settings (non-secret)
+     └─ bastion.vault.yml    # secrets (managed through Ansible Vault)
    templates/
      └─ pam_config.json.j2
    .gitignore
 
-Inside the directory there is an inventory file, a site.yml for the installation and settings of the PAM module, a group_vars dir that contains all the bastion setting and secret, and a template directory for the templates, containing the configurations of the idp.
+Inside the directory you will find:
+
+- an ``inventory`` file  
+- a ``site.yml`` for installation and PAM configuration  
+- a ``group_vars`` directory containing settings and secrets  
+- templates used to configure your IdP  
 
 .. note::
-   Is advisable to match the following requirements:
-#. **Target host:** Ubuntu 22.04 VM reachable over SSH (user with sudo, e.g. `ubuntu`).
-#. **Controller:** Ansible ≥ 2.15.
-#. **OIDC client:** `client_id` + `client_secret` registered at your Identity Provider (IdP).
-#. (Optional) SMTP credentials if you want code/URL by email.
+   Make sure the following requirements are met:
 
-Sreps to follow
+   #. **Target host:** Ubuntu 22.04 VM reachable via SSH (with sudo-capable user, e.g. ``ubuntu``).
+   #. **Controller:** Ansible ≥ 2.15.
+   #. **OIDC client:** ``client_id`` and ``client_secret`` registered at your IdP.
+   #. (Optional) SMTP credentials for delivering device-code URLs by email.
+
+Steps to follow
 ---------------
 
-Edit `inventory` and set your bastion’s public IP and SSH user:
+Edit ``inventory`` and set your bastion’s public IP and SSH user:
 
 .. code-block:: bash
+
    [bastion]
    bastion1 ansible_host=BASTION_PUBLIC_IP ansible_user=ubuntu
 
-Choose the IdP and fill provider endpoints. Pick your provider and open `group_vars/bastion.yml` (IAM endpoints are prefilled. For other IdPs, replace the placeholders):
+Select your IdP and fill the provider endpoints. Open ``group_vars/bastion.yml``. IAM endpoints are already filled in; for other IdPs, replace the placeholders:
 
-  .. code-block:: yaml
-     idp_provider: "iam"   # or lifescience | egi
+.. code-block:: yaml
+
+   idp_provider: "iam"   # or lifescience | egi
      
-     oidc_providers:
+   oidc_providers:
      iam:
-      device_endpoint:   "https://iam.recas.ba.infn.it/devicecode"
-      token_endpoint:    "https://iam.recas.ba.infn.it/token"
-      userinfo_endpoint: "https://iam.recas.ba.infn.it/userinfo"
+       device_endpoint:   "https://iam.recas.ba.infn.it/devicecode"
+       token_endpoint:    "https://iam.recas.ba.infn.it/token"
+       userinfo_endpoint: "https://iam.recas.ba.infn.it/userinfo"
      lifescience:
-      device_endpoint:   "FILL_ME"
-      token_endpoint:    "FILL_ME"
-      userinfo_endpoint: "FILL_ME"
+       device_endpoint:   "FILL_ME"
+       token_endpoint:    "FILL_ME"
+       userinfo_endpoint: "FILL_ME"
      egi:
-      device_endpoint:   "FILL_ME"
-      token_endpoint:    "FILL_ME"
-      userinfo_endpoint: "FILL_ME"
+       device_endpoint:   "FILL_ME"
+       token_endpoint:    "FILL_ME"
+       userinfo_endpoint: "FILL_ME"
 
 .. warning::
-   Put **secrets** into the Vault file, is very to **NOT** commit the vault file
+   Put **secrets** into the Vault file.  
+   **Never** commit the Vault file.
 
-
-Once you have followed th etutorial you need to run the playbook
+Once configured, run the playbook:
 
 .. code-block:: bash
+
    ansible-playbook -i inventory site.yml
+
 
 Create the Bastion Host with Terraform
 --------------------------------------
 
-These procedure serves to define and deploy a Virtual Machine (VM) on OpenStack. This VM is configured to act as a Bastion Host (or jump host), serving as the single secure SSH entry point to access resources located in the private network.
+This procedure defines and deploys a Virtual Machine (VM) on OpenStack, configured to act as a Bastion Host (jump host). It serves as a secure SSH entry point to access resources in private networks.
 
-Running the configuration file you'll obtain:
+Running the configuration will create:
 
-#. An OpenStack keypair for SSH access to the bastion host.
-#. The provisioning of a bastion VM in OpenStack with a `public and private NIC`.
-#. An Ansible inventory file pointing to the bastion VM with the correct SSH key and ip.
-#. A fully configured bastion host, thanks to the ansible.
+#. An OpenStack keypair for SSH access.  
+#. A bastion VM in OpenStack with both **public and private** NICs.  
+#. An Ansible inventory file pointing to the VM with the correct SSH key and IP.  
+#. A fully configured bastion host (via Ansible).  
 
 .. note::
-   Before starting assure to match the following requirements:
-   - **Controller:** Terraform ≥ 1.14.0 
-   - **Controller:** Ansible ≥ 2.15.
-   - **OIDC client:** `client_id` + `client_secret` registered at your Identity Provider (IdP)
-   - (Optional) SMTP credentials if you want code/URL by email.
+   Ensure the following requirements:
 
-Sturcture of the repository
+   - **Terraform:** ≥ 1.14.0  
+   - **Ansible:** ≥ 2.15  
+   - **OIDC client:** ``client_id`` + ``client_secret`` from your IdP  
+   - (Optional) SMTP credentials  
+
+Structure of the repository
 ---------------------------
 
-By cloning the repository you will obtain the following structure for the Terraform part:
+Cloning the repository gives the following Terraform structure:
 
-.. code:: bash
+.. code-block:: bash
+
    terraform_bastion/
        ├─ main.tf
        ├─ terraform.tfvars
        └─ variables.tf
 
-In the `main.tf` you will find all the configuration, fileds and sensible information needed to create the Bastion, you can directly insert all of the **requested** value inside this file **but** nothe that is better to keep it separate by acting on `terraform.tfvars`. Inside the `variables.tf` all the variable are accuratly descripted with type and what it represent. And at the end `terraform.tfvars`, contain all the sensible information and values that is better to keep safe.
+- ``main.tf`` contains the configuration and all required fields.  
+- ``variables.tf`` defines and documents all variables.  
+- ``terraform.tfvars`` contains sensitive values and must be kept private.
 
-.. warning:: 
-   If you want to fork this repository, in order to modify something, keep in mind to **NEVER** commit the `terraform.tfvars`, hide it in the `.gitignore` or in a vault.
+.. warning::
+   If you fork the repository, **never** commit ``terraform.tfvars``.  
+   Add it to ``.gitignore`` or store it in a vault.
+
 
 Authentication & Entitlements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Identity Providers (IdPs) expose user authorization data in different ways.  
+Some IdPs—such as ReCaS IAM or AWS Cognito—embed group membership directly into the access token as simple JSON attributes, for example:
 
-Identity Providers (IdPs) manage user permissions and authorization in different ways. Some systems, such as ReCaS IAM or AWS Cognito, embed the user's group memberships directly inside the access token in a JSON structure, for example:
-
-.. code-block:: code
+.. code-block:: json
    
    {
-   "sub": "1234567890",
-   "name": "Mario Rossi",
-   "group": tester
+     "sub": "1234567890",
+     "name": "Mario Rossi",
+     "group": "tester"
    }
 
-Other federated AAI providers such as the Life Science Authentication and Authorization Infrastructure (LS AAI) and the European Grid Infrastructure (EGI), expose user authorization information using a more structured and complex mechanism, the ``eduPersonEntitlement``, an attribute defined in the eduPerson schema.
+Other federated AAI providers—such as the Life Science Authentication and Authorization Infrastructure (LS AAI) and the European Grid Infrastructure (EGI)—use a more structured mechanism: the ``eduPersonEntitlement`` attribute, defined in the eduPerson schema.
+
 
 EDUPERSON-ENTITLEMENT
-^^^^^^^^^^^^^^^^^^^^^
+---------------------
 
-In Research and Education, organizations have a standardised attribute to exchange informations using known schema, eduPerson is one of them. The eduPerson schema does provide an attribute called eduPersonEntitlement in which the value of the entitlement indicates a set of rights to specific resources.
+In Research and Education federations, organizations exchange user-authorization information using standardized schemas, including **eduPerson**.  
+The ``eduPersonEntitlement`` attribute represents a set of rights associated with a user.
 
-The generic structure can be represented as the following:
+Generic structure:
 
 .. code-block:: text
 
-   urn:<authorization>:<domain>:group:<path>:<optional_role>#qualifier
+   urn:<authority>:<domain>:group:<path>:<optional_role>#<qualifier>
 
-In this string you can observe:
+Components:
 
-- ``URN`:` stands for uniform resource name
-- ``authority:`` the authority that 'release' the entitlement 
-- ``domain:`` the domain of the authority
-- ``group:`` group to which a user belong
-- ``role:`` the role played in that group
-- ``qualifier:`` the name of the idp | qualifier
+- ``urn`` — Uniform Resource Name  
+- ``authority`` — issuing authority  
+- ``domain`` — authority domain  
+- ``group`` — group identifier  
+- ``role`` — role inside the group  
+- ``qualifier`` — IdP name or scope  
 
-In other terms, this is a sub-category of URI that does not point to a location but rather identifies a conceptual identity or entitlement.
+This is a conceptual identifier, not a location-based URI.
 
-The two main federation that use EdupersonEntitlements that we will cover are: EGI and LS AAI.
+We focus on EGI and LS AAI.
 
-EGI 
-^^^
+EGI
+---
 
-Egi entitlements follow the below schema:
+EGI entitlements follow this schema:
 
 .. code-block:: text
 
    urn:mace:egi.eu:group:<vo_name>:role=<role>#<aai-domain>
 
-Main Elements:
+Main elements:
 
-- ``urn:mace:egi.eu:`` official egi namespace
+- ``urn:mace:egi.eu`` — official EGI namespace  
+- ``<vo_name>`` — name of the VO or group  
+- ``role=vm_operator`` / ``role=member`` — role in the VO  
+- ``#aai.egi.eu`` — authority qualifier  
 
-- ``vo.access.egi.eu:`` name of the group or VO
+In our script, we currently **ignore the role** and use only the group name.
 
-- ``role=vm_operator / role=member:`` role inside the VO
+EGI Check-in exposes two entitlement categories:
 
-- ``#aai.egi.eu:`` authority
+**a) Resource entitlements (res):**
 
+These relate to backend services:
 
-nello script al momento ignoriamo il ruolo, prendiamo solo il nome del gruppo.
+.. code-block:: text
 
-- Da riportare il codice del modulo pam -
+   urn:mace:egi.eu:res:ggus.eu
+   urn:mace:egi.eu:res:gocdb#aai.egi.eu
+   urn:mace:egi.eu:res:rcauth#aai.egi.eu
 
+These are **not** groups and are ignored by our script.
 
-EGI AAI (Check-in) use eduPerson standard, but follow AARC-G002 instructions on federation for e-Infrastructure, this lead to two different types of entitlement:
-
-a) **res (Resource Entitlements):** which contain infomation on backend serices, for example:
-
-.. code-block: code
-
-   - urn:mace:egi.eu:res:ggus.eu
-
-   - urn:mace:egi.eu:res:gocdb#aai.egi.eu
-
-   - urn:mace:egi.eu:res:rcauth#aai.egi.eu
-
-These do **NOT** represent groups but are "authorization" to resources generated from EGI proxy. 
-
-In our script and for our finality these are not interesting and are discarded.
-
-b) **group entitlement:** contain informations about the role and group of the user
+**b) Group entitlements:**  
+Contain group and role information used for authorization.
 
 LS AAI
-^^^^^^
+------
 
-LS AAI expresses group-based authorization using a specific eduPersonEntitlement structure, reported here:
+LS AAI expresses group-based authorization using this structure:
 
 .. code-block:: text
 
    urn:geant:lifescience-ri.eu:group:lifescience:<subgroup/subdomain>:<service>#aai.lifescience-ri.eu
 
-Document once you have screenshots of ls aai platform tutorial
+(I will update this section with the LS AAI platform screenshots once provided.)
 
-IAM Recas
-^^^^^^^^^
+IAM ReCaS
+---------
 
-... skippable
+(To be completed or removed depending on your needs.)
 
 AWS
-^^^
+---
 
 ...
-
 
 References
 ----------
 
-Install OpenVPN: https://community.openvpn.net/openvpn/wiki/OpenvpnSoftwareRepos
+Install OpenVPN: https://community.openvpn.net/openvpn/wiki/OpenvpnSoftwareRepos  
+Enable IP forwarding: https://linuxconfig.org/how-to-turn-on-off-ip-forwarding-in-linux  
+Enable IP forwarding with OpenVPN: https://openvpn.net/faq/what-is-and-how-do-i-enable-ip-forwarding-on-linux/  
+Iptables configuration: https://askubuntu.com/questions/1181115/openvpn-client-cannot-access-any-network-except-for-the-server-itself-after-conn  
+Example eduPersonEntitlement: https://help.switch.ch/aai/support/documents/attributes/edupersonentitlement/  
+EduPerson entitlement values: https://servicedesk.surf.nl/wiki/spaces/IAM/pages/128910063/Standardized+values+for+eduPersonEntitlement
 
-Enable IP forwarding: https://linuxconfig.org/how-to-turn-on-off-ip-forwarding-in-linux
-
-Enable IP forwarding with OpenVPN: https://openvpn.net/faq/what-is-and-how-do-i-enable-ip-forwarding-on-linux/
-
-Iptables configuration: https://askubuntu.com/questions/1181115/openvpn-client-cannot-access-any-network-except-for-the-server-itself-after-conn
-
-example edupersonEntitlement: https://help.switch.ch/aai/support/documents/attributes/edupersonentitlement/
-
-main things edu-entitlement: https://servicedesk.surf.nl/wiki/spaces/IAM/pages/128910063/Standardized+values+for+eduPersonEntitlement
