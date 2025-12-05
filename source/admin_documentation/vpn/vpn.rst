@@ -650,6 +650,7 @@ Then is important to modify the ``bastion.vault.yml`` and insert your sensible d
 **(Optional)** enable email for device code/URL:
 
 .. code-block:: bash
+
    enable_email: true
    smtp:
      smtp_server_url: "smtps://smtp.gmail.com:465"
@@ -719,9 +720,6 @@ The ``main.tf`` and ``variables.tf`` files are already setted, you need to modif
    public_network = "public"
    flavor         = "DESIRED FLAVOUR"
    image          = "Ubuntu 22.04"
-
-.. warning::
-   As for the Ansible vault **do not** leave this file in clear or publish it anywhere.
 
 When you set all the configuration run the commant for terraform, and it will create and configure the bastion host for you:
 
