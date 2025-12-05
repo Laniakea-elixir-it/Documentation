@@ -523,16 +523,15 @@ The resulting output is, for example:
 Automatic deployment of a bastion on OpenStack
 ----------------------------------------------
 
-In this section, we show how to automatically deploy a bastion host in an OpenStack environment using Terraform, followed by direct configuration through an Ansible role. The repository documenting all steps is available at this `link <https://github.com/Laniakea-elixir-it/ansible-role-vpn-bastion>`_.  
-It contains an Ansible role for provisioning and configuring a secure bastion host (Ubuntu 22.04) with PAM authentication using the OAuth2 Device Flow. The role creates the required local users, builds and installs the ``pam_oauth2_device`` module, applies the necessary PAM configuration, and updates ``sshd`` to enable OIDC-based interactive authentication and automatic home directory management.
+In this sub-section, is shown how to automatically deploy a bastion host in an OpenStack environment using Terraform, followed by direct configuration through an Ansible role. The repository documenting all steps is available at this `GitHub repository link <https://github.com/Laniakea-elixir-it/ansible-role-vpn-bastion>`_.  
 
-The Ansible role can be used standalone or as part of an automated deployment pipeline together with the Terraform module in the ``terraform`` directory, which handles the infrastructure provisioning on OpenStack.
+The Ansible role you'll find can be used standalone or as part of an automated deployment pipeline together with the Terraform module in the ``terraform`` directory, which handles the infrastructure provisioning on OpenStack.
 
 .. tip::
    Choose this installation method only if you already have some knowledge of Terraform and Ansible.
    Otherwise, follow the full guide.
 
-Start by cloning the repository on any VM you want to use:
+Start by cloning the repository on any VM you want:
 
 .. code-block:: bash
  
@@ -544,8 +543,9 @@ Ansible configuration
 This playbook turns an **Ubuntu 22.04** VM into a **bastion** that accepts SSH logins via **OpenID Connect (device code flow)** using the ``pam_oauth2_device`` module.
 
 .. note::
+   If you're configuring the VM where you're running as your bastion host make sure that the vm match the requirements, if you'll integrate the terraform part also, this is not necessary. 
    A modified version of the module is used. See:
-   `pam_oauth2_device <https://github.com/riccardocaccia/pam_oauth2_device>`_.
+   `pam_oauth2_device <https://github.com/Laniakea-elixir-it/pam_oauth2_device>`_.
 
 The playbook performs the following tasks:
 
@@ -584,6 +584,8 @@ Inside the directory you will find:
 
 Steps to follow
 ~~~~~~~~~~~~~~~
+
+TODO
 
 Edit ``inventory`` and set your bastion’s public IP and SSH user:
 
@@ -663,6 +665,7 @@ Cloning the repository gives the following Terraform structure:
    If you fork the repository, **never** commit ``terraform.tfvars``.  
    Add it to ``.gitignore`` or store it in a vault.
 
+TODO
 
 Authentication & Entitlements
 -----------------------------
