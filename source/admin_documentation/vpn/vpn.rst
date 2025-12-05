@@ -525,7 +525,7 @@ Automatic deployment of a bastion on OpenStack
 
 In this sub-section, is shown how to automatically deploy a bastion host in an OpenStack environment using Terraform, followed by direct configuration through an Ansible role. The repository documenting all steps is available at this `GitHub repository link <https://github.com/Laniakea-elixir-it/ansible-role-vpn-bastion>`_.  
 
-The Ansible role you'll find can be used standalone or as part of an automated deployment pipeline together with the Terraform module in the ``terraform`` directory, which handles the infrastructure provisioning on OpenStack.
+The Ansible role you'll find can be used standalone or as part of an automated deployment pipeline together with the Terraform module in the ``terraform directory``, which handles the infrastructure provisioning on OpenStack.
 
 .. tip::
    Choose this installation method only if you already have some knowledge of Terraform and Ansible.
@@ -537,6 +537,9 @@ Start by cloning the repository on any VM you want:
  
    git clone https://github.com/Laniakea-elixir-it/ansible-role-vpn-bastion
 
+.. note::
+   TODO vuoi tutto fai solo terraform e skippa questo s eno runna questo
+
 Ansible configuration
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -544,7 +547,7 @@ This playbook turns an **Ubuntu 22.04** VM into a **bastion** that accepts SSH l
 
 .. note::
    If you're configuring the VM where you're running as your bastion host make sure that the vm match the requirements, if you'll integrate the terraform part also, this is not necessary. 
-   A modified version of the module is used. See:
+   A modified version of the pam module is used. See:
    `pam_oauth2_device <https://github.com/Laniakea-elixir-it/pam_oauth2_device>`_.
 
 The playbook performs the following tasks:
@@ -558,14 +561,14 @@ By cloning the repository, the Ansible section contains:
 
 .. code-block:: bash
 
-   inventory
-   site.yml
-   group_vars/
-     ├─ bastion.yml          # public settings (non-secret)
-     └─ bastion.vault.yml    # secrets (managed through Ansible Vault)
-   templates/
-     └─ pam_config.json.j2
-   .gitignore
+   ├─ inventory
+   ├─ site.yml
+   ├─ group_vars/
+   |  ├─ bastion.yml          # public settings (non-secret)
+   |  └─ bastion.vault.yml    # secrets (managed through Ansible Vault)
+   ├─ templates/
+   |  └─ pam_config.json.j2
+   └─ .gitignore
 
 Inside the directory you will find:
 
@@ -577,7 +580,7 @@ Inside the directory you will find:
 .. note::
    Make sure the following requirements are met:
 
-   #. **Target host:** Ubuntu 22.04 VM reachable via SSH (with sudo-capable user, e.g. ``ubuntu``).
+   #. **Target host (can be your vm):** Ubuntu 22.04 VM reachable via SSH (with sudo-capable user, e.g. ``ubuntu``).
    #. **Controller:** Ansible ≥ 2.15.
    #. **OIDC client:** ``client_id`` and ``client_secret`` registered at your IdP.
    #. (Optional) SMTP credentials for delivering device-code URLs by email.
@@ -585,21 +588,21 @@ Inside the directory you will find:
 Steps to follow
 ~~~~~~~~~~~~~~~
 
-TODO
-
-Edit ``inventory`` and set your bastion’s public IP and SSH user:
+First edit the ``inventory`` file and set your bastion’s public IP and SSH user:
 
 .. code-block:: bash
 
    [bastion]
    bastion1 ansible_host=BASTION_PUBLIC_IP ansible_user=ubuntu
 
-Select your IdP and fill the provider endpoints. Open ``group_vars/bastion.yml``. IAM endpoints are already filled in; for other IdPs, replace the placeholders:
+Then choose your IdP and fill the provider endpoints. Open ``group_vars/bastion.yml``. IAM endpoints are already filled in; for other IdPs, replace the placeholders:
 
 .. code-block:: yaml
 
    idp_provider: "iam"   # or lifescience | egi
-     
+
+    ...
+
    oidc_providers:
      iam:
        device_endpoint:   "https://iam.recas.ba.infn.it/devicecode"
@@ -614,16 +617,49 @@ Select your IdP and fill the provider endpoints. Open ``group_vars/bastion.yml``
        token_endpoint:    "FILL_ME"
        userinfo_endpoint: "FILL_ME"
 
+Then is important to modify the ``bastion.vault.yml`` and insert your sensible data.
+
 .. warning::
    Put **secrets** into the Vault file.  
    **Never** commit the Vault file.
 
-Once configured, run the playbook:
+.. code-block:: bash 
+
+   # OIDC client (confidential)
+   client_id: "YOUR_OIDC_CLIENT_ID"
+   client_secret: "YOUR_OIDC_CLIENT_SECRET"
+
+   # SMTP password (only if enable_email: true in bastion.yml)
+   smtp:
+     smtp_password: "YOUR_SMTP_PASSWORD"
+
+   # Create local UNIX users before enabling PAM (must include the OIDC preferred_username)
+   preferred_username: "your_oidc_username"
+   extra_local_users:
+     - "im"            # technical jump user (optional)
+     # - "anotheruser" # add more if needed
+
+   # SSH public key for the 'im' user (optional)
+   jump_user_pubkey: "ssh-rsa AAAA... comment"
+
+   Once configured, run the playbook:
+
+**(Optional)** enable email for device code/URL:
+
+.. code-block:: bash
+   enable_email: true
+   smtp:
+     smtp_server_url: "smtps://smtp.gmail.com:465"
+     smtp_username: "your-smtp-user"
+     # smtp_password goes in bastion.vault.yml
+
+Then encrypt your valut and run the playbook:
 
 .. code-block:: bash
 
    ansible-playbook -i inventory site.yml
 
+Now you should have a fully functional and configured bastion host on your ``BASTION_PUBLIC_IP``. 
 
 Create the Bastion Host with Terraform
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -663,9 +699,32 @@ Cloning the repository gives the following Terraform structure:
 
 .. warning::
    If you fork the repository, **never** commit ``terraform.tfvars``.  
-   Add it to ``.gitignore`` or store it in a vault.
+   Add it to ``.gitignore`` or encrypt and use a vault.
 
-TODO
+Steps to follow
+~~~~~~~~~~~~~~~
+
+The ``main.tf`` and ``variables.tf`` files are already setted, you need to modify the ``terraform.tfvars`` with your sensible configurations:
+
+.. code-block:: bash 
+   auth_url      = "AUTHENTICATOR-URL"
+   user_name     = "NAME-OF-THE-USER"
+   password      = "SUPER-SECRET-PASSWORD"
+   tenant_name   = "TENANT OR PROJECT NAME"
+   region        = "RegionOne"
+
+   public_network = "public"
+   flavor         = "DESIRED FLAVOUR"
+   image          = "Ubuntu 22.04"
+
+.. warning::
+   As for the Ansible vault **do not** leave this file in clear or publish it anywhere.
+
+When you set all the configuration run the commant for terraform, and it will create and configure the bastion host for you:
+
+.. code-block:: bash
+   terraform init
+   terrafrom apply
 
 Authentication & Entitlements
 -----------------------------
