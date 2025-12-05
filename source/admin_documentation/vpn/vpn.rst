@@ -534,12 +534,85 @@ The Ansible role is designed to be used standalone or as part of an automated de
 Start by coping the repository in any VM that you want:
 
 .. code-block:: bash
+ 
    git clone https://github.com/Laniakea-elixir-it/ansible-role-vpn-bastion/main
+
+Ansible configuration
+---------------------
+
+This playbook turns an **Ubuntu 22.04** VM into a **bastion** that accepts SSH logins via **OpenID Connect (device code flow)** using the [`pam_oauth2_device`](https://github.com/LuigiMansi1/pam_oauth2_device) module.
+
+.. note:: 
+   A modified version of the module had been used, check `pam_oauth2_device <https://github.com/riccardocaccia/pam_oauth2_device>`_
+
+This playbook serves to:
+
+#. Builds and installs the `pam_oauth2_device` PAM module.
+#. Writes `/etc/pam_oauth2_device/config.json` for your chosen IdP.
+#. Sends the device code URL via SMTP (disabled by default).
+#. Creates `~/.ssh/authorized_keys` for the `im` user if you provide a public key.
+
+By cloning the repository, the ansible part contains:
+
+.. code.block ::bash
+   inventory
+   site.yml
+   group_vars/
+     ├─ bastion.yml           # public settings (non-secret)
+     └─ bastion.vault.yml     # secrets (put in Ansible Vault)
+   templates/
+     └─ pam_config.json.j2
+   .gitignore
+
+Inside the directory there is an inventory file, a site.yml for the installation and settings of the PAM module, a group_vars dir that contains all the bastion setting and secret, and a template directory for the templates, containing the configurations of the idp.
+
+.. note::
+   Is advisable to match the following requirements:
+#. **Target host:** Ubuntu 22.04 VM reachable over SSH (user with sudo, e.g. `ubuntu`).
+#. **Controller:** Ansible ≥ 2.15.
+#. **OIDC client:** `client_id` + `client_secret` registered at your Identity Provider (IdP).
+#. (Optional) SMTP credentials if you want code/URL by email.
+
+Sreps to follow
+---------------
+
+Edit `inventory` and set your bastion’s public IP and SSH user:
+
+.. code-block:: bash
+   [bastion]
+   bastion1 ansible_host=BASTION_PUBLIC_IP ansible_user=ubuntu
+
+Choose the IdP and fill provider endpoints. Pick your provider and open `group_vars/bastion.yml` (IAM endpoints are prefilled. For other IdPs, replace the placeholders):
+
+  .. code-block:: yaml
+     idp_provider: "iam"   # or lifescience | egi
+     
+     oidc_providers:
+     iam:
+      device_endpoint:   "https://iam.recas.ba.infn.it/devicecode"
+      token_endpoint:    "https://iam.recas.ba.infn.it/token"
+      userinfo_endpoint: "https://iam.recas.ba.infn.it/userinfo"
+     lifescience:
+      device_endpoint:   "FILL_ME"
+      token_endpoint:    "FILL_ME"
+      userinfo_endpoint: "FILL_ME"
+     egi:
+      device_endpoint:   "FILL_ME"
+      token_endpoint:    "FILL_ME"
+      userinfo_endpoint: "FILL_ME"
+
+.. warning::
+   Put **secrets** into the Vault file, is very to **NOT** commit the vault file
+
+
+Once you have followed th etutorial you need to run the playbook
+
+.. code-block:: bash
+   ansible-playbook -i inventory site.yml
 
 Create the Bastion Host with Terraform
 --------------------------------------
 
-###############################
 These procedure serves to define and deploy a Virtual Machine (VM) on OpenStack. This VM is configured to act as a Bastion Host (or jump host), serving as the single secure SSH entry point to access resources located in the private network.
 
 Running the configuration file you'll obtain:
@@ -570,190 +643,7 @@ By cloning the repository you will obtain the following structure for the Terraf
 In the `main.tf` you will find all the configuration, fileds and sensible information needed to create the Bastion, you can directly insert all of the **requested** value inside this file **but** nothe that is better to keep it separate by acting on `terraform.tfvars`. Inside the `variables.tf` all the variable are accuratly descripted with type and what it represent. And at the end `terraform.tfvars`, contain all the sensible information and values that is better to keep safe.
 
 .. warning:: 
-   If you want to fork this repository, in order to modify something, keep in mind to **NEVER** commit the `terraform.tfvars`, hide it in the `.gitignore` or in a vault
-
-
-Guide to run the file 
----------------------
-
-Provider settings and terraform requirements:
-
-> **Note:** Keystone login is needed in order to proceed, otherwise you can think to use OIDC login to access the OpenStack cloud enviroment
-
-```hcl
-# ---------------------------------
-# Provider = OpenStack
-# ---------------------------------
-terraform {
-  required_version = ">= 1.4.0"
-  required_providers {
-	openstack = {
-	source  = "terraform-provider-openstack/openstack"
-	version = "~> 1.53.0"
-	}
-  }
-}
-
-provider "openstack" {
-  auth_url    = var.auth_url
-  user_name   = var.user_name
-  password    = var.password
-  tenant_name = var.tenant_name
-  region      = var.region
-}
-```
----
-
-## 2) Key generation
-
-You can set your preferred name for your key pair, also pay attention to the path and key location of your public key (here: ~/.ssh/authorized_keys):
-
-  ```hcl
-  # ---------------------------------
-  # Keypair
-  # ---------------------------------
-  resource "openstack_compute_keypair_v2" "bastion_key" {
-  name       = "bastion-key"
-  public_key = file("~/.ssh/authorized_keys")
-  }
-  ```
----
-
-## 3) Network definition
-
-In the network configuration is important to assign a public and a private network access:
-
-```hcl
-# ---------------------------------
-# Network
-# ---------------------------------
-
-# Private network
-data "openstack_networking_network_v2" "private" {
-  name = "private_net"
-}
-# subnet
-data "openstack_networking_subnet_v2" "private_subnet" {
-  network_id = data.openstack_networking_network_v2.private.id
-}
-
-# public network
-data "openstack_networking_network_v2" "public" {
-  name = "public_net"
-}
-
-```
----
-
-## 4) VM Bastion
-
-The VM is configururated as reported, here is importatnt to define your bastion name inside the field `name`:
-
-```hcl
-# ---------------------------------
-# VM Bastion
-# ---------------------------------
-resource "openstack_compute_instance_v2" "bastion" {
-  name            = "NAME-OF-YOUR-BASTION"
-  flavor_name     = var.flavor
-  image_name      = var.image
-  key_pair        = openstack_compute_keypair_v2.bastion_key.name
-
-  # NIC pubblica
-  network {
-    uuid = data.openstack_networking_network_v2.public.id
-  }
-
-  # NIC privata
-  network {
-    uuid = data.openstack_networking_network_v2.private.id
-  }
-
-  metadata = {
-    ansible_user = "ubuntu"
-  }
-}
-```
----
-
-## 6) Ansible part
-
-This section creates the inventory file dynamically and executes the Ansible playbook using `null_resource` and `local-exec`:
-
-```hcl
-# ---------------------------------
-# Inventory per Ansible
-# ---------------------------------
-resource "local_file" "inventory" {
-  filename = "/home/ubuntu/ansible-role-vpn-bastion/ansible-role/inventory"
-  content  = <<EOF
-[bastion]
-bastion1 ansible_host=${openstack_compute_instance_v2.bastion.access_ip_v4} ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/my_private
-EOF
-}
-
-# ---------------------------------
-# Provisioning Ansible
-# ---------------------------------
-resource "null_resource" "ansible_provision" {
-  depends_on = [
-    openstack_compute_instance_v2.bastion,
-    local_file.inventory
-  ]
-
-  provisioner "local-exec" {
-    working_dir = "/home/ubuntu/ansible-role-vpn-bastion/ansible-role"
-    command     =  <<EOT
-    # Wait VM to be reachable via SSH
-until ssh -o StrictHostKeyChecking=no -i /home/ubuntu/.ssh/my_private ubuntu@${openstack_compute_instance_v2.bastion.access_ip_v4} "echo ok" 2>/dev/null; do
-  echo "Waiting for SSH on ${openstack_compute_instance_v2.bastion.access_ip_v4}..."
-  sleep 5
-done 
-
-ansible-playbook -i inventory site.yml
-EOT
-  }
-}
-```
----
-
-# variables value
-
-> **NOTE:** do not commit this file, it contains sensible data! 
-
-  ```
-  auth_url      = "AUTHENTICATOR-URL"
-  user_name     = "NAME-OF-THE-USER"
-  password      = "SUPER-SECRET-PASSWORD"
-  tenant_name   = "TENANT OR PROJECT NAME"
-  region        = "RegionOne"
-
-  public_network = "public"
-  flavor         = "DESIRED FLAVOUR"
-  image          = "Ubuntu 22.04"
-  ```
-
-* The `im` user is created for automation (e.g. Terraform/IM). If you provided `jump_user_pubkey`, it will be authorized in `~im/.ssh/authorized_keys`.
-* Re-running the playbook is **idempotent**.
-
----
-
-## Troubleshooting
-
-* Template errors (undefined vars):   Make sure group_vars/bastion.vault.yml contains client_id, client_secret, and—if email is enabled—smtp_password.
-* Private key Required:   Before running, you must create your private key file at the location specified in the inventory: ~/.ssh/my_private
-* Loop asking for “Password:”   Ensure the PAM line is present in /etc/pam.d/sshd. Verify that UsePAM yes, KbdInteractiveAuthentication yes, and ChallengeResponseAuthentication yes are set in /etc/ssh/sshd_config. Then restart SSH: sudo systemctl restart sshd.
-
----
-
-## Safety
-
-* Never commit real secrets. Keep group_vars/bastion.vault.yml encrypted and .vault_pass.txt out of version control (and in .gitignore).
-* Test on a disposable VM before adopting in production.
-
-
-
-###############################
+   If you want to fork this repository, in order to modify something, keep in mind to **NEVER** commit the `terraform.tfvars`, hide it in the `.gitignore` or in a vault.
 
 Authentication & Entitlements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
