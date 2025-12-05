@@ -521,7 +521,7 @@ The resulting output is, for example:
   }
 
 Automatic deployment of a bastion on OpenStack
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------------------
 
 In this section, we show how to automatically deploy a bastion host in an OpenStack environment using Terraform, followed by direct configuration through an Ansible role. The repository documenting all steps is available at this `link <https://github.com/Laniakea-elixir-it/ansible-role-vpn-bastion>`_.  
 It contains an Ansible role for provisioning and configuring a secure bastion host (Ubuntu 22.04) with PAM authentication using the OAuth2 Device Flow. The role creates the required local users, builds and installs the ``pam_oauth2_device`` module, applies the necessary PAM configuration, and updates ``sshd`` to enable OIDC-based interactive authentication and automatic home directory management.
@@ -539,7 +539,7 @@ Start by cloning the repository on any VM you want to use:
    git clone https://github.com/Laniakea-elixir-it/ansible-role-vpn-bastion
 
 Ansible configuration
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 This playbook turns an **Ubuntu 22.04** VM into a **bastion** that accepts SSH logins via **OpenID Connect (device code flow)** using the ``pam_oauth2_device`` module.
 
@@ -583,7 +583,7 @@ Inside the directory you will find:
    #. (Optional) SMTP credentials for delivering device-code URLs by email.
 
 Steps to follow
----------------
+~~~~~~~~~~~~~~~
 
 Edit ``inventory`` and set your bastion’s public IP and SSH user:
 
@@ -624,7 +624,7 @@ Once configured, run the playbook:
 
 
 Create the Bastion Host with Terraform
---------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This procedure defines and deploys a Virtual Machine (VM) on OpenStack, configured to act as a Bastion Host (jump host). It serves as a secure SSH entry point to access resources in private networks.
 
@@ -644,7 +644,7 @@ Running the configuration will create:
    - (Optional) SMTP credentials  
 
 Structure of the repository
----------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Cloning the repository gives the following Terraform structure:
 
@@ -665,7 +665,7 @@ Cloning the repository gives the following Terraform structure:
 
 
 Authentication & Entitlements
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 
 Identity Providers (IdPs) expose user authorization data in different ways.  
 Some IdPs—such as ReCaS IAM or AWS Cognito—embed group membership directly into the access token as simple JSON attributes, for example:
@@ -682,7 +682,7 @@ Other federated AAI providers—such as the Life Science Authentication and Auth
 
 
 EDUPERSON-ENTITLEMENT
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 In Research and Education federations, organizations exchange user-authorization information using standardized schemas, including **eduPerson**.  
 The ``eduPersonEntitlement`` attribute represents a set of rights associated with a user.
@@ -707,7 +707,7 @@ This is a conceptual identifier, not a location-based URI.
 We focus on EGI and LS AAI.
 
 EGI
----
+~~~
 
 EGI entitlements follow this schema:
 
@@ -742,7 +742,7 @@ These are **not** groups and are ignored by our script.
 Contain group and role information used for authorization.
 
 LS AAI
-------
+~~~~~~
 
 LS AAI expresses group-based authorization using this structure:
 
@@ -753,12 +753,12 @@ LS AAI expresses group-based authorization using this structure:
 (I will update this section with the LS AAI platform screenshots once provided.)
 
 IAM ReCaS
----------
+~~~~~~~~~
 
 (To be completed or removed depending on your needs.)
 
 AWS
----
+~~~
 
 ...
 
