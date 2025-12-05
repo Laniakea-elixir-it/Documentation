@@ -1,34 +1,6 @@
 Deployment under VPN
 ====================
 
-prova 1
-~~~~~~~
-
-ciao 
-----
-
-ciao
-----
-
-prova 2
-^^^^^^^
-
-ciao
-----
-
-...
-
-ciao
-----
-
-prova 3
-"""""""
-
-ciao
-----
-
-
-
 The PaaS provides the possibility to instantiate and configure VMs with private network only and then configure them to be accessed through a VPN, therefore providing complete isolation to the environment.
 
 Isolation is reached using OpenStack tenant and security groups properties, granting the access only through VPN authentication, while the user authentication to the VPN using the same Laniakea credentials.
@@ -440,112 +412,6 @@ Now is sufficent to click connect and compile the following fields:
       - Disable the field: Require External Certificate
       - Click **Save Changes** to receive the email
 
-Automatic deployment of a bastion
----------------------------------
-
-Authentication & Entitlements
------------------------------
-
-Identity Providers (IdPs) manage user permissions and authorization in different ways. Some systems, such as ReCaS IAM or AWS Cognito, embed the user's group memberships directly inside the access token in a JSON structure, for example:
-
-.. code-block:: code
-   
-   {
-   "sub": "1234567890",
-   "name": "Mario Rossi",
-   "group": tester
-   }
-
-Other federated AAI providers such as the Life Science Authentication and Authorization Infrastructure (LS AAI) and the European Grid Infrastructure (EGI), expose user authorization information using a more structured and complex mechanism, the ``eduPersonEntitlement``, an attribute defined in the eduPerson schema.
-
-EDUPERSON-ENTITLEMENT
----------------------
-
-In Research and Education, organizations have a standardised attribute to exchange informations using known schema, eduPerson is one of them. The eduPerson schema does provide an attribute called eduPersonEntitlement in which the value of the entitlement indicates a set of rights to specific resources.
-
-The generic structure can be represented as the following:
-
-.. code-block:: text
-
-   urn:<authorization>:<domain>:group:<path>:<optional_role>#qualifier
-
-In this string you can observe:
-
-- ``URN`:` stands for uniform resource name
-- ``authority:`` the authority that 'release' the entitlement 
-- ``domain:`` the domain of the authority
-- ``group:`` group to which a user belong
-- ``role:`` the role played in that group
-- ``qualifier:`` the name of the idp | qualifier
-
-In other terms, this is a sub-category of URI that does not point to a location but rather identifies a conceptual identity or entitlement.
-
-The two main federation that use EdupersonEntitlements that we will cover are: EGI and LS AAI.
-
-EGI 
----
-
-Egi entitlements follow the below schema:
-
-.. code-block:: text
-
-   urn:mace:egi.eu:group:<vo_name>:role=<role>#<aai-domain>
-
-Main Elements:
-
-- ``urn:mace:egi.eu:`` official egi namespace
-
-- ``vo.access.egi.eu:`` name of the group or VO
-
-- ``role=vm_operator / role=member:`` role inside the VO
-
-- ``#aai.egi.eu:`` authority
-
-
-nello script al momento ignoriamo il ruolo, prendiamo solo il nome del gruppo.
-
-- Da riportare il codice del modulo pam -
-
-
-EGI AAI (Check-in) use eduPerson standard, but follow AARC-G002 instructions on federation for e-Infrastructure, this lead to two different types of entitlement:
-
-a) **res (Resource Entitlements):** which contain infomation on backend serices, for example:
-
-.. code-block: code
-
-   - urn:mace:egi.eu:res:ggus.eu
-
-   - urn:mace:egi.eu:res:gocdb#aai.egi.eu
-
-   - urn:mace:egi.eu:res:rcauth#aai.egi.eu
-
-These do **NOT** represent groups but are "authorization" to resources generated from EGI proxy. 
-
-In our script and for our finality these are not interesting and are discarded.
-
-b) **group entitlement:** contain informations about the role and group of the user
-
-LS AAI
-------
-
-LS AAI expresses group-based authorization using a specific eduPersonEntitlement structure, reported here:
-
-.. code-block:: text
-
-   urn:geant:lifescience-ri.eu:group:lifescience:<subgroup/subdomain>:<service>#aai.lifescience-ri.eu
-
-Document once you have screenshots of ls aai platform tutorial
-
-IAM Recas
----------
-
-... skippable
-
-AWS
----
-
-...
-
 PaaS Configuration
 ------------------
 
@@ -653,6 +519,116 @@ The resulting output is, for example:
       "type": "tenant"
     }
   }
+
+Automatic deployment of a bastion
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+Authentication & Entitlements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Identity Providers (IdPs) manage user permissions and authorization in different ways. Some systems, such as ReCaS IAM or AWS Cognito, embed the user's group memberships directly inside the access token in a JSON structure, for example:
+
+.. code-block:: code
+   
+   {
+   "sub": "1234567890",
+   "name": "Mario Rossi",
+   "group": tester
+   }
+
+Other federated AAI providers such as the Life Science Authentication and Authorization Infrastructure (LS AAI) and the European Grid Infrastructure (EGI), expose user authorization information using a more structured and complex mechanism, the ``eduPersonEntitlement``, an attribute defined in the eduPerson schema.
+
+EDUPERSON-ENTITLEMENT
+---------------------
+
+In Research and Education, organizations have a standardised attribute to exchange informations using known schema, eduPerson is one of them. The eduPerson schema does provide an attribute called eduPersonEntitlement in which the value of the entitlement indicates a set of rights to specific resources.
+
+The generic structure can be represented as the following:
+
+.. code-block:: text
+
+   urn:<authorization>:<domain>:group:<path>:<optional_role>#qualifier
+
+In this string you can observe:
+
+- ``URN`:` stands for uniform resource name
+- ``authority:`` the authority that 'release' the entitlement 
+- ``domain:`` the domain of the authority
+- ``group:`` group to which a user belong
+- ``role:`` the role played in that group
+- ``qualifier:`` the name of the idp | qualifier
+
+In other terms, this is a sub-category of URI that does not point to a location but rather identifies a conceptual identity or entitlement.
+
+The two main federation that use EdupersonEntitlements that we will cover are: EGI and LS AAI.
+
+EGI 
+---
+
+Egi entitlements follow the below schema:
+
+.. code-block:: text
+
+   urn:mace:egi.eu:group:<vo_name>:role=<role>#<aai-domain>
+
+Main Elements:
+
+- ``urn:mace:egi.eu:`` official egi namespace
+
+- ``vo.access.egi.eu:`` name of the group or VO
+
+- ``role=vm_operator / role=member:`` role inside the VO
+
+- ``#aai.egi.eu:`` authority
+
+
+nello script al momento ignoriamo il ruolo, prendiamo solo il nome del gruppo.
+
+- Da riportare il codice del modulo pam -
+
+
+EGI AAI (Check-in) use eduPerson standard, but follow AARC-G002 instructions on federation for e-Infrastructure, this lead to two different types of entitlement:
+
+a) **res (Resource Entitlements):** which contain infomation on backend serices, for example:
+
+.. code-block: code
+
+   - urn:mace:egi.eu:res:ggus.eu
+
+   - urn:mace:egi.eu:res:gocdb#aai.egi.eu
+
+   - urn:mace:egi.eu:res:rcauth#aai.egi.eu
+
+These do **NOT** represent groups but are "authorization" to resources generated from EGI proxy. 
+
+In our script and for our finality these are not interesting and are discarded.
+
+b) **group entitlement:** contain informations about the role and group of the user
+
+LS AAI
+------
+
+LS AAI expresses group-based authorization using a specific eduPersonEntitlement structure, reported here:
+
+.. code-block:: text
+
+   urn:geant:lifescience-ri.eu:group:lifescience:<subgroup/subdomain>:<service>#aai.lifescience-ri.eu
+
+Document once you have screenshots of ls aai platform tutorial
+
+IAM Recas
+---------
+
+... skippable
+
+AWS
+---
+
+...
+
 
 References
 ----------
