@@ -520,10 +520,240 @@ The resulting output is, for example:
     }
   }
 
-Automatic deployment of a bastion
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Automatic deployment of a bastion on OpenStack
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In this section is shown how to automatically deploy a bastion host in the Openstack enviroment with terraform and directrly configuring it throught an Ansible role. The repoistory where all the steps are documented is reported at this `link <https://github.com/Laniakea-elixir-it/ansible-role-vpn-bastion>`_. In the repository you can find an Ansible role for provisioning and configuring a secure bastion host (Ubuntu 22.04) with PAM authentication using the OAuth2 Device Flow. The role creates the required local users, builds and installs the pam_oauth2_device module, applies the necessary PAM configuration, and updates sshd to enable OIDC-based interactive authentication and automatic home directory management.
+
+The Ansible role is designed to be used standalone or as part of an automated deployment pipeline together with the accompanying Terraform module published in the terraform directory, which handles the infrastructure provisioning layer for OpenStack.
+
+.. tip::
+   It is recomended that you choose this modality of installation if you already have some knoledge or affinity to terraform and ansible. Otherwise is advisable to follow the full guide.
+
+Start by coping the repository in any VM that you want:
+
+.. code-block:: bash
+   git clone https://github.com/Laniakea-elixir-it/ansible-role-vpn-bastion/main
+
+Create the Bastion Host with Terraform
+--------------------------------------
+
+###############################
+These procedure serves to define and deploy a Virtual Machine (VM) on OpenStack. This VM is configured to act as a Bastion Host (or jump host), serving as the single secure SSH entry point to access resources located in the private network.
+
+Running the configuration file you'll obtain:
+
+#. An OpenStack keypair for SSH access to the bastion host.
+#. The provisioning of a bastion VM in OpenStack with a `public and private NIC`.
+#. An Ansible inventory file pointing to the bastion VM with the correct SSH key and ip.
+#. A fully configured bastion host, thanks to the ansible.
+
+.. note::
+   Before starting assure to match the following requirements:
+   - **Controller:** Terraform ≥ 1.14.0 
+   - **Controller:** Ansible ≥ 2.15.
+   - **OIDC client:** `client_id` + `client_secret` registered at your Identity Provider (IdP)
+   - (Optional) SMTP credentials if you want code/URL by email.
+
+Sturcture of the repository
+---------------------------
+
+By cloning the repository you will obtain the following structure for the Terraform part:
+
+.. code:: bash
+   terraform_bastion/
+       ├─ main.tf
+       ├─ terraform.tfvars
+       └─ variables.tf
+
+In the `main.tf` you will find all the configuration, fileds and sensible information needed to create the Bastion, you can directly insert all of the **requested** value inside this file **but** nothe that is better to keep it separate by acting on `terraform.tfvars`. Inside the `variables.tf` all the variable are accuratly descripted with type and what it represent. And at the end `terraform.tfvars`, contain all the sensible information and values that is better to keep safe.
+
+.. warning:: 
+   If you want to fork this repository, in order to modify something, keep in mind to **NEVER** commit the `terraform.tfvars`, hide it in the `.gitignore` or in a vault
 
 
+Guide to run the file 
+---------------------
+
+Provider settings and terraform requirements:
+
+> **Note:** Keystone login is needed in order to proceed, otherwise you can think to use OIDC login to access the OpenStack cloud enviroment
+
+```hcl
+# ---------------------------------
+# Provider = OpenStack
+# ---------------------------------
+terraform {
+  required_version = ">= 1.4.0"
+  required_providers {
+	openstack = {
+	source  = "terraform-provider-openstack/openstack"
+	version = "~> 1.53.0"
+	}
+  }
+}
+
+provider "openstack" {
+  auth_url    = var.auth_url
+  user_name   = var.user_name
+  password    = var.password
+  tenant_name = var.tenant_name
+  region      = var.region
+}
+```
+---
+
+## 2) Key generation
+
+You can set your preferred name for your key pair, also pay attention to the path and key location of your public key (here: ~/.ssh/authorized_keys):
+
+  ```hcl
+  # ---------------------------------
+  # Keypair
+  # ---------------------------------
+  resource "openstack_compute_keypair_v2" "bastion_key" {
+  name       = "bastion-key"
+  public_key = file("~/.ssh/authorized_keys")
+  }
+  ```
+---
+
+## 3) Network definition
+
+In the network configuration is important to assign a public and a private network access:
+
+```hcl
+# ---------------------------------
+# Network
+# ---------------------------------
+
+# Private network
+data "openstack_networking_network_v2" "private" {
+  name = "private_net"
+}
+# subnet
+data "openstack_networking_subnet_v2" "private_subnet" {
+  network_id = data.openstack_networking_network_v2.private.id
+}
+
+# public network
+data "openstack_networking_network_v2" "public" {
+  name = "public_net"
+}
+
+```
+---
+
+## 4) VM Bastion
+
+The VM is configururated as reported, here is importatnt to define your bastion name inside the field `name`:
+
+```hcl
+# ---------------------------------
+# VM Bastion
+# ---------------------------------
+resource "openstack_compute_instance_v2" "bastion" {
+  name            = "NAME-OF-YOUR-BASTION"
+  flavor_name     = var.flavor
+  image_name      = var.image
+  key_pair        = openstack_compute_keypair_v2.bastion_key.name
+
+  # NIC pubblica
+  network {
+    uuid = data.openstack_networking_network_v2.public.id
+  }
+
+  # NIC privata
+  network {
+    uuid = data.openstack_networking_network_v2.private.id
+  }
+
+  metadata = {
+    ansible_user = "ubuntu"
+  }
+}
+```
+---
+
+## 6) Ansible part
+
+This section creates the inventory file dynamically and executes the Ansible playbook using `null_resource` and `local-exec`:
+
+```hcl
+# ---------------------------------
+# Inventory per Ansible
+# ---------------------------------
+resource "local_file" "inventory" {
+  filename = "/home/ubuntu/ansible-role-vpn-bastion/ansible-role/inventory"
+  content  = <<EOF
+[bastion]
+bastion1 ansible_host=${openstack_compute_instance_v2.bastion.access_ip_v4} ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/my_private
+EOF
+}
+
+# ---------------------------------
+# Provisioning Ansible
+# ---------------------------------
+resource "null_resource" "ansible_provision" {
+  depends_on = [
+    openstack_compute_instance_v2.bastion,
+    local_file.inventory
+  ]
+
+  provisioner "local-exec" {
+    working_dir = "/home/ubuntu/ansible-role-vpn-bastion/ansible-role"
+    command     =  <<EOT
+    # Wait VM to be reachable via SSH
+until ssh -o StrictHostKeyChecking=no -i /home/ubuntu/.ssh/my_private ubuntu@${openstack_compute_instance_v2.bastion.access_ip_v4} "echo ok" 2>/dev/null; do
+  echo "Waiting for SSH on ${openstack_compute_instance_v2.bastion.access_ip_v4}..."
+  sleep 5
+done 
+
+ansible-playbook -i inventory site.yml
+EOT
+  }
+}
+```
+---
+
+# variables value
+
+> **NOTE:** do not commit this file, it contains sensible data! 
+
+  ```
+  auth_url      = "AUTHENTICATOR-URL"
+  user_name     = "NAME-OF-THE-USER"
+  password      = "SUPER-SECRET-PASSWORD"
+  tenant_name   = "TENANT OR PROJECT NAME"
+  region        = "RegionOne"
+
+  public_network = "public"
+  flavor         = "DESIRED FLAVOUR"
+  image          = "Ubuntu 22.04"
+  ```
+
+* The `im` user is created for automation (e.g. Terraform/IM). If you provided `jump_user_pubkey`, it will be authorized in `~im/.ssh/authorized_keys`.
+* Re-running the playbook is **idempotent**.
+
+---
+
+## Troubleshooting
+
+* Template errors (undefined vars):   Make sure group_vars/bastion.vault.yml contains client_id, client_secret, and—if email is enabled—smtp_password.
+* Private key Required:   Before running, you must create your private key file at the location specified in the inventory: ~/.ssh/my_private
+* Loop asking for “Password:”   Ensure the PAM line is present in /etc/pam.d/sshd. Verify that UsePAM yes, KbdInteractiveAuthentication yes, and ChallengeResponseAuthentication yes are set in /etc/ssh/sshd_config. Then restart SSH: sudo systemctl restart sshd.
+
+---
+
+## Safety
+
+* Never commit real secrets. Keep group_vars/bastion.vault.yml encrypted and .vault_pass.txt out of version control (and in .gitignore).
+* Test on a disposable VM before adopting in production.
+
+
+
+###############################
 
 Authentication & Entitlements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -542,7 +772,7 @@ Identity Providers (IdPs) manage user permissions and authorization in different
 Other federated AAI providers such as the Life Science Authentication and Authorization Infrastructure (LS AAI) and the European Grid Infrastructure (EGI), expose user authorization information using a more structured and complex mechanism, the ``eduPersonEntitlement``, an attribute defined in the eduPerson schema.
 
 EDUPERSON-ENTITLEMENT
----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 In Research and Education, organizations have a standardised attribute to exchange informations using known schema, eduPerson is one of them. The eduPerson schema does provide an attribute called eduPersonEntitlement in which the value of the entitlement indicates a set of rights to specific resources.
 
@@ -566,7 +796,7 @@ In other terms, this is a sub-category of URI that does not point to a location 
 The two main federation that use EdupersonEntitlements that we will cover are: EGI and LS AAI.
 
 EGI 
----
+^^^
 
 Egi entitlements follow the below schema:
 
@@ -609,7 +839,7 @@ In our script and for our finality these are not interesting and are discarded.
 b) **group entitlement:** contain informations about the role and group of the user
 
 LS AAI
-------
+^^^^^^
 
 LS AAI expresses group-based authorization using a specific eduPersonEntitlement structure, reported here:
 
@@ -620,12 +850,12 @@ LS AAI expresses group-based authorization using a specific eduPersonEntitlement
 Document once you have screenshots of ls aai platform tutorial
 
 IAM Recas
----------
+^^^^^^^^^
 
 ... skippable
 
 AWS
----
+^^^
 
 ...
 
