@@ -730,25 +730,23 @@ When you set all the configuration run the commant for terraform, and it will cr
 Authentication & Entitlements
 -----------------------------
 
-Identity Providers (IdPs) expose user authorization data in different ways.  
-Some IdPs—such as ReCaS IAM or AWS Cognito—embed group membership directly into the access token as simple JSON attributes, for example:
+Identity Providers (IdPs) expose user authorization data in different ways, some IdPs such as ReCaS IAM or AWS Cognito—embed group membership directly inside the access token as simple JSON attributes, for example:
 
 .. code-block:: json
-   
+
    {
      "sub": "1234567890",
      "name": "Mario Rossi",
      "group": "tester"
    }
 
-Other federated AAI providers—such as the Life Science Authentication and Authorization Infrastructure (LS AAI) and the European Grid Infrastructure (EGI)—use a more structured mechanism: the ``eduPersonEntitlement`` attribute, defined in the eduPerson schema.
-
+Other federated AAI providers—such as the Life Science Authentication and Authorization Infrastructure (LS AAI) and the European Grid Infrastructure (EGI), use a more structured mechanism based on the ``eduPersonEntitlement`` attribute, defined in the eduPerson schema.
 
 EDUPERSON-ENTITLEMENT
 ~~~~~~~~~~~~~~~~~~~~~
 
-In Research and Education federations, organizations exchange user-authorization information using standardized schemas, including **eduPerson**.  
-The ``eduPersonEntitlement`` attribute represents a set of rights associated with a user.
+In Research and Education federations, organizations exchange authorization information using standardized schemas such as **eduPerson**. The ``eduPersonEntitlement`` attribute expresses rights or memberships
+assigned to a user. Extracting the group name is slightly more complex than reading a flat attribute because the information is encoded inside a URN.
 
 Generic structure:
 
@@ -762,17 +760,18 @@ Components:
 - ``authority`` — issuing authority  
 - ``domain`` — authority domain  
 - ``group`` — group identifier  
+- ``path`` — subgroup or hierarchical path  
 - ``role`` — role inside the group  
 - ``qualifier`` — IdP name or scope  
 
-This is a conceptual identifier, not a location-based URI.
+This is not a location identifier; it is purely a structured authorization string.
 
-We focus on EGI and LS AAI.
+We focus on EGI and LS AAI in this enviroment.
 
 EGI
 ~~~
 
-EGI entitlements follow this schema:
+EGI group entitlements follow this schema:
 
 .. code-block:: text
 
@@ -780,18 +779,18 @@ EGI entitlements follow this schema:
 
 Main elements:
 
-- ``urn:mace:egi.eu`` — official EGI namespace  
-- ``<vo_name>`` — name of the VO or group  
-- ``role=vm_operator`` / ``role=member`` — role in the VO  
-- ``#aai.egi.eu`` — authority qualifier  
+- ``urn:mace:egi.eu:`` official EGI namespace  
+- ``<vo_name>:`` the VO or group name  
+- ``role=vm_operator / role=member:`` the user's VO role  
+- ``#aai.egi.eu:`` the authority qualifier  
 
-In our script, we currently **ignore the role** and use only the group name.
+In our script, we currently **ignore the role** and extract only the VO/group name. This is fine for our use case, since role-based access is not needed.
 
-EGI Check-in exposes two entitlement categories:
+EGI Check-in exposes two types of entitlements:
 
 **a) Resource entitlements (res):**
 
-These relate to backend services:
+These refer to backend services:
 
 .. code-block:: text
 
@@ -799,10 +798,11 @@ These relate to backend services:
    urn:mace:egi.eu:res:gocdb#aai.egi.eu
    urn:mace:egi.eu:res:rcauth#aai.egi.eu
 
-These are **not** groups and are ignored by our script.
+These do **not** represent groups and are ignored by our script, because they do not provide useful authorization information for our purposes.
 
-**b) Group entitlements:**  
-Contain group and role information used for authorization.
+**b) Group entitlements:**
+
+These contain the actual group (VO) and role information. Only these are used.
 
 LS AAI
 ~~~~~~
@@ -813,17 +813,32 @@ LS AAI expresses group-based authorization using this structure:
 
    urn:geant:lifescience-ri.eu:group:lifescience:<subgroup/subdomain>:<service>#aai.lifescience-ri.eu
 
-(I will update this section with the LS AAI platform screenshots once provided.)
+Unlike EGI, LS AAI does **not** encode roles inside the entitlement. All LS AAI group information is carried inside the ``<subgroup>`` or ``<subdomain>`` path and the ``<service>`` part.
 
 IAM ReCaS
 ~~~~~~~~~
 
-(To be completed or removed depending on your needs.)
+For IAM ReCaS, the situation is simpler: the access token itself contains a ``group`` field. You can inspect this directly by decoding the JWT with any JWT encoder no entitlement parsing is
+required.
 
 AWS
 ~~~
 
-...
+AWS Cognito typically embeds groups in ``cognito:groups`` inside the token. 
+
+(TODO: complete this part once integration tests are finished.)
+
+Pam OAUTH2 module modification
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Thanks to additional features added to the original ``pam_oauth2_device`` module—implemented in `this repository <https://github.com/Laniakea-elixir-it/pam_oauth2_device>`_, it is possible to extract group membership from all IdPs described above, including those using ``eduPersonEntitlement`` (EGI and LS AAI) and those adopting groups directly in the token (IAM ReCaS, AWS Cognito).
+
+The modified module can:
+
+- detect whether the IdP exposes groups through entitlements or token claims,
+- normalize the extracted group list,  
+- return a unified group representation to PAM, making the authentication flow
+  consistent regardless of the IdP.
 
 References
 ----------
