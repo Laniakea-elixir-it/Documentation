@@ -730,7 +730,7 @@ When you set all the configuration run the commant for terraform, and it will cr
 Authentication & Entitlements
 -----------------------------
 
-Identity Providers (IdPs) expose user authorization data in different ways, some IdPs such as ReCaS IAM or AWS Cognito—embed group membership directly inside the access token as simple JSON attributes, for example:
+Identity Providers (IdPs) expose user authorization data in different ways, some IdPs such as ReCaS IAM or AWS Cognito-embed group membership directly inside the access token as simple JSON attributes, for example:
 
 .. code-block:: json
 
@@ -740,7 +740,7 @@ Identity Providers (IdPs) expose user authorization data in different ways, some
      "group": "tester"
    }
 
-Other federated AAI providers—such as the Life Science Authentication and Authorization Infrastructure (LS AAI) and the European Grid Infrastructure (EGI), use a more structured mechanism based on the ``eduPersonEntitlement`` attribute, defined in the eduPerson schema.
+Other federated AAI providers, such as the Life Science Authentication and Authorization Infrastructure (LS AAI) and the European Grid Infrastructure (EGI), use a more structured mechanism based on the ``eduPersonEntitlement`` attribute, defined in the eduPerson schema.
 
 EDUPERSON-ENTITLEMENT
 ~~~~~~~~~~~~~~~~~~~~~
