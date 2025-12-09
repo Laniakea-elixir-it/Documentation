@@ -756,13 +756,13 @@ Generic structure:
 
 Components:
 
-- ``urn`` — Uniform Resource Name  
-- ``authority`` — issuing authority  
-- ``domain`` — authority domain  
-- ``group`` — group identifier  
-- ``path`` — subgroup or hierarchical path  
-- ``role`` — role inside the group  
-- ``qualifier`` — IdP name or scope  
+- ``urn:`` Uniform Resource Name  
+- ``authority:`` issuing authority  
+- ``domain:`` authority domain  
+- ``group:`` group identifier  
+- ``path:`` subgroup or hierarchical path  
+- ``role:`` role inside the group  
+- ``qualifier:`` IdP name or scope  
 
 This is not a location identifier; it is purely a structured authorization string.
 
