@@ -355,63 +355,6 @@ To make the change permanent, disable and stop the default OpenVPN iptables serv
 
   systemctl disable openvpn-iptables.service
 
-OpenVPN Connect
-~~~~~~~~~~~~~~~
-
-Now you need to install the official client application that enables you to securely access network resources. Here we strongly suggest **OpenVPN Connect**, available on Windows, MacOS and Linux. The tutorial will show openVPN Connect steps.
-
-.. note::
-   **OpenVPN Connect** is not the only valid client option, **Tunnelblick** can also be used on **macOS** (but not on Windows).  
-   However, it is essential to use a client that does **not** prompt for a password before authentication (Later in this guide, we will cover this topic in more detail),  
-   so that the login verification code can be received by e-mail.
-
-Please visit the `official OpenVPN CLient page <https://openvpn.net/client/>`_ to download the client.
-Once you have installed and opened the client you should see the following window:
-
-.. figure:: _static/OpenVPN_Connect_cloud_connection.png
-   :scale: 40%
-   :align: center
-
-Here, at the bottom of the window, you need to upload a **.ovpn** file, e.g the one that you create in `the previous script <#enable-pam-plugin>`_: ``client.ovpn``.
-Once you have uploaded the file, you will be redirected to the following page:
-
-.. figure:: _static/openvpn_ovpn_uploaded.png
-   :scale: 40%
-   :align: center
-
-Now is sufficent to click connect and compile the following fields:
-
-.. warning::
-   **Important:** We use this client (**Tunnelblick** also supports this feature) because it allows the user to start the authentication process without requiring a real password.  
-   When filling in the login fields, you can enter **any string** as the password , **it is not used for verification**.  
-   The only mandatory field is your **e-mail address**, where the authentication code will be sent.  
-   The password field cannot be left empty, but it can contain any value (e.g. ``aaaaaaa`` or ``password``) and can be changed freely at any login.
-
-.. figure:: _static/openvpn_login.png
-   :scale: 40% 
-   :align: center
-
-
-.. tip::
-   When you first configure the connection in **OpenVPN Connect**, you may see the following prompt:
-
-   .. figure:: _static/openvpn_missing_certificate.png
-      :scale: 60%
-      :align: center
-
-      This message appears when the client expects an external certificate for authentication.  
-      In our **example**, this step is not required, so we had simply disabled the *“Require External Certificate”* option in the connection profile. (you may want to keep it)
-
-   Once disabled, you can proceed with the configuration as shown below:
-
-   .. figure:: _static/openvpn_disable_certificate.png
-      :scale: 50%
-      :align: center
-
-      Make sure to:  
-      - Disable the field: Require External Certificate
-      - Click **Save Changes** to receive the email
-
 PaaS Configuration
 ~~~~~~~~~~~~~~~~~~
 
