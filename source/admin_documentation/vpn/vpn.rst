@@ -53,7 +53,7 @@ Network Public and private IP address
 ======= ==============================
 
 PAM module installation and configuration
------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The PAM module enables OAuth2 device authentication for OpenVPN.  
 We will install version ``0.0.3`` on **Ubuntu 22.04**.
@@ -102,7 +102,7 @@ Remember that when creating the OIDC client on your identity provider,  **do not
 (or any number > 0) to prevent immediate expiration.
 
 OpenVPN installation
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. note::
 
@@ -140,7 +140,7 @@ OpenVPN installation
 Once the script completes, your OpenVPN server will be installed and ready for configuration.
 
 Server Certificates and OIDC configuration
-------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following steps focus on generating the required server and client certificates, if you haven't done so already.
 To procede you have to have installed OpenVPN ed Easy-RSA:
@@ -198,7 +198,7 @@ Generate the TLS key and certificate revocation list (CRL):
 
 .. _enable-pam-plugin:
 Enable the PAM plugin
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 Create the file ``/etc/pam.d/openvpn`` with your preferred editor:
 
@@ -306,7 +306,7 @@ Recommendations:
 - Keep OpenVPN and PAM modules up to date.  
 
 Jump host connection tweaks
----------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Once OpenVPN is configured is important to fix the networking configuration.
 
@@ -356,7 +356,7 @@ To make the change permanent, disable and stop the default OpenVPN iptables serv
   systemctl disable openvpn-iptables.service
 
 OpenVPN Connect
----------------
+~~~~~~~~~~~~~~~
 
 Now you need to install the official client application that enables you to securely access network resources. Here we strongly suggest **OpenVPN Connect**, available on Windows, MacOS and Linux. The tutorial will show openVPN Connect steps.
 
@@ -413,7 +413,7 @@ Now is sufficent to click connect and compile the following fields:
       - Click **Save Changes** to receive the email
 
 PaaS Configuration
-------------------
+~~~~~~~~~~~~~~~~~~
 
 Once the OpenVPN part is configured, we need to teach IM and the PaaS how to exploit it.
 
