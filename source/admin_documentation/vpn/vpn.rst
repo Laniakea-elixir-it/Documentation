@@ -831,7 +831,7 @@ AWS Cognito typically embeds groups in ``cognito:groups`` inside the token.
 Pam OAUTH2 module modification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Thanks to additional features added to the original ``pam_oauth2_device`` module—implemented in `this repository <https://github.com/Laniakea-elixir-it/pam_oauth2_device>`_, it is possible to extract group membership from all IdPs described above, including those using ``eduPersonEntitlement`` (EGI and LS AAI) and those adopting groups directly in the token (IAM ReCaS, AWS Cognito).
+Thanks to additional features added to the original ``pam_oauth2_device`` module-implemented in `this repository <https://github.com/Laniakea-elixir-it/pam_oauth2_device>`_, it is possible to extract group membership from all IdPs described above, including those using ``eduPersonEntitlement`` (EGI and LS AAI) and those adopting groups directly in the token (IAM ReCaS, AWS Cognito).
 
 The modified module can:
 
