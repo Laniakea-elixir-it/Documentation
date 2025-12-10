@@ -25,7 +25,7 @@ To deploy and application under VPN select among those available:
 
 The deployment will follow as usual. Once the Deployment is complete click on ``details`` button, and navigate to ``Output values``.
 
-   .. figure:: img/vpn_deployment_complete.png
+.. figure:: img/vpn_deployment_complete.png
    :scale: 20 %
    :align: center
 
@@ -45,15 +45,18 @@ To access it, save the ovpn file on your computer. Please click on the ``Save Li
    :scale: 30 %
    :align: center
 
-Two possibilities are here explained.
+Two possibilities are here explained:
+
+#. ``OpenVPN Connect``
+#. ``Tunnelblick`` (suggested for MacOS user)
 
 OpenVPN Connect
 ~~~~~~~~~~~~~~~
 
-Now you need to install the official client application that enables you to securely access network resources. Here we strongly suggest **OpenVPN Connect**, available on Windows, MacOS and Linux. The tutorial will show openVPN Connect steps.
+Here is necessary that you install the official client application that enables to securely access network resources. We strongly suggest **OpenVPN Connect**, available on Windows, MacOS and Linux. This small tutorial will show openVPN Connect steps.
 
 .. note::
-   **OpenVPN Connect** is not the only valid client option, **Tunnelblick** can also be used on **macOS** (but not on Windows).  
+   **OpenVPN Connect** is not the only valid client option, **Tunnelblick** can also be used on **MacOS** (but not on Windows).  
    However, it is essential to use a client that does **not** prompt for a password before authentication (Later in this guide, we will cover this topic in more detail),  
    so that the login verification code can be received by e-mail.
 
@@ -64,7 +67,7 @@ Once you have installed and opened the client you should see the following windo
    :scale: 30%
    :align: center
 
-Here, at the bottom of the window, you need to upload a **.ovpn** file, e.g the one that you create in `the previous script <#enable-pam-plugin>`_: ``client.ovpn``.
+Here, at the bottom of the window, you need to upload  the**.ovpn** file previously saved, e.g the one that you create in `the previous script <#enable-pam-plugin>`_: ``client.ovpn``.
 Once you have uploaded the file, you will be redirected to the following page:
 
 .. figure:: img/openvpn_ovpn_uploaded.png
