@@ -86,10 +86,9 @@ Now is sufficent to click connect and compile the following fields:
    :scale: 30% 
    :align: center
 
+When you first configure the connection in **OpenVPN Connect**, you may see the following prompt:
 
 .. tip::
-   When you first configure the connection in **OpenVPN Connect**, you may see the following prompt:
-
    .. figure:: img/openvpn_missing_certificate.png
       :scale: 60%
       :align: center
@@ -110,7 +109,7 @@ Now is sufficent to click connect and compile the following fields:
 Tunnelblick
 ~~~~~~~~~~~
 
-In this case we are using `tunnelblick <https://tunnelblick.net/>`_, which is available for OSX and Linux systems. Import the OVPN file on your client.
+In this case we are showing also `tunnelblick <https://tunnelblick.net/>`_, which is available for OSX and Linux systems. Import the OVPN file on your client.
 
 .. figure:: img/vpn_deployment_ovpn_file_import.png
    :scale: 30 %
