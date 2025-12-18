@@ -203,15 +203,48 @@ To ensure you have the correct permissions for VPN deployment, follow these step
 Life-Science AAI
 ~~~~~~~~~~~~~~~~
 
+Life-Science AAI is the authentication infrastructure tailored for the life sciences community. It allows you to use your existing institutional credentials to access shared resources.
+
+1.  **Access the Portal**: Click the `LS AAI Link <https://services.aai.lifescience-ri.eu/>`_. To begin the login process, click the **LS Login** button located in the first quadrant of the homepage.
+
 .. figure:: img/LSAAI-login1.jpg
    :scale: 40%
    :align: center
-   :alt: EGI Groups dashboard
+   :alt: LS AAI Homepage
+
+   *The LS AAI homepage: locate the login area to proceed.*
+
+2.  **Identity Selection**: You will be redirected to the main login page. Click the **LS Login** button on the right side of the screen.
+
+3.  **Institutional Login**: Select your home institution (university or research center) and follow the steps to authenticate using your official credentials.
 
 .. figure:: img/LSAAI-login2.jpg
    :scale: 40%
    :align: center
-   :alt: EGI Groups dashboard
+   :alt: LS AAI Login selection
+
+   *then after this step you need to choose your provider to complete the authentication process.*
+
+.. note::
+   Once logged in, your profile informations need to be shared with the Laniakea platform to enable VPN access. If your institution is not listed, contact your **Admin** to discuss alternative login methods or gìnew groups enrollment.
+
+4. **Profile exploration**: Once you're inside, you'll see your profile information, like this:
+
+.. figure:: img/LSAAI-profile1.jpg
+   :scale: 40%
+   :align: center
+   :alt: LS AAI profile
+
+   *Overview of the LS AAI profile homepage.*
+
+5. **Group**: Now, check that you are part of the correct group.
+
+.. figure:: img/LSAAI-profile2.png
+   :scale: 40%
+   :align: center
+   :alt: LS AAI profile group
+
+   *Overview of a LS AAI group.*
 
 Indigo IAM (recas)
 ~~~~~~~~~~~~~~~~~~
