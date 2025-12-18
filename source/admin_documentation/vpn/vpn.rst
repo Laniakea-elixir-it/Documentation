@@ -673,22 +673,30 @@ When you set all the configuration run the commant for terraform, and it will cr
 Configuration and management of identity and access policy
 ----------------------------------------------------------
 
-mmmm
+Admins are responsible for ensuring that users are correctly mapped to their respective groups and roles before granting access to computing resources. The management of user identities and access rights is critical to maintaining the security and integrity of the infrastructure. This section outlines the primary Authentication and Authorization Infrastructures (AAI) integrated into any **tenant** or **project** a user is part of. Here are described:
+
+#. **EGI Check-in**: The main proxy service for EGI resources.
+#. **Life Science AAI (LS AAI):** The authentication infrastructure dedicated to the Life Science community
+#. **INDIGO IAM:** The Identity and Access Management service (e.g., RECAS instance) for fine-grained authorization.
+
+.. warning::
+   Always verify the user's identity and their specific resource requirements via official communication channels before proceeding.
+   Before granting, modifying or revoking access for any user within any system you must coordinate directly with the specific user requesting access.
 
 EGI
 ~~~
 
-mmmm
+The EGI Check-in service is used for federated authentication. Admins must ensure the appropriate Virtual Organization (VO) memberships are verified.
 
 LS AAI
 ~~~~~~
 
-mmmm
+Specifically used for biological and medical research projects. Access policies here are often driven by project-specific attributes.
 
 IAM RECAS
 ~~~~~~~~~
 
-mmm
+The local instance for identity management within the RECAS-Bari organization.
 
 Authentication & Entitlements
 -----------------------------
