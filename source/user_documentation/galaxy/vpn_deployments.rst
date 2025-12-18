@@ -1,7 +1,7 @@
 Applications deploy under VPN
 =============================
 
-Laniakea provides the possibility to deploy its applications as VPN isolated environments usin just private networks.
+Laniakea provides the possibility to deploy its applications as VPN isolated environments using just private networks.
 
 Indeed the access is grant only through VPN authentication, using the same Laniakea credentials. 
 
@@ -11,7 +11,7 @@ Therefore only users authrised using the Laniakea authentication system can acce
 
    To login to the Laniakea dashboard visit the section: :doc:`/user_documentation//authentication/authentication`.
 
-In the following we describe how to deploy Galaxy under VPN and exploit it. The step are identical for any other application on Laniakea.
+In the following tutorial we describe how to deploy Galaxy under a VPN and exploit it.
 
 .. note::
 
@@ -23,7 +23,7 @@ To deploy and application under VPN select among those available:
    :scale: 40 %
    :align: center
 
-The deployment will follow as usual. Once the Deployment is complete click on ``details`` button, and navigate to ``Output values``.
+The deployment will follow as usual. Once the Deployment is complete click on ``details`` button under **Action** section, and navigate to ``Output values``.
 
 .. figure:: img/vpn_deployment_complete.png
    :scale: 20 %
@@ -33,19 +33,19 @@ The deployment will follow as usual. Once the Deployment is complete click on ``
    :scale: 30 %
    :align: center
 
-Here if you click the Galaxy url, it is not possible to access it since it is not available.
+Here if you click the Galaxy url, it is not possible to access it since it wouldn't be available.
 
 .. figure:: img/vpn_deployment_galaxy_fail.png
    :scale: 20 %
    :align: center
 
-To access it, save the ovpn file on your computer. Please click on the ``Save Link As`` button and select ``Save Link As``.
+To access it, save the ovpn file on your computer, please click on the ``Save Link As`` button and select ``Save Link As``.
 
 .. figure:: img/vpn_deployment_save_ovpn_file.png
    :scale: 30 %
    :align: center
 
-Two possibilities are here explained:
+Two possibilities for accessing Galaxy is here explored:
 
 #. ``OpenVPN Connect``
 #. ``Tunnelblick`` (suggested for MacOS user)
@@ -53,7 +53,7 @@ Two possibilities are here explained:
 OpenVPN Connect
 ~~~~~~~~~~~~~~~
 
-Here is necessary that you install the official client application that enables to securely access network resources. We strongly suggest **OpenVPN Connect**, available on Windows, MacOS and Linux. This small tutorial will show openVPN Connect steps.
+To follow this tutorial is necessary that you install the official client application that enables to securely access network resources. We strongly suggest **OpenVPN Connect**, available on Windows, MacOS and Linux. The steps for OpenVPN Connect are shown below.
 
 .. note::
    **OpenVPN Connect** is not the only valid client option, **Tunnelblick** can also be used on **MacOS** (but not on Windows).  
@@ -67,7 +67,7 @@ Once you have installed and opened the client you should see the following windo
    :scale: 30%
    :align: center
 
-Here, at the bottom of the window, you need to upload  the**.ovpn** file previously saved, e.g the one that you create in `the previous script <#enable-pam-plugin>`_: ``client.ovpn``.
+Here, at the bottom of the window, you need to upload  the **.ovpn** file previously created by your **Admin**, e.g the one called ``client.ovpn``.
 Once you have uploaded the file, you will be redirected to the following page:
 
 .. figure:: img/openvpn_ovpn_uploaded.png
@@ -93,8 +93,8 @@ When you first configure the connection in **OpenVPN Connect**, you may see the 
       :scale: 60%
       :align: center
 
-      This message appears when the client expects an external certificate for authentication.  
-      In our **example**, this step is not required, so we had simply disabled the *“Require External Certificate”* option in the connection profile. (you may want to keep it)
+   This message appears when the client expects an external certificate for authentication.  
+   In our **example**, this step is not required, so we had simply disabled the *“Require External Certificate”* option in the connection profile. (you may want to keep it)
 
    Once disabled, you can proceed with the configuration as shown below:
 
@@ -102,14 +102,14 @@ When you first configure the connection in **OpenVPN Connect**, you may see the 
       :scale: 50%
       :align: center
 
-      Make sure to:  
-      - Disable the field: Require External Certificate
-      - Click **Save Changes** to receive the email
+   Make sure to:  
+     #. Disable the field: Require External Certificate
+     #. Click **Save Changes** to receive the email
 
 Tunnelblick
 ~~~~~~~~~~~
 
-In this case we are showing also `tunnelblick <https://tunnelblick.net/>`_, which is available for OSX and Linux systems. Import the OVPN file on your client.
+In this case we are showing also `tunnelblick <https://tunnelblick.net/>`_, which is available for OSX and Linux systems. Install it and import the ``OVPN file`` on your client.
 
 .. figure:: img/vpn_deployment_ovpn_file_import.png
    :scale: 30 %
