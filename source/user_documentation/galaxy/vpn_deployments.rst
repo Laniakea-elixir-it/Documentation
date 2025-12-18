@@ -93,7 +93,7 @@ When you first configure the connection in **OpenVPN Connect**, you may see the 
 
 .. tip::
    .. figure:: img/openvpn_missing_certificate.png
-      :scale: 60%
+      :scale: 40%
       :align: center
 
    This message appears when the client expects an external certificate for authentication.  
@@ -207,7 +207,7 @@ Life-Science AAI is the authentication infrastructure tailored for the life scie
 
 1.  **Access the Portal**: Click the `LS AAI Link <https://services.aai.lifescience-ri.eu/>`_. To begin the login process, click the **LS Login** button located in the first quadrant of the homepage.
 
-.. figure:: img/LSAAI-login1.jpg
+.. figure:: img/LSAAI-login1.png
    :scale: 40%
    :align: center
    :alt: LS AAI Homepage
@@ -218,7 +218,7 @@ Life-Science AAI is the authentication infrastructure tailored for the life scie
 
 3.  **Institutional Login**: Select your home institution (university or research center) and follow the steps to authenticate using your official credentials.
 
-.. figure:: img/LSAAI-login2.jpg
+.. figure:: img/LSAAI-login2.png
    :scale: 40%
    :align: center
    :alt: LS AAI Login selection
