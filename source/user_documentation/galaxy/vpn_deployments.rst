@@ -190,7 +190,7 @@ To ensure you have the correct permissions for VPN deployment, follow these step
 
 3. **Verify Group Membership**: Once logged in, navigate to the **"Groups"** section in your dashboard. Here you can see the list of Virtual Organizations (VOs) and subgroups you belong to.
 
-.. figure:: img/EGI-group.png
+.. figure:: img/EGI-group.jpg
    :scale: 40%
    :align: center
    :alt: EGI Groups dashboard
