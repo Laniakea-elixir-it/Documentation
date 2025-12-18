@@ -109,7 +109,7 @@ When you first configure the connection in **OpenVPN Connect**, you may see the 
 Tunnelblick
 ~~~~~~~~~~~
 
-In this case we are showing also `tunnelblick <https://tunnelblick.net/>`_, which is available for OSX and Linux systems. Install it and import the ``OVPN file`` on your client.
+In this case we are showing also `tunnelblick <https://tunnelblick.net/>`_, which is available for OSX and Linux systems. Install Tunnelblick and import the ``OVPN file`` on your client.
 
 .. figure:: img/vpn_deployment_ovpn_file_import.png
    :scale: 30 %
