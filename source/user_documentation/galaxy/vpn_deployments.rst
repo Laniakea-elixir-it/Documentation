@@ -252,6 +252,5 @@ Life-Science AAI is the authentication infrastructure tailored for the life scie
 Indigo IAM (recas)
 ~~~~~~~~~~~~~~~~~~
 
-mmm
-
+Recas? or only EGI+LSAAI
 
