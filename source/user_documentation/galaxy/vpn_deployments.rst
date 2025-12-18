@@ -17,6 +17,9 @@ In the following tutorial we describe how to deploy Galaxy under a VPN and explo
 
    The step are identical for any other application on Laniakea.
 
+Deploy an application under VPN
+-------------------------------
+
 To deploy and application under VPN select among those available:
 
 .. figure:: img/vpn_deployment_select.png
