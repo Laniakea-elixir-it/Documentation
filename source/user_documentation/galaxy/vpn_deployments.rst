@@ -164,10 +164,41 @@ This section describes how to interact with and register for each of the primary
 * **Life Science AAI (LS AAI)**: The authentication infrastructure dedicated to the Life Science community. `LS AAI Link <>`_
 * **INDIGO IAM**: The Identity and Access Management service (e.g., RECAS instance) for fine-grained authorization.
 
+.. warning::
+
+   Here it is essential to coordinate with your **Admin** to manage authorization requests and ensure resource accessibility.
+
 EGI Check-in
 ~~~~~~~~~~~~
 
+`EGI Check-in <https://aai.egi.eu/>`_ is the main gateway to access the platform's distributed resources. It acts as a bridge between your institutional identity and the scientific services.
 
+.. figure:: img/EGI-login.png
+   :scale: 40%
+   :align: center
+   :alt: EGI Check-in Login interface
+
+   *The EGI Check-in login page where you can select your Identity Provider.*
+
+To ensure you have the correct permissions for VPN deployment, follow these steps:
+
+1. **Login**: Access the portal and authenticate using your institutional account or the method provided by your administrator.
+2. **Check the Environment**: 
+   
+   .. important::
+      EGI operates different environments. Make sure you are logging into the correct one (**Production**, **Demo**, or **Dev**). Permissions granted in the *Demo* environment will not work in *Production*.
+
+3. **Verify Group Membership**: Once logged in, navigate to the **"Groups"** section in your dashboard. Here you can see the list of Virtual Organizations (VOs) and subgroups you belong to.
+
+.. figure:: img/openvpn-group.png
+   :scale: 40%
+   :align: center
+   :alt: EGI Groups dashboard
+
+   *Example of the Groups dashboard. Ensure that the 'Group Path' matches the one required for your VPN access.*
+
+.. tip::
+   If you don't see the expected group (e.g., ``/test-access-path``), please contact your **Admin**. Access to private VPN networks is strictly tied to these memberships; without the correct group assignment, the VPN authentication will fail.
 
 Life-Science AAI
 ~~~~~~~~~~~~~~~~
