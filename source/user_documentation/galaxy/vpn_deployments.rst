@@ -161,7 +161,7 @@ This section describes how to interact with and register for each of the primary
     * **EGI Production**: For real research activities and stable deployments. `Egi-production Link <https://aai.egi.eu/>`_
     * **EGI Demo**: A sandbox environment for tutorials and testing. `Egi-Demo Link <https://aai-demo.egi.eu/>`_
     * **EGI Dev**: Dedicated to developers for testing new features. `Egi-Dev Link <https://aai-dev.egi.eu/>`_
-* **Life Science AAI (LS AAI)**: The authentication infrastructure dedicated to the Life Science community. `LS AAI Link <>`_
+* **Life Science AAI (LS AAI)**: The authentication infrastructure dedicated to the Life Science community. `LS AAI Link <https://services.aai.lifescience-ri.eu/>`_
 * **INDIGO IAM**: The Identity and Access Management service (e.g., RECAS instance) for fine-grained authorization.
 
 .. warning::
@@ -203,7 +203,15 @@ To ensure you have the correct permissions for VPN deployment, follow these step
 Life-Science AAI
 ~~~~~~~~~~~~~~~~
 
-mmm
+.. figure:: img/LSAAI-login1.jpg
+   :scale: 40%
+   :align: center
+   :alt: EGI Groups dashboard
+
+.. figure:: img/LSAAI-login2.jpg
+   :scale: 40%
+   :align: center
+   :alt: EGI Groups dashboard
 
 Indigo IAM (recas)
 ~~~~~~~~~~~~~~~~~~
