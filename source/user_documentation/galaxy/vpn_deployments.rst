@@ -155,20 +155,27 @@ And you can access Galaxy.
 Identity and Access Management (IAM)
 ------------------------------------
 
-mmm
+This section describes how to interact with and register for each of the primary Identity Providers and authorization systems. These systems enable users to verify their identity and demonstrate their access permissions. To start you have to posses a valid account to one of the following Authentication and Authorization Infrastructure (AAI):
 
-EGI
-~~~
+* **EGI Check-in**: The main proxy service for EGI resources.
+    * **EGI Production**: For real research activities and stable deployments. `Egi-production Link <https://aai.egi.eu/>`_
+    * **EGI Demo**: A sandbox environment for tutorials and testing. `Egi-Demo Link <https://aai-demo.egi.eu/>`_
+    * **EGI Dev**: Dedicated to developers for testing new features. `Egi-Dev Link <https://aai-dev.egi.eu/>`_
+* **Life Science AAI (LS AAI)**: The authentication infrastructure dedicated to the Life Science community. `LS AAI Link <>`_
+* **INDIGO IAM**: The Identity and Access Management service (e.g., RECAS instance) for fine-grained authorization.
 
-mmm
+EGI Check-in
+~~~~~~~~~~~~
+
+
 
 Life-Science AAI
 ~~~~~~~~~~~~~~~~
 
 mmm
 
-IAM recas
-~~~~~~~~~
+Indigo IAM (recas)
+~~~~~~~~~~~~~~~~~~
 
 mmm
 
