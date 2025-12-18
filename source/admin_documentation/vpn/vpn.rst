@@ -670,6 +670,26 @@ When you set all the configuration run the commant for terraform, and it will cr
    terraform init
    terrafrom apply
 
+Configuration and management of identity and access policy
+----------------------------------------------------------
+
+mmmm
+
+EGI
+~~~
+
+mmmm
+
+LS AAI
+~~~~~~
+
+mmmm
+
+IAM RECAS
+~~~~~~~~~
+
+mmm
+
 Authentication & Entitlements
 -----------------------------
 
