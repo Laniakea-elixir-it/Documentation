@@ -148,3 +148,25 @@ And you can access Galaxy.
 .. figure:: img/vpn_deployment_galaxy_ok.png
    :scale: 20 %
    :align: center
+
+Identity and Access Management (IAM)
+------------------------------------
+
+mmm
+
+EGI
+~~~
+
+mmm
+
+Life-Science AAI
+~~~~~~~~~~~~~~~~
+
+mmm
+
+IAM recas
+~~~~~~~~~
+
+mmm
+
+
