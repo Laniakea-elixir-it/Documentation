@@ -230,7 +230,7 @@ Life-Science AAI is the authentication infrastructure tailored for the life scie
 
 4. **Profile exploration**: Once you're inside, you'll see your profile information, like this:
 
-.. figure:: img/LSAAI-profile1.png
+.. figure:: img/LSAAI-profile1.jpg
    :scale: 40%
    :align: center
    :alt: LS AAI profile
