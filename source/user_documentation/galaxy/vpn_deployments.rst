@@ -225,9 +225,6 @@ Life-Science AAI is the authentication infrastructure tailored for the life scie
 
    *then after this step you need to choose your provider to complete the authentication process.*
 
-.. note::
-   Once logged in, your profile informations need to be shared with the Laniakea platform to enable VPN access. If your institution is not listed, contact your **Admin** to discuss alternative login methods or new groups enrollment.
-
 4. **Profile exploration**: Once you're inside, you'll see your profile information, like this:
 
 .. figure:: img/LSAAI-profile1.jpg
