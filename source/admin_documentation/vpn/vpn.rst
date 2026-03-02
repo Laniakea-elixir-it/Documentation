@@ -669,11 +669,10 @@ The ``main.tf`` and ``variables.tf`` files are already setted, you need to modif
 
 When you set all the configuration run the commant for terraform, and it will create and configure the bastion host for you:
 
-.. code-block:: bash 
+.. code-block:: bash
+
    terraform init
-
    terraform apply
-
 
 Configuration and management of identity and access policy
 ----------------------------------------------------------
