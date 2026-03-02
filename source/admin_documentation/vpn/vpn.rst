@@ -18,7 +18,7 @@ We use a jump host VM that has two fundamental functions:
 
    The procedure has been tested using Ubuntu 22.04 as OS on the jump host VM.
 
-The VPN is based on OpenVPN, with clients and server are configured to use TCP protocol.
+The VPN relies on OpenVPN, with both client and server configured to use the TCP protocol.
 
 We exploit a PAM plugin to enable authentication through OpenID Connect, exploiting Oauth2 device flow:
 
@@ -44,7 +44,7 @@ VM configuration
 Create a virtual machine (VM) that will be used as **jump host** in the tenant where you are planning to enable VPN deployment. 
 
 .. note::
-   Each tenant in your cloud requires its own dedicated jump host.
+   Each tenant in your cloud should have its own dedicated jump host.
 
 The VM should meet the following minimum requirements:
 
@@ -124,7 +124,7 @@ OpenVPN installation
 
 2. Then you need to install OpenVPN:
 
-   You can install and configure OpenVPN using the following `script <https://raw.githubusercontent.com/Nyr/openvpn-install/master/openvpn-install.sh>`_.:  
+   You can install and configure OpenVPN using the following `script <https://raw.githubusercontent.com/Nyr/openvpn-install/master/openvpn-install.sh>`_:  
   
    .. code-block:: bash
 
@@ -669,9 +669,9 @@ The ``main.tf`` and ``variables.tf`` files are already setted, you need to modif
 
 When you set all the configuration run the commant for terraform, and it will create and configure the bastion host for you:
 
-.. code-block:: bash
+.. code-block:: bash 
    terraform init
-   terrafrom apply
+   terraform apply
 
 Configuration and management of identity and access policy
 ----------------------------------------------------------
