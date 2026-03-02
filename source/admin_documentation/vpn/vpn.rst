@@ -671,7 +671,9 @@ When you set all the configuration run the commant for terraform, and it will cr
 
 .. code-block:: bash 
    terraform init
+
    terraform apply
+
 
 Configuration and management of identity and access policy
 ----------------------------------------------------------
