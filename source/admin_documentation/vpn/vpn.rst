@@ -9,7 +9,9 @@ Isolation is reached using OpenStack tenant and security groups properties, gran
    :scale: 40%
    :align: center
 
-We use a jump host VM that has two fundamental functions: (1) allow IM to access the private network and perform VM installation and configuration; (2) allow users to access the private network and the deployment. Therefore, we need to configure it to act as access point to the IM and to the users.
+We use a jump host VM that has two fundamental functions: 
+1. Allow IM to access the private network and perform VM installation and configuration;
+2. Allow users to access the private network and the deployment. Therefore, we need to configure it to act as access point to the IM and to the users.
 
 .. note::
 
