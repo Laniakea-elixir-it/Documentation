@@ -554,9 +554,9 @@ Then choose your IdP and fill the provider endpoints. Open ``group_vars/bastion.
 
    oidc_providers:
      iam:
-       device_endpoint:   "https://iam.recas.ba.infn.it/devicecode"
-       token_endpoint:    "https://iam.recas.ba.infn.it/token"
-       userinfo_endpoint: "https://iam.recas.ba.infn.it/userinfo"
+       device_endpoint:   "https://.../devicecode"
+       token_endpoint:    "https://.../token"
+       userinfo_endpoint: "https://.../userinfo"
      lifescience:
        device_endpoint:   "FILL_ME"
        token_endpoint:    "FILL_ME"
@@ -692,15 +692,16 @@ EGI
 
 The EGI Check-in service is used for federated authentication. Admins must ensure the appropriate Virtual Organization (VO) memberships are verified.
 
+.. warning::
+   Human Ineraction needed: User groups and access permissions cannot be managed through the dashboard, you must coordinate with the EGI Check-in Team via email to finalize configuration. Refer to their official protocol <https://www.egi.eu/service/check-in/>_.
+
 LS AAI
 ~~~~~~
 
 Specifically used for biological and medical research projects. Access policies here are often driven by project-specific attributes.
 
-IAM RECAS
-~~~~~~~~~
-
-The local instance for identity management within the RECAS-Bari organization.
+.. warning::
+   Human Interaction needed: Managing user groups and accessibility requires direct communication with the LS AAI Team, please follow the protocol outlined in the LS AAI Site <https://lifescience-ri.eu/ls-login/ls-aai-aup.html>_.
 
 Authentication & Entitlements
 -----------------------------
@@ -790,19 +791,6 @@ LS AAI expresses group-based authorization using this structure:
 
 Unlike EGI, LS AAI does **not** encode roles inside the entitlement. All LS AAI group information is carried inside the ``<subgroup>`` or ``<subdomain>`` path and the ``<service>`` part.
 
-IAM ReCaS
-~~~~~~~~~
-
-For IAM ReCaS, the situation is simpler: the access token itself contains a ``group`` field. You can inspect this directly by decoding the JWT with any JWT encoder no entitlement parsing is
-required.
-
-AWS
-~~~
-
-AWS Cognito typically embeds groups in ``cognito:groups`` inside the token. 
-
-(TODO: complete this part once integration tests are finished.)
-
 Pam OAUTH2 module modification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -819,9 +807,14 @@ References
 ----------
 
 Install OpenVPN: https://community.openvpn.net/openvpn/wiki/OpenvpnSoftwareRepos  
+
 Enable IP forwarding: https://linuxconfig.org/how-to-turn-on-off-ip-forwarding-in-linux  
+
 Enable IP forwarding with OpenVPN: https://openvpn.net/faq/what-is-and-how-do-i-enable-ip-forwarding-on-linux/  
-Iptables configuration: https://askubuntu.com/questions/1181115/openvpn-client-cannot-access-any-network-except-for-the-server-itself-after-conn  
+
+Iptables configuration: https://askubuntu.com/questions/1181115/openvpn-client-cannot-access-any-network-except-for-the-server-itself-after-conn 
+
 Example eduPersonEntitlement: https://help.switch.ch/aai/support/documents/attributes/edupersonentitlement/  
+
 EduPerson entitlement values: https://servicedesk.surf.nl/wiki/spaces/IAM/pages/128910063/Standardized+values+for+eduPersonEntitlement
 
