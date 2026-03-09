@@ -693,7 +693,7 @@ EGI
 The EGI Check-in service is used for federated authentication. Admins must ensure the appropriate Virtual Organization (VO) memberships are verified.
 
 .. warning::
-   Human Ineraction needed: User groups and access permissions cannot be managed through the dashboard, you must coordinate with the EGI Check-in Team via email to finalize configuration. Refer to their official protocol <https://www.egi.eu/service/check-in/>_.
+   Human Ineraction needed: User groups and access permissions cannot be managed through the dashboard, you must coordinate with the EGI Check-in Team via email to finalize configuration. Refer to their `official protocol <https://www.egi.eu/service/check-in/>_`.
 
 LS AAI
 ~~~~~~
@@ -701,7 +701,7 @@ LS AAI
 Specifically used for biological and medical research projects. Access policies here are often driven by project-specific attributes.
 
 .. warning::
-   Human Interaction needed: Managing user groups and accessibility requires direct communication with the LS AAI Team, please follow the protocol outlined in the LS AAI Site <https://lifescience-ri.eu/ls-login/ls-aai-aup.html>_.
+   Human Interaction needed: Managing user groups and accessibility requires direct communication with the LS AAI Team, please follow the protocol outlined in the `LS AAI Site <https://lifescience-ri.eu/ls-login/ls-aai-aup.html>_`.
 
 Authentication & Entitlements
 -----------------------------
