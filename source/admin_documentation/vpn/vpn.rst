@@ -687,13 +687,18 @@ Admins are responsible for ensuring that users are correctly mapped to their res
    Always verify the user's identity and their specific resource requirements via official communication channels before proceeding.
    Before granting, modifying or revoking access for any user within any system you must coordinate directly with the specific user requesting access.
 
-EGI
-~~~
+EGI Check-in
+~~~~~~~~~~~~
 
 The EGI Check-in service is used for federated authentication. Admins must ensure the appropriate Virtual Organization (VO) memberships are verified.
 
 .. warning::
    Human Ineraction needed: User groups and access permissions cannot be managed through the dashboard, you must coordinate with the EGI Check-in Team via email to finalize configuration. Refer to their `official protocol <https://www.egi.eu/service/check-in/>`_.
+
+EGI Check-in client
+-------------------
+
+In order to registry a client and obtaining a client id and a client secret (needed inside the configuration file in your bastion host) is necessary to visit `the following page <https://aai.egi.eu/federation/egi/home>`_.
 
 LS AAI
 ~~~~~~
