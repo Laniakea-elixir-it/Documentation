@@ -104,6 +104,26 @@ You can follow these steps or refer to the original istructions (remember to app
 Remember that when creating the OIDC client on your identity provider,  **do not** leave the default ``device code timeout`` at 0 seconds but set it to **300 seconds** 
 (or any number > 0) to prevent immediate expiration.
 
+.. warning::
+   It is **essential** to include the correct scopes in your configuration file (e.g., ``/etc/pam_oauth2_device/config.json``) to ensure the module can retrieve the necessary user information:
+
+   1. Use ``"scope": "openid profile eduperson_entitlement",``: if your Identity Provider (IdP) uses **Eduperson entitlements** for authorization.
+   2. Use ``"scope": "openid profile",`` :if your IdP relies on standard **OIDC profiles** or internal IAM groups.
+
+   **Example snippet:**
+   
+   .. code-block:: json
+
+      "oauth": {
+        "client": {
+            "id": "YOUR_CLIENT_ID",
+            "secret": "YOUR_CLIENT_SECRET"
+        },
+        "scope": "openid profile",  || "scope": "openid profile eduperson_entitlement",
+        "device_endpoint":"https://endpoint/.../",
+        ...
+        }
+
 OpenVPN installation
 ~~~~~~~~~~~~~~~~~~~~
 
