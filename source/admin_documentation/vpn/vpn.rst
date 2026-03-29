@@ -515,8 +515,9 @@ Ansible configuration
 This playbook turns an **Ubuntu 22.04** VM into a **bastion** that accepts SSH logins via **OpenID Connect (device code flow)** using the ``pam_oauth2_device`` module.
 
 .. note::
-   If you're configuring the VM where you're running as your bastion host make sure that the vm match the requirements, if you'll integrate the terraform part also, this is not necessary. 
-   The version used for the pam module is reported here:
+   If you are manually configuring the VM to act as a bastion host, ensure that the instance meets all the specified requirements. However, if you are using the Terraform integration, these manual steps are not necessary as the configuration is handled automatically.
+
+   The specific version of the PAM module used is:
    `pam_oauth2_device <https://github.com/Laniakea-elixir-it/pam_oauth2_device>`_.
 
 The playbook performs the following tasks:
