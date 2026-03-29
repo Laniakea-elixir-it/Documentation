@@ -717,9 +717,12 @@ The EGI Check-in service is used for federated authentication. Admins must ensur
    Human Ineraction needed: User groups and access permissions cannot be managed through the dashboard, you must coordinate with the EGI Check-in Team via email to finalize configuration. Refer to their `official protocol <https://www.egi.eu/service/check-in/>`_.
 
 EGI Check-in client
-~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^
 
-In order to registry a client and obtaining a client id and a client secret (needed inside the configuration file in your bastion host) is necessary to visit `the following page <https://aai.egi.eu/federation/egi/home>`_.
+To use EGI Check-in on your bastion host, you must register a client to obtain a **Client ID** and **Client Secret**.
+
+* Visit the `EGI Federation Registry <https://aai.egi.eu/federation/egi/home>`_ to start the process.
+* These credentials must be inserted into the PAM module configuration file on your bastion host.
 
 LS AAI
 ~~~~~~
