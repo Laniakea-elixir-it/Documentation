@@ -59,7 +59,7 @@ PAM module installation and configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The PAM module enables OAuth2 device authentication for OpenVPN.  
-We will install version ``0.0.3`` on **Ubuntu 22.04**.
+We will install version ``0.0.4`` on **Ubuntu 22.04**.
 
 .. note::
 
@@ -68,7 +68,7 @@ We will install version ``0.0.3`` on **Ubuntu 22.04**.
 Please note:
 
 1. The steps below are adapted and tested on **Ubuntu 22.04**.
-2. Use the release `0.0.3` of the PAM module:  
+2. Use the release `0.0.4` of the PAM module:  
    https://github.com/maricaantonacci/pam_oauth2_device/releases
 3. When you create the IAM client, **do not leave the default “device code timeout” at 0 seconds**.  
    Set it explicitly to **300 seconds (5 minutes)**, otherwise it will expire immediately.
@@ -79,11 +79,11 @@ You can follow these steps or refer to the original istructions (remember to app
 
    .. code-block:: bash
 
-      wget https://github.com/maricaantonacci/pam_oauth2_device/archive/refs/tags/v0.0.3.tar.gz
+      wget https://github.com/maricaantonacci/pam_oauth2_device/archive/refs/tags/v0.0.4.tar.gz
       
-      tar -xzf v0.0.3.tar.gz
+      tar -xzf v0.0.4.tar.gz
       
-      cd pam_oauth2_device-0.0.3
+      cd pam_oauth2_device-0.0.4
 
 2. Install required tools:
 
@@ -119,7 +119,7 @@ Remember that when creating the OIDC client on your identity provider,  **do not
             "id": "YOUR_CLIENT_ID",
             "secret": "YOUR_CLIENT_SECRET"
         },
-        "scope": "openid profile",  || "scope": "openid profile eduperson_entitlement",
+        "scope": "openid profile",  ``||`` "scope": "openid profile eduperson_entitlement",
         "device_endpoint":"https://endpoint/.../",
         ...
         }
