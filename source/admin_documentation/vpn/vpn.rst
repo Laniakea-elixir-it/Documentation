@@ -110,7 +110,7 @@ Remember that when creating the OIDC client on your identity provider,  **do not
    1. Use ``"scope": "openid profile eduperson_entitlement",``: if your Identity Provider (IdP) uses **Eduperson entitlements** for authorization.
    2. Use ``"scope": "openid profile",`` :if your IdP relies on standard **OIDC profiles** or internal IAM groups.
 
-   **Example snippet:**
+   **Example snippet (chose only one ``"scope":``):**
    
    .. code-block:: json
 
@@ -119,7 +119,7 @@ Remember that when creating the OIDC client on your identity provider,  **do not
             "id": "YOUR_CLIENT_ID",
             "secret": "YOUR_CLIENT_SECRET"
         },
-        "scope": "openid profile",  ``||`` "scope": "openid profile eduperson_entitlement",
+        "scope": "openid profile",  OR  "scope": "openid profile eduperson_entitlement",
         "device_endpoint":"https://endpoint/.../",
         ...
         }
