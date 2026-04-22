@@ -6,6 +6,7 @@ Keycloak is an easy open source identity and access management solution, it adds
 .. figure:: img/keycloak_logo.png
    :scale: 40%
    :align: center
+   :alt: Keycloak Logo
 
 We provide a complete guide from the installation, protracted in this section, and configuration, described in the Laniakea-Nebula VPN section :ref:`here <connection_keycloak_configuration>`.
 
@@ -49,14 +50,14 @@ Then you can personalize various fields insiede the main ``docker-compose.yml`` 
 .. note::
    We strongly suggest changing the default passwords and usernames.
 
-.. code-block:: bash
+.. code-block:: yaml
+
    ...
      environment:
        POSTGRES_DB: keycloak
        POSTGRES_USER: keycloak
        POSTGRES_PASSWORD: CHANGE_HERE
-     ...
- 
+   ...
    keycloak:
      ...
      environment:
@@ -66,10 +67,10 @@ Then you can personalize various fields insiede the main ``docker-compose.yml`` 
        KC_DB_PASSWORD: CHANGE_HERE
        KEYCLOAK_ADMIN: admin
        KEYCLOAK_ADMIN_PASSWORD: CHANGE_HERE
-       KC_HOSTNAME: www.CHANGE_HERE.com
+       KC_HOSTNAME: your-domain.com
        KC_PROXY: edge
        KC_HOSTNAME_STRICT_HTTPS: "true"
-     ...
+   ...
     
 Then we can procede and start the stack:
 
