@@ -1,7 +1,9 @@
 Keycloak
 ========
 
-Keycloak is an easy open source identity and access management solution, it adds single-sign-on and authentication to applications and secure services with minimum and simple configurations. Keycloak is an Identity Access Management(IAM) solution which manages a user database (name, email, password, role, ...) and authenticates them to the final application/s. It also supports standard like OpenID Connect (OIDC) and SAML 2.0.
+Keycloak is an easy open source identity and access management solution, it adds single-sign-on and authentication to applications and secure services with minimum and simple configurations.
+
+Keycloak is an Identity Access Management(IAM) solution which manages a user database (name, email, password, role, ...) and authenticates them to the final application/s. It also supports standard like OpenID Connect (OIDC) and SAML 2.0.
 
 .. figure:: img/keycloak_logo.png
    :scale: 40%
