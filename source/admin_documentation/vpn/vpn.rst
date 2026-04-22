@@ -820,6 +820,8 @@ LS AAI expresses group-based authorization using this structure:
 
 Unlike EGI, LS AAI does **not** encode roles inside the entitlement. All LS AAI group information is carried inside the ``<subgroup>`` or ``<subdomain>`` path and the ``<service>`` part.
 
+.. _connection_keycloak_configuration:
+
 CONFIGURING EDUPERSON ENTITLEMENTS ON KEYCLOAK
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
