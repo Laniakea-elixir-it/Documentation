@@ -33,7 +33,8 @@ The main Features of this projects are:
 
 Installation
 ~~~~~~~~~~~~
-.. warning:
+
+.. warning::
    The installation will need some prerequisites not covered in this tutorial:
 
    1. Docker and Docker Compose installed (`docker installation <https://docs.docker.com/engine/install/>`_, `docker compose installation <https://docs.docker.com/compose/install/>`_ ).
@@ -42,6 +43,7 @@ Installation
 To start with the deployment you need to follow these steps: 
 
 .. code-block:: bash
+
    git clone https://github.com/riccardocaccia/docker-compose-keycloak-caddy-posgredb.git
    cd docker-compose-keycloak-caddy-posgredb
 
@@ -52,8 +54,8 @@ Then you can personalize various fields insiede the main ``docker-compose.yml`` 
 
 .. code-block:: yaml
 
-   ...
-     environment:
+   ... 
+   environment:
        POSTGRES_DB: keycloak
        POSTGRES_USER: keycloak
        POSTGRES_PASSWORD: CHANGE_HERE
@@ -75,11 +77,13 @@ Then you can personalize various fields insiede the main ``docker-compose.yml`` 
 Then we can procede and start the stack:
 
 .. code-block:: bash
+
    docker-compose up -d
 
 Caddy will automatically fetch the SSL certificates for the domain specified in the configuration. You can now proceed to configure the IAM functionalities.
 
 References
 ----------
+
 * Keycloak: https://www.keycloak.org/
 * Caddy Server: https://caddyserver.com/
