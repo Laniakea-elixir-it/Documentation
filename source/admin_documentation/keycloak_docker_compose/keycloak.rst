@@ -67,7 +67,7 @@ Then you can personalize various fields insiede the main ``docker-compose.yml`` 
        KC_DB_PASSWORD: CHANGE_HERE
        KEYCLOAK_ADMIN: admin
        KEYCLOAK_ADMIN_PASSWORD: CHANGE_HERE
-       KC_HOSTNAME: your-domain.com
+       KC_HOSTNAME: YOUR-DOMAIN.CHANGE_HERE.COM
        KC_PROXY: edge
        KC_HOSTNAME_STRICT_HTTPS: "true"
    ...
