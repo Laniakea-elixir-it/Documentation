@@ -888,9 +888,35 @@ Configuring eduperson entitlements on Keycloak
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To simulate an environment like LS AAI or EGI Check-in, your Keycloak instance must be able to issue specific entitlements. In the Life Science context, these are typically formatted as URNs (``urn:mace:usegalaxy.it:group:vo.usegalaxy.it:role=member#usegalaxy.it``). 
-In this section we take a look on how to implement eduperson entitlement inside your Keycloak
+In this section we take a look on how to implement eduperson entitlement inside your Keycloak.
 
+.. note::
+   While there are several ways to manage entitlements, this guide focuses on the manual User attribute method.
 
+First, navigate to the **Users** section in the Keycloak admin console and select the user you wish to configure.
+
+1. Go to the **Attributes** tab.
+2. Enter the following key-value pair:
+   * **Key**: ``eduperson_entitlement`` (mandatory)
+   * **Value**: ``urn:mace:usegalaxy.it:group:vo.usegalaxy.it:role=member#usegalaxy.it`` (**Use your specific project URN**).
+3. Click **Save**.
+
+.. figure:: _static/keycloak_user_attr.png
+   :scale: 40%
+   :align: center
+
+To ensure the entitlement is delivered correctly in the identity token, you must configure a Mapper.
+
+#. Navigate to Client Scopes and select the eduperson_entitlement scope.
+#. Go to the Mappers tab and click on your mapper configuration.
+#. Ensure that Multivalued is set to ON.
+
+.. figure:: _static/keycloak_eduperson.png
+   :scale: 40%
+   :align: center
+
+.. warning::
+   Enabling Multivalued is critical, this ensures that the eduperson_entitlement arrives as a JSON array matching the standard format.
 
 Pam OAUTH2 module modification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
