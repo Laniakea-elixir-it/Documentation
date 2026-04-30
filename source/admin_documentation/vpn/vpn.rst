@@ -792,7 +792,7 @@ Once submitted:
 To finalize the workflow and connect specific user groups to your resource, you must contact the LS AAI support team via email: ``support@aai.lifescience-ri.eu``.
 
 .. warning::
-   o manage existing groups or modify user access as a Group Manager, please refer to the official: `HERE <https://perunaai.atlassian.net/wiki/spaces/PERUN/pages/123600928/Group+manager>`_ 
+   To manage existing groups or modify user access as a Group Manager, please refer to the official: `HERE <https://perunaai.atlassian.net/wiki/spaces/PERUN/pages/123600928/Group+manager>`_ 
 
 Authentication & Entitlements
 -----------------------------
@@ -884,8 +884,11 @@ Unlike EGI, LS AAI does **not** encode roles inside the entitlement. All LS AAI 
 
 .. _connection_keycloak_configuration:
 
-CONFIGURING EDUPERSON ENTITLEMENTS ON KEYCLOAK
+Configuring eduperson entitlements on Keycloak
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To simulate an environment like LS AAI or EGI Check-in, your Keycloak instance must be able to issue specific entitlements. In the Life Science context, these are typically formatted as URNs (``urn:mace:usegalaxy.it:group:vo.usegalaxy.it:role=member#usegalaxy.it``). 
+In this section we take a look on how to implement eduperson entitlement inside your Keycloak
 
 
 
