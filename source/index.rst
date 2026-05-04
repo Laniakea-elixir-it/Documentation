@@ -66,6 +66,7 @@ For more information on the Galaxy Project, please visit the https://galaxyproje
    admin_documentation/vault/vault_config
    admin_documentation/dashboard/dashboard
    admin_documentation/indigo_paas_deploy/introduction
+   admin_documentation/keycloak_docker_compose/keycloak
 
 GitHub repository
 -----------------
