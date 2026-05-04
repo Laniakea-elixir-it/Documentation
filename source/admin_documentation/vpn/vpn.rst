@@ -1,4 +1,4 @@
-Deployment beyond VPN
+Deployment behind VPN
 =====================
 
 The PaaS provides the possibility to instantiate and configure VMs with private network only and then configure them to be accessed through a VPN, therefore providing complete isolation to the environment.
