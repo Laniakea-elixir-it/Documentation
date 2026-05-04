@@ -50,7 +50,6 @@ Service configuration
    auth_intro
    ls_aai
    egi_checkin
-   keycloak
 
 VM configuration
 ----------------
