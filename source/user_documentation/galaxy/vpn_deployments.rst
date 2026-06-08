@@ -1,5 +1,5 @@
-Applications deploy under VPN
-=============================
+Applications deploy behind VPN
+==============================
 
 Laniakea provides the possibility to deploy its applications as VPN isolated environments using just private networks.
 
@@ -11,7 +11,7 @@ Therefore only users authrised using the Laniakea authentication system can acce
 
    To login to the Laniakea dashboard visit the section: :doc:`/user_documentation//authentication/authentication`.
 
-In the following tutorial we describe how to deploy Galaxy under a VPN and exploit it.
+In the following tutorial we describe how to deploy Galaxy behind a VPN and exploit it.
 
 .. note::
 
@@ -23,7 +23,7 @@ Deploy an application under VPN
 To deploy and application under VPN select among those available:
 
 .. figure:: img/vpn_deployment_select.png
-   :scale: 40 %
+   :scale: 20 %
    :align: center
 
 The deployment will follow as usual. Once the Deployment is complete click on ``details`` button under **Action** section, and navigate to ``Output values``.
