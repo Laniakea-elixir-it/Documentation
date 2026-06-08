@@ -42,28 +42,25 @@ Here if you click the Galaxy url, it is not possible to access it since it would
    :scale: 20 %
    :align: center
 
-To access it, save the ovpn file on your computer, please click on the ``Save Link As`` button and select ``Save Link As``.
-
-.. figure:: img/vpn_deployment_save_ovpn_file.png
-   :scale: 30 %
-   :align: center
+To access it, save the ovpn file on your computer, by clicking on the ``Save Link As`` button.
 
 Two possibilities for accessing Galaxy is here explored:
 
 #. ``OpenVPN Connect``
 #. ``Tunnelblick`` (suggested for MacOS user)
 
-OpenVPN Connect
-~~~~~~~~~~~~~~~
-
-To follow this tutorial is necessary that you install the official client application that enables to securely access network resources. We strongly suggest **OpenVPN Connect**, available on Windows, MacOS and Linux. The steps for OpenVPN Connect are shown below.
-
 .. note::
    **OpenVPN Connect** is not the only valid client option, **Tunnelblick** can also be used on **MacOS** (but not on Windows).  
    However, it is essential to use a client that does **not** prompt for a password before authentication (Later in this guide, we will cover this topic in more detail),  
    so that the login verification code can be received by e-mail.
 
+OpenVPN Connect
+~~~~~~~~~~~~~~~
+
+To follow this tutorial is necessary that you install the official client application that enables to securely access network resources. We strongly suggest **OpenVPN Connect**, available on Windows, MacOS and Linux. The steps for OpenVPN Connect are shown below.
+
 Please visit the `official OpenVPN CLient page <https://openvpn.net/client/>`_ to download the client.
+
 Once you have installed and opened the client you should see the following window:
 
 .. figure:: img/openvpn_connect_cloud_connection.png
@@ -77,7 +74,7 @@ Once you have uploaded the file, you will be redirected to the following page:
    :scale: 30%
    :align: center
 
-Now is sufficent to click connect and compile the following fields:
+Now you need to click connect and fill the following fields:
 
 .. warning::
    **Important:** We use this client (**Tunnelblick** also supports this feature) because it allows the user to start the authentication process without requiring a real password.  
@@ -88,6 +85,22 @@ Now is sufficent to click connect and compile the following fields:
 .. figure:: img/openvpn_login.png
    :scale: 30% 
    :align: center
+
+OpenVPN Connect - troubleshooting (2) - Increase OpenVPN Connection Timeout
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+The Default Connection Timeout in OpenVPN Connect is set to 1 minute. This value may be too short, especially during the login process if the authentication email is delayed.
+
+This is a client-side issue. To fix it:
+
+Settings → General → Connection Timeout → ``Continuously Retry``
+
+.. figure:: img/openvpn_timeout_ext.png
+   :scale: 30%
+   :align: center
+
+OpenVPN Connect - troubleshooting (2) - Missing certificate
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 When you first configure the connection in **OpenVPN Connect**, you may see the following prompt:
 
