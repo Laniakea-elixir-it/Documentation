@@ -74,17 +74,23 @@ Once you have uploaded the file, you will be redirected to the following page:
    :scale: 30%
    :align: center
 
-Now you need to click connect and fill the following fields:
+Now you need to click connect and fill the following fields: 
 
-.. warning::
-   **Important:** We use this client (**Tunnelblick** also supports this feature) because it allows the user to start the authentication process without requiring a real password.  
-   When filling in the login fields, you can enter **any string** as the password , **it is not used for verification**.  
-   The only mandatory field is your **e-mail address**, where the authentication code will be sent.  
-   The password field cannot be left empty, but it can contain any value (e.g. ``aaaaaaa`` or ``password``) and can be changed freely at any login.
+- Username: use the same email address you use to log in to Laniakea or that was used to invite you to the VPN.
+
+- Password: this field is mandatory, but you can enter any value. Please read the warning below carefully.
 
 .. figure:: img/openvpn_login.png
    :scale: 30% 
    :align: center
+
+.. warning::
+   **Important:** We use this client (**Tunnelblick** also supports this feature) because it allows the user to start the authentication process without requiring a real password.  
+   When filling in the login fields, you can enter **any string** as the password , **it is not used for verification**.  
+   
+   The only meaningful field is your **e-mail address**, where the authentication code will be sent.
+
+   The password field cannot be left empty, but it can contain any value (e.g. ``aaaaaaa`` or ``password``) and can be changed freely at any login.
 
 OpenVPN Connect - troubleshooting (2) - Increase OpenVPN Connection Timeout
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
