@@ -84,6 +84,7 @@ Now you need to click connect and fill the following fields:
    :scale: 30% 
    :align: center
 
+
 .. warning::
    **Important:** We use this client (**Tunnelblick** also supports this feature) because it allows the user to start the authentication process without requiring a real password.  
    When filling in the login fields, you can enter **any string** as the password , **it is not used for verification**.  
